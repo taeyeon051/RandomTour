@@ -4,4 +4,4 @@
 	String id = request.getParameter("id");
 	String text = request.getParameter("text");
 %>
-<button id="<%=id%>" class="btn btn-skyblue border-0 mt-2 fw-semibold"><%=text%></button>
+<button type="button" id="<%=id%>" class="btn btn-skyblue border-0 mt-2 fw-semibold"><%=text%></button>
