@@ -9,7 +9,7 @@
 	<h4 class="text-center mb-4 fw-bolder">로그인</h4>
 	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-id" />
-		<jsp:param name="type" value="email" />
+		<jsp:param name="type" value="text" />
 		<jsp:param name="label" value="아이디" />
 	</jsp:include>
 	<jsp:include page="./components/Input.jsp">
