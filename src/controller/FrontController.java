@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.room.RoomListController;
 import controller.user.JoinController;
 import controller.user.LoginController;
 
-@WebServlet(urlPatterns = { "/user/*" })
+@WebServlet(urlPatterns = { "/user/*", "/main/*" })
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HashMap<String, Controller> controllerMap = new HashMap<>();
@@ -23,8 +24,11 @@ public class FrontController extends HttpServlet {
     }
 
 	public void init(ServletConfig config) throws ServletException {
+		// 로그인, 회원가입
 		controllerMap.put("/user/login", new LoginController());
 		controllerMap.put("/user/join", new JoinController());
+		// 메인페이지(방목록 페이지)
+		controllerMap.put("/main/roomList", new RoomListController());
 	}
 
 
