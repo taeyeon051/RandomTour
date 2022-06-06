@@ -18,6 +18,7 @@
 		<jsp:param name="label" value="비밀번호" />
 	</jsp:include>
 	<jsp:include page="./components/Button.jsp">
+		<jsp:param name="id" value="login-btn" />
 		<jsp:param name="text" value="로그인" />
 	</jsp:include>
 	<div id="user-page-links" class="w-100 mt-4 d-flex justify-content-around">	
@@ -25,4 +26,5 @@
 		<a href="<%=path%>/user/find/id">아이디 찾기</a>
 	</div>
 </div>
+
 <%@ include file="./components/Footer.jsp" %>

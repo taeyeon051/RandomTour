@@ -31,8 +31,11 @@
 		<jsp:param name="label" value="비밀번호 확인" />
 	</jsp:include>
 	<jsp:include page="./components/Button.jsp">
+		<jsp:param name="id" value="join-btn" />
 		<jsp:param name="text" value="회원가입" />
 	</jsp:include>
 </div>
+
+<script src="<%=path%>/js/join.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>
