@@ -1,0 +1,66 @@
+@charset "UTF-8";
+* {
+    font-family: Arial;
+}
+
+:root {
+    --white: #fff;
+    --black: #000;
+    --gray: #7f7f7f;
+    --lightgray: #e7e6e6;
+    --skyblue: #87c6dd;
+    --blue: #3890a3;
+    --mint: #87cbc1;
+}
+
+a,
+a:hover {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.border-gray {
+    border: 1px solid var(--gray);
+}
+
+
+/* login-page, join-page */
+
+#user-page {
+    width: 22rem;
+    height: 25rem;
+    border-radius: 1.5rem;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+}
+
+#user-page-links a {
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+
+/* Components */
+
+
+/* Background.jsp */
+
+#backgrond-image {
+    filter: brightness(75%);
+    background-size: cover;
+    z-index: -1;
+}
+
+
+/* Button.jsp */
+
+.btn-skyblue,
+.btn-skyblue:hover,
+.btn-skyblue:focus {
+    background-color: var(--skyblue);
+    color: var(--white);
+}
+
+.btn-skyblue:hover {
+    background-color: var(--blue);
+}
