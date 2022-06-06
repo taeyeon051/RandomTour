@@ -82,3 +82,13 @@ a:hover {
 .btn-skyblue:hover {
     background-color: var(--blue);
 }
+
+/* Alert */
+
+.alert {
+	display: inline-block;
+	position: absolute;
+	bottom: 5rem;
+	left: 50%;
+	transform: translateX(-50%);
+}
