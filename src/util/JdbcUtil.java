@@ -10,7 +10,7 @@ public class JdbcUtil {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306?characterEncoding=UTF-8&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/randomtour?characterEncoding=UTF-8&serverTimezone=UTC";
 			con = DriverManager.getConnection(url, "root", "");
 			System.out.println("connected");
 		} catch (Exception e) {
