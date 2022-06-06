@@ -3,8 +3,9 @@
 <%@ include file="./components/Header.jsp" %>
 
 <jsp:include page="./components/Background.jsp" />
+<jsp:include page="./components/Logo.jsp" />
 
-<div id="user-page" class="p-5 text-center border-gray position-absolute top-50 start-50">
+<div id="login-page" class="user-page p-5 text-center border-gray position-absolute top-50 start-50">
 	<h4 class="text-center mb-4 fw-bolder">로그인</h4>
 	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-id" />

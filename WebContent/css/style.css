@@ -1,6 +1,6 @@
 @charset "UTF-8";
 * {
-    font-family: Arial;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 :root {
@@ -26,12 +26,20 @@ a:hover {
 
 /* login-page, join-page */
 
-#user-page {
-    width: 22rem;
-    height: 25rem;
+.user-page {
     border-radius: 1.5rem;
     transform: translate(-50%, -50%);
     background-color: var(--white);
+}
+
+#login-page {
+    width: 22rem;
+    height: 25rem;
+}
+
+#join-page {
+    width: 26.4rem;
+    height: 30rem;
 }
 
 #user-page-links a {
@@ -43,7 +51,17 @@ a:hover {
 /* Components */
 
 
-/* Background.jsp */
+/* Logo */
+
+#logo {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 72px;
+    top: 5rem;
+    right: 5rem;
+}
+
+
+/* Background */
 
 #backgrond-image {
     filter: brightness(75%);
@@ -52,7 +70,7 @@ a:hover {
 }
 
 
-/* Button.jsp */
+/* Button */
 
 .btn-skyblue,
 .btn-skyblue:hover,
