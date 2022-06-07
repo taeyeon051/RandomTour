@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.room.RoomListController;
 import controller.user.JoinController;
 import controller.user.LoginController;
+import controller.user.LogoutController;
 
 @WebServlet(urlPatterns = { "/user/*", "/main/*" })
 public class FrontController extends HttpServlet {
@@ -24,10 +25,11 @@ public class FrontController extends HttpServlet {
     }
 
 	public void init(ServletConfig config) throws ServletException {
-		// ·Î±×ÀÎ, È¸¿ø°¡ÀÔ
+		// ë¡œê·¸ì¸, íšŒì›ê°€ì…, ë¡œê·¸ì•„ì›ƒ
 		controllerMap.put("/user/login", new LoginController());
 		controllerMap.put("/user/join", new JoinController());
-		// ¸ŞÀÎÆäÀÌÁö(¹æ¸ñ·Ï ÆäÀÌÁö)
+		controllerMap.put("/user/logout", new LogoutController());
+		// ë©”ì¸í˜ì´ì§€(ë°©ëª©ë¡ í˜ì´ì§€)
 		controllerMap.put("/main/roomList", new RoomListController());
 	}
 
