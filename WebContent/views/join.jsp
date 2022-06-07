@@ -36,11 +36,14 @@
 	</jsp:include>
 </form>
 
-<% if (alert != null) { %>
-	<script>
-		window.Alert('danger', <%=alert%>);
-	</script>
-<% } %>
+<script>
+	<% if (alert != null) { %>
+		window.Alert('danger', '<%=alert%>');
+	<% } %>
+	<% if (success != null) { %>
+		window.Alert('success', '<%=success%>');
+	<% } %>
+</script>
 <script src="<%=path%>/js/join.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>

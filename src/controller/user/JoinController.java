@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.MyView;
 import dao.UserDAO;
+import vo.UserVO;
 
 public class JoinController implements Controller {
 	private String userIdRegex = "[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}";
-    private String nicknameRegex = "[A-Za-z0-9°¡-ÆR]{2,16}";
+    private String nicknameRegex = "[A-Za-z0-9ê°€-í£]{2,16}";
     private String passwordRegex = "(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*().])[A-Za-z\\d!@#$%^&*().]{10,}";
 	
 	@Override
@@ -27,21 +28,20 @@ public class JoinController implements Controller {
 		String password = request.getParameter("user-pwd");
 		String passwordCheck = request.getParameter("user-pwdc");
 		
-		System.out.println(userId);
 		if (!userId.matches(userIdRegex)) {
-			request.setAttribute("alert", "¾ÆÀÌµğ´Â ÀÌ¸ŞÀÏ Çü½ÄÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+			request.setAttribute("alert", "ì•„ì´ë””ëŠ” ì´ë©”ì¼ í˜•ì‹ì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
 			return new MyView("/views/join.jsp");
 		}
 		if (!nickname.matches(nicknameRegex)) {
-			request.setAttribute("alert", "´Ğ³×ÀÓÀº ÇÑ±Û,¿µ¹®,¼ıÀÚ¸¸ »ç¿ë °¡´ÉÇÏ¸ç 2±ÛÀÚ ÀÌ»ó 16±ÛÀÚ ÀÌÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+			request.setAttribute("alert", "ë‹‰ë„¤ì„ì€ í•œê¸€,ì˜ë¬¸,ìˆ«ìë§Œ ì‚¬ìš© ê°€ëŠ¥í•˜ë©° 2ê¸€ì ì´ìƒ 16ê¸€ì ì´í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 			return new MyView("/views/join.jsp");
 		}
 		if (!password.matches(passwordRegex)) {
-			request.setAttribute("alert", "ºñ¹Ğ¹øÈ£´Â ¿µ¹® ´ë¼Ò¹®ÀÚ,¼ıÀÚ,±âÈ£¸¦ Æ÷ÇÔÇÏ¿©Çá ÇÏ¸ç 10±ÛÀÚ ÀÌ»óÀÌ¿©¾ß ÇÕ´Ï´Ù.");
+			request.setAttribute("alert", "ë¹„ë°€ë²ˆí˜¸ëŠ” ì˜ë¬¸ ëŒ€ì†Œë¬¸ì,ìˆ«ì,ê¸°í˜¸ë¥¼ í¬í•¨í•˜ì—¬í– í•˜ë©° 10ê¸€ì ì´ìƒì´ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 			return new MyView("/views/join.jsp");
 		}
 		if (!password.equals(passwordCheck)) {
-			request.setAttribute("alert", "ºñ¹Ğ¹øÈ£¿Í È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			request.setAttribute("alert", "ë¹„ë°€ë²ˆí˜¸ì™€ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return new MyView("/views/join.jsp");
 		}
 		
@@ -50,14 +50,22 @@ public class JoinController implements Controller {
 		boolean nicknameCheck = dao.nicknameCheck(nickname);
 		
 		if (userIdCheck) {
-			request.setAttribute("alert", "¾ÆÀÌµğ°¡ Áßº¹µË´Ï´Ù.");
+			request.setAttribute("alert", "ì•„ì´ë””ê°€ ì¤‘ë³µë©ë‹ˆë‹¤.");
 			return new MyView("/views/join.jsp");			
 		}
 		if (nicknameCheck) {
-			request.setAttribute("alert", "´Ğ³×ÀÓÀÌ Áßº¹µË´Ï´Ù.");
+			request.setAttribute("alert", "ë‹‰ë„¤ì„ì´ ì¤‘ë³µë©ë‹ˆë‹¤.");
 			return new MyView("/views/join.jsp");
 		}
 		
-		return new MyView("/views/login.jsp");
+		UserVO vo = new UserVO(userId, nickname, password, false, 0);
+		int n = dao.userJoin(vo);
+		if (n > 0) {
+			request.setAttribute("success", "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+			return new MyView("/views/login.jsp");
+		} else {
+			request.setAttribute("alert", "ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜ë¡œ ì¸í•˜ì—¬ íšŒì›ê°€ì…ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			return new MyView("/views/join.jsp");
+		}		
 	}
 }

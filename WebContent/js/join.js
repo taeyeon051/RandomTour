@@ -1,5 +1,3 @@
-const log = console.log;
-
 window.onload = () => {
     const join = new Join();
 }
