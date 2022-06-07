@@ -13,7 +13,7 @@ public class UserDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	// ¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	// ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
 	public boolean userIdCheck(String userId) {
 		boolean check = false;
 		String sql = "select * from users where user_id = ?";
@@ -33,7 +33,7 @@ public class UserDAO {
 		return check;
 	}
 
-	// ´Ğ³×ÀÓ Áßº¹ Ã¼Å©
+	// ë‹‰ë„¤ì„ ì¤‘ë³µ ì²´í¬
 	public boolean nicknameCheck(String nickname) {
 		boolean check = false;
 		String sql = "select * from users where nickname = ?";
@@ -53,21 +53,49 @@ public class UserDAO {
 		return check;
 	}
 	
-	// È¸¿ø°¡ÀÔ
-	public int joinUser(UserVO vo) {
+	// íšŒì›ê°€ì…
+	public int userJoin(UserVO vo) {
 		int n = 0;
-		String sql = "insert into users values (?, ?, PASSWORD(?))";
+		String sql = "INSERT INTO users (user_id, nickname, password) VALUES (?, ?, CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))))";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
 			pstmt.setString(2, vo.getNickname());
 			pstmt.setString(3, vo.getPassword());
+			n = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(con, pstmt);
 		}
 		return n;
+	}
+	
+	// ë¡œê·¸ì¸
+	public UserVO userLogin(String userId, String password) {
+		UserVO vo = null;
+		String sql = "select * from users where user_id = ? and password = CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?)))))";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				vo = new UserVO(
+					rs.getString("user_id"),
+					rs.getString("nickname"),
+					rs.getString("password"),
+					rs.getBoolean("login_check"),
+					rs.getInt("now_room")
+				);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return vo;
 	}
 }

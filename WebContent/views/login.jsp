@@ -5,7 +5,7 @@
 <jsp:include page="./components/Background.jsp" />
 <jsp:include page="./components/Logo.jsp" />
 
-<div id="login-page" class="user-page p-5 text-center border-gray position-absolute top-50 start-50">
+<form action="<%=path%>/user/login" method="post" id="login-page" class="user-page p-5 text-center border-gray position-absolute top-50 start-50">
 	<h4 class="text-center mb-4 fw-bolder">로그인</h4>
 	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-id" />
@@ -25,6 +25,16 @@
 		<a href="<%=path%>/user/join">회원가입</a>
 		<a href="<%=path%>/user/find/id">아이디 찾기</a>
 	</div>
-</div>
+</form>
+
+<script>
+	<% if (alert != null) { %>
+		window.Alert('danger', '<%=alert%>');
+	<% } %>
+	<% if (success != null) { %>
+		window.Alert('success', '<%=success%>');
+	<% } %>
+</script>
+<script src="<%=path%>/js/login.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>
