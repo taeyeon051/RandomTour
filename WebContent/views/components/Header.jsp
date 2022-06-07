@@ -1,8 +1,14 @@
+<%@page import="vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	// 경로
 	String path = request.getContextPath();
+	// 로그인 정보
+	UserVO user = (UserVO) session.getAttribute("user");
+	// 알림창
 	String alert = (String) request.getAttribute("alert");
+	String success = (String) request.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html lang="ko">
