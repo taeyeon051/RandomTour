@@ -6,7 +6,7 @@
 	<% if (user == null) { %>
 		location.href = "<%=path%>/user/login";
 	<% } else { %>
-		location.href="<%=path%>/views/roomList.jsp";
+		location.href="<%=path%>/main/roomList";
 	<% } %>
 </script>
 
