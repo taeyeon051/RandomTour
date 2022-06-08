@@ -50,11 +50,11 @@ public class JoinController implements Controller {
 		boolean nicknameCheck = dao.nicknameCheck(nickname);
 		
 		if (userIdCheck) {
-			request.setAttribute("alert", "아이디가 중복됩니다.");
+			request.setAttribute("alert", "이미 사용중인 아이디입니다.");
 			return new MyView("/views/join.jsp");			
 		}
 		if (nicknameCheck) {
-			request.setAttribute("alert", "닉네임이 중복됩니다.");
+			request.setAttribute("alert", "이미 사용중인 닉네임입니다.");
 			return new MyView("/views/join.jsp");
 		}
 		

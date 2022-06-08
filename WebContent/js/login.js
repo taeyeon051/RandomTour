@@ -10,7 +10,12 @@ class Login {
         this.userIdRegex = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}/g;
         this.passwordRegex = /(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*().])[A-Za-z\d!@#$%^&*().]{10,}/g;
 
+        this.init();
         this.addEvent();
+    }
+
+    init() {
+        new App().urlMapping('/logout', '/login');
     }
 
     addEvent() {
@@ -25,8 +30,8 @@ class Login {
 
     formSubmit() {
         const { userId, password } = this;
-        if (userId.value == "" || password.value == "") return window.Alert('danger', '빈 값이 있습니다.');
-        if (document.querySelector(".is-invalid")) return window.Alert('danger', '잘못된 값이 있습니다.');
+        if (userId.value == "" || password.value == "") return new Alert('danger', '빈 값이 있습니다.');
+        if (document.querySelector(".is-invalid")) return new Alert('danger', '잘못된 값이 있습니다.');
         document.querySelector("form").submit();
     }
 

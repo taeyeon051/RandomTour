@@ -6,9 +6,6 @@
 	String path = request.getContextPath();
 	// 로그인 정보
 	UserVO user = (UserVO) session.getAttribute("user");
-	// 알림창
-	String alert = (String) request.getAttribute("alert");
-	String success = (String) request.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,6 +18,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="<%=path%>/css/style.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="<%=path%>/js/app.js"></script>
 <script src="<%=path%>/js/alert.js"></script>
 <title>Random Tour</title>
 </head>
