@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
+<% if (user != null) { %>
+	<script>
+		location.href = "<%=path%>/main/roomList";
+	</script>
+<% } %>
 
 <jsp:include page="./components/Background.jsp" />
 <jsp:include page="./components/Logo.jsp" />
 
-<form action="<%=path%>/user/join" method="post" id="join-page" class="user-page p-5 text-center border-gray position-absolute top-50 start-50">
+<form action="<%=path%>/user/join" method="post" id="join-page" class="user-page p-5 text-center border-gray position-relative">
 	<h4 class="text-center mb-4 fw-bolder">회원가입</h4>
 	<a href="<%=path%>/user/login" class="position-absolute fs-3" style="top: 1.2rem; left: 1.5rem;">
 		<i class="bi bi-arrow-left"></i>
@@ -36,14 +41,6 @@
 	</jsp:include>
 </form>
 
-<script>
-	<% if (alert != null) { %>
-		window.Alert('danger', '<%=alert%>');
-	<% } %>
-	<% if (success != null) { %>
-		window.Alert('success', '<%=success%>');
-	<% } %>
-</script>
 <script src="<%=path%>/js/join.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>

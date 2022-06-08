@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
+<% if (user != null) { %>
+	<script>
+		location.href = "<%=path%>/main/roomList";
+	</script>
+<% } %>
 
 <jsp:include page="./components/Background.jsp" />
 <jsp:include page="./components/Logo.jsp" />
 
-<form action="<%=path%>/user/login" method="post" id="login-page" class="user-page p-5 text-center border-gray position-absolute top-50 start-50">
+<form action="<%=path%>/user/login" method="post" id="login-page" class="user-page p-5 text-center border-gray">
 	<h4 class="text-center mb-4 fw-bolder">로그인</h4>
 	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-id" />
@@ -27,14 +32,6 @@
 	</div>
 </form>
 
-<script>
-	<% if (alert != null) { %>
-		window.Alert('danger', '<%=alert%>');
-	<% } %>
-	<% if (success != null) { %>
-		window.Alert('success', '<%=success%>');
-	<% } %>
-</script>
 <script src="<%=path%>/js/login.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>
