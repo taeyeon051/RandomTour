@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Socket">
+    <wb-module deploy-name="RandomTour">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Socket"/>
-        <property name="java-output-path" value="/Socket/build/classes"/>
+        <property name="context-root" value="RandomTour"/>
+        <property name="java-output-path" value="/RandomTour/build/classes"/>
     </wb-module>
 </project-modules>
