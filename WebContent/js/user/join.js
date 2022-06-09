@@ -30,8 +30,8 @@ class Join {
 
     formSubmit() {
         const { userId, nickname, password, passwordCheck } = this;
-        if (userId.value == "" || nickname.value == "" || password.value == "" || passwordCheck.value == "") return new Alert('danger', '빈 값이 있습니다.');
-        if (document.querySelector(".is-invalid")) return new Alert('danger', '잘못된 값이 있습니다.');
+        if (userId.value == "" || nickname.value == "" || password.value == "" || passwordCheck.value == "") return new App().alert('danger', '빈 값이 있습니다.');
+        if (document.querySelector(".is-invalid")) return new App().alert('danger', '잘못된 값이 있습니다.');
         document.querySelector("form").submit();
     }
 
