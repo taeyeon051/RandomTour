@@ -19,14 +19,13 @@
 <link rel="stylesheet" href="<%=path%>/css/style.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="<%=path%>/js/app.js"></script>
-<script src="<%=path%>/js/alert.js"></script>
 <title>Random Tour</title>
 <% if (user != null) { %>
 	<script>
 		setTimeout(() => {
 			alert('세션이 만료되어 로그아웃됩니다.');
 			location.href = '<%=path%>/user/logout';
-		}, <%=session.getMaxInactiveInterval() * 1000 - 10000 %>);
+		}, <%=session.getMaxInactiveInterval() * 1000 - 60000 %>);
 	</script>
 <% } %>
 </head>
