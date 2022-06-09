@@ -1,6 +1,7 @@
 package vo;
 
 public class UserVO {
+	private int id;
 	private String userId;
 	private String nickname;
 	private String password;
@@ -11,13 +12,22 @@ public class UserVO {
 		super();
 	}
 
-	public UserVO(String userId, String nickname, String password, boolean login_check, int now_room) {
+	public UserVO(int id, String userId, String nickname, String password, boolean login_check, int now_room) {
 		super();
+		this.id = id;
 		this.userId = userId;
 		this.nickname = nickname;
 		this.password = password;
 		this.login_check = login_check;
 		this.now_room = now_room;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUserId() {

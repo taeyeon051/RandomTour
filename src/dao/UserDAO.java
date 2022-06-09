@@ -16,13 +16,13 @@ public class UserDAO {
 	// 아이디 중복 체크
 	public boolean userIdCheck(String userId) {
 		boolean check = false;
-		String sql = "select * from users where user_id = ?";
+		String sql = "SELECT * FROM users WHERE user_id = ?";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
 				check = true;
 			}
 		} catch (SQLException e) {
@@ -36,13 +36,13 @@ public class UserDAO {
 	// 닉네임 중복 체크
 	public boolean nicknameCheck(String nickname) {
 		boolean check = false;
-		String sql = "select * from users where nickname = ?";
+		String sql = "SELECT * FROM users WHERE nickname = ?";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
 				check = true;
 			}
 		} catch (SQLException e) {
@@ -54,15 +54,15 @@ public class UserDAO {
 	}
 	
 	// 회원가입
-	public int userJoin(UserVO vo) {
+	public int userJoin(UserVO user) {
 		int n = 0;
 		String sql = "INSERT INTO users (user_id, nickname, password) VALUES (?, ?, CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))))";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getUserId());
-			pstmt.setString(2, vo.getNickname());
-			pstmt.setString(3, vo.getPassword());
+			pstmt.setString(1, user.getUserId());
+			pstmt.setString(2, user.getNickname());
+			pstmt.setString(3, user.getPassword());
 			n = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,8 +74,8 @@ public class UserDAO {
 	
 	// 로그인
 	public UserVO userLogin(String userId, String password) {
-		UserVO vo = null;
-		String sql = "select * from users where user_id = ? and password = CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?)))))";
+		UserVO user = null;
+		String sql = "SELECT * FROM users WHERE user_id = ? AND password = CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?)))))";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -83,19 +83,44 @@ public class UserDAO {
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				vo = new UserVO(
-					rs.getString("user_id"),
-					rs.getString("nickname"),
-					rs.getString("password"),
-					rs.getBoolean("login_check"),
-					rs.getInt("now_room")
-				);
+				sql = "UPDATE users SET login_check = ? WHERE id = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setBoolean(1, true);
+				pstmt.setInt(2, rs.getInt("id"));
+				int n = pstmt.executeUpdate();
+				if (n > 0) {
+					user = new UserVO(
+						rs.getInt("id"),
+						rs.getString("user_id"),
+						rs.getString("nickname"),
+						rs.getString("password"),
+						rs.getBoolean("login_check"),
+						rs.getInt("now_room")
+					);				
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(con, pstmt, rs);
 		}
-		return vo;
+		return user;
+	}
+	
+	public int userLogout(UserVO user) {
+		int n = 0;
+		String sql = "UPDATE users SET login_check = ? WHERE id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setBoolean(1, false);
+			pstmt.setInt(2, user.getId());
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt);
+		}
+		return n;
 	}
 }

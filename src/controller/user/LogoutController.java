@@ -9,15 +9,26 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.MyView;
+import dao.UserDAO;
+import vo.UserVO;
 
 public class LogoutController implements Controller {
 	@Override
 	public MyView process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.invalidate();
+		UserVO user = (UserVO) session.getAttribute("user");
+		int n = 0;
+		if (user != null) {
+			UserDAO dao = new UserDAO();
+			n = dao.userLogout(user);
+		}
+		
+		if (n > 0) {
+			session.invalidate();
+			request.setAttribute("success", "로그아웃 되었습니다.");
+		}
 
-		request.setAttribute("success", "로그아웃 되었습니다.");
 		return new MyView("/views/login.jsp");
 	}
 }

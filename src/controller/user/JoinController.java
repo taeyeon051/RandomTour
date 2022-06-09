@@ -58,7 +58,7 @@ public class JoinController implements Controller {
 			return new MyView("/views/join.jsp");
 		}
 		
-		UserVO vo = new UserVO(userId, nickname, password, false, 0);
+		UserVO vo = new UserVO(0, userId, nickname, password, false, 0);
 		int n = dao.userJoin(vo);
 		if (n > 0) {
 			request.setAttribute("success", "회원가입이 완료되었습니다.");
