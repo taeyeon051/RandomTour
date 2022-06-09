@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import util.JdbcUtil;
+import common.JdbcUtil;
 import vo.UserVO;
 
 public class UserDAO {
@@ -107,6 +107,7 @@ public class UserDAO {
 		return user;
 	}
 	
+	// 로그아웃
 	public int userLogout(UserVO user) {
 		int n = 0;
 		String sql = "UPDATE users SET login_check = ? WHERE id = ?";
