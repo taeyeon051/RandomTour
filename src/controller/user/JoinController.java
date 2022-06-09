@@ -12,7 +12,7 @@ import dao.UserDAO;
 import vo.UserVO;
 
 public class JoinController implements Controller {
-	private String userIdRegex = "[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}";
+	private String userIdRegex = "[0-9a-zA-Z]([-_]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}";
     private String nicknameRegex = "[A-Za-z0-9가-힣]{2,16}";
     private String passwordRegex = "(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*().])[A-Za-z\\d!@#$%^&*().]{10,}";
 	
