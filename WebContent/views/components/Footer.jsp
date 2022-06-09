@@ -11,10 +11,10 @@
 <script>
 	<% if (alert != null) { %>
 		console.log('<%=alert%>');
-		new Alert('danger', '<%=alert%>');
+		new App().alert('danger', '<%=alert%>');
 	<% } %>
 	<% if (success != null) { %>
-		new Alert('success', '<%=success%>');
+		new App().alert('success', '<%=success%>');
 	<% } %>
 </script>
 </html>

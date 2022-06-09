@@ -32,6 +32,6 @@
 	</div>
 </form>
 
-<script src="<%=path%>/js/login.js"></script>
+<script src="<%=path%>/js/user/login.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>
