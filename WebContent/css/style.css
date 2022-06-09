@@ -4,13 +4,16 @@
 }
 
 :root {
-    --white: #fff;
-    --black: #000;
     --gray: #7f7f7f;
     --lightgray: #e7e6e6;
     --skyblue: #87c6dd;
-    --blue: #3890a3;
     --mint: #87cbc1;
+    --wheat: #e1d5b3;
+    --brown: #c7a777;
+    --silver: #92a8b6;
+    --blue: #3890a3;
+    --black: #000000;
+    --white: #ffffff;
 }
 
 body {
@@ -19,10 +22,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
-a,
-a:hover {
+a, a:hover {
     color: var(--black);
     text-decoration: none;
 }
@@ -35,6 +38,7 @@ a:hover {
 /* login-page, join-page */
 
 .user-page {
+    margin-top: 3rem;
     border-radius: 1.5rem;
     background-color: var(--white);
 }
@@ -58,17 +62,109 @@ a:hover {
 /* main-page (room-list-page) */
 
 #main-page {
-    width: 80rem;
+    width: 96rem;
+    height: 44rem;
 }
 
-.table {
-    width: 50rem;
-    height: 30rem;
+
+/* room-list-table */
+
+#room-list {
+    width: 64rem;
+    border: 1px solid var(--gray);
 }
 
-.table tr {
-    height: 3rem;
-    vertical-align: middle;
+tr {
+    width: 100%;
+    height: 4rem;
+    display: table;
+    table-layout: fixed;
+    border-bottom: 1px solid var(--gray);
+    transition: .15s;
+}
+
+thead {
+    padding-right: 0.75rem;
+    cursor: default;
+}
+
+tbody {
+    height: 32rem;
+    cursor: pointer;
+    overflow-y: scroll;
+}
+
+tbody tr:hover {
+    background-color: var(--wheat);
+}
+
+tr>th:nth-child(1), tr>td:nth-child(1) { width: 12%; }
+tr>th:nth-child(2), tr>td:nth-child(2) { width: 26%; }
+tr>th:nth-child(3), tr>td:nth-child(3) { width: 14%; }
+tr>th:nth-child(4), tr>td:nth-child(4) { width: 12%; }
+tr>th:nth-child(5), tr>td:nth-child(5) { width: 12%; }
+tr>th:nth-child(6), tr>td:nth-child(6) { width: 12%; }
+tr>th:nth-child(7), tr>td:nth-child(7) { width: 12%; }
+
+
+/* user-info, chatting */
+
+#user-chatting {
+    width: 24rem;
+    height: 37rem;
+    margin-top: 7rem;
+}
+
+#user-info {
+	display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#user-info>* {
+	padding: 0.5rem 0.75rem;
+	text-align: center;
+	border-left: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
+}
+
+#nickname {
+	border-left: 0;
+	cursor: default;
+	font-size: 0.875rem;
+}
+
+#user-chatting h3 {
+	border-bottom: 1px solid var(--gray);
+}
+
+#chatting-list {
+	height: 25rem;
+	margin: 1rem 0.5rem 0.5rem;
+	padding: 1.2rem;
+	overflow-y: scroll;
+	border: 1px solid var(--lightgray);
+}
+
+#chatting-form>input {
+	box-shadow: none;
+	border-color: var(--brown);
+	border-width: 2px;
+}
+
+
+/* scroll */
+
+tbody::-webkit-scrollbar,
+#chatting-list::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+tbody::-webkit-scrollbar-thumb,
+#chatting-list::-webkit-scrollbar-thumb {
+    background-color: var(--mint);
+    background-clip: padding-box;
+    border-radius: 1rem;
+    border: 3px solid transparent;
 }
 
 
@@ -80,8 +176,9 @@ a:hover {
 #logo {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 4.5rem;
-    top: 5rem;
-    right: 5rem;
+    top: 7rem;
+    right: 12rem;
+    z-index: 100;
 }
 
 
@@ -100,11 +197,20 @@ a:hover {
 .btn-skyblue:hover,
 .btn-skyblue:focus {
     background-color: var(--skyblue);
+	border: 1px solid var(--skyblue);
     color: var(--white);
 }
 
 .btn-skyblue:hover {
     background-color: var(--blue);
+}
+
+.btn-brown,
+.btn-brown:hover,
+.btn-brown:focus {
+	background-color: var(--brown);
+	border: 1px solid var(--brown);
+    color: var(--white);
 }
 
 
