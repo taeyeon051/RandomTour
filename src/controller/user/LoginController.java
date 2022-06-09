@@ -33,7 +33,7 @@ public class LoginController implements Controller {
 		
 		if (vo != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", vo);
+			session.setAttribute("randomtour-user", vo);
 			request.setAttribute("success", "성공적으로 로그인 되었습니다.");
 			return new MyView("/views/roomList.jsp");
 		} else {

@@ -17,7 +17,7 @@ public class LogoutController implements Controller {
 	public MyView process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO) session.getAttribute("user");
+		UserVO user = (UserVO) session.getAttribute("randomtour-user");
 		int n = 0;
 		if (user != null) {
 			UserDAO dao = new UserDAO();
@@ -25,7 +25,7 @@ public class LogoutController implements Controller {
 		}
 		
 		if (n > 0) {
-			session.invalidate();
+			session.removeAttribute("randomtour-user");
 			request.setAttribute("success", "로그아웃 되었습니다.");
 		}
 

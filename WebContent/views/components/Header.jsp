@@ -5,7 +5,7 @@
 	// 경로
 	String path = request.getContextPath();
 	// 로그인 정보
-	UserVO user = (UserVO) session.getAttribute("user");
+	UserVO user = (UserVO) session.getAttribute("randomtour-user");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,6 +21,12 @@
 <script src="<%=path%>/js/app.js"></script>
 <script src="<%=path%>/js/alert.js"></script>
 <title>Random Tour</title>
+<script>
+	setTimeout(() => {
+		alert('session이 만료되어 로그아웃됩니다.');
+		location.href = '/user/logout';
+	}, <%=session.getMaxInactiveInterval() * 1000 - 1 %>);
+</script>
 </head>
 
 <body>
