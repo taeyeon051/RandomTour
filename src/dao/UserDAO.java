@@ -96,7 +96,7 @@ public class UserDAO {
 						rs.getString("password"),
 						rs.getBoolean("login_check"),
 						rs.getInt("now_room")
-					);				
+					);
 				}
 			}
 		} catch (SQLException e) {
@@ -106,6 +106,9 @@ public class UserDAO {
 		}
 		return user;
 	}
+	
+	// 로그인 체크
+	
 	
 	// 로그아웃
 	public int userLogout(UserVO user) {
