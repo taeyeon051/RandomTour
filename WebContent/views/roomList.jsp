@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
+<% if (user == null) { %>
+	<script>
+		new App().alert('danger', '로그인 후 이용가능합니다.');
+		location.href = "<%=path%>/user/login";
+	</script>
+<% } %>
 
 <jsp:include page="./components/Background.jsp" />
 <jsp:include page="./components/Logo.jsp" />
