@@ -21,6 +21,6 @@ class App {
         $(div).addClass(`alert alert-${state} alert-dismissible fade show`).attr('role', 'alert');
         div.innerHTML = `${text} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
         document.querySelector("body").appendChild(div);
-        setTimeout(() => { div.remove(); }, 5000);
+        setTimeout(() => { div.remove(); }, 3500);
     }
 }
