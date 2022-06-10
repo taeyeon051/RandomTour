@@ -20,12 +20,17 @@
 		<jsp:param name="type" value="text" />
 		<jsp:param name="label" value="아이디" />
 	</jsp:include>
-		<jsp:include page="./components/Input.jsp">
+	<jsp:include page="./components/Input.jsp">
+		<jsp:param name="id" value="user-name" />
+		<jsp:param name="type" value="text" />
+		<jsp:param name="label" value="이름" />		
+	</jsp:include>
+	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-nickname" />
 		<jsp:param name="type" value="text" />
 		<jsp:param name="label" value="닉네임" />
 	</jsp:include>
-		<jsp:include page="./components/Input.jsp">
+	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-pwd" />
 		<jsp:param name="type" value="password" />
 		<jsp:param name="label" value="비밀번호" />
