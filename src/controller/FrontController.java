@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.room.RoomListController;
+import controller.user.FindIdController;
 import controller.user.JoinController;
 import controller.user.LoginController;
 import controller.user.LogoutController;
@@ -29,6 +30,8 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/user/login", new LoginController());
 		controllerMap.put("/user/join", new JoinController());
 		controllerMap.put("/user/logout", new LogoutController());
+		// 아이디 찾기
+		controllerMap.put("/user/find/id", new FindIdController());
 		// 메인페이지 (방목록 페이지)
 		controllerMap.put("/main/roomList", new RoomListController());
 	}
