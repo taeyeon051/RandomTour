@@ -56,13 +56,14 @@ public class UserDAO {
 	// 회원가입
 	public int userJoin(UserVO user) {
 		int n = 0;
-		String sql = "INSERT INTO users (user_id, nickname, password) VALUES (?, ?, CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))))";
+		String sql = "INSERT INTO users (user_id, user_name, nickname, password) VALUES (?, ?, ?, CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))))";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getUserId());
-			pstmt.setString(2, user.getNickname());
-			pstmt.setString(3, user.getPassword());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getNickname());
+			pstmt.setString(4, user.getPassword());
 			n = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,15 +84,15 @@ public class UserDAO {
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				sql = "UPDATE users SET login_check = ? WHERE id = ?";
+				sql = "UPDATE users SET login_check = ? WHERE user_id = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setBoolean(1, true);
-				pstmt.setInt(2, rs.getInt("id"));
+				pstmt.setString(2, rs.getString("user_id"));
 				int n = pstmt.executeUpdate();
 				if (n > 0) {
 					user = new UserVO(
-						rs.getInt("id"),
 						rs.getString("user_id"),
+						rs.getString("user_name"),
 						rs.getString("nickname"),
 						rs.getString("password"),
 						rs.getBoolean("login_check"),
@@ -113,12 +114,12 @@ public class UserDAO {
 	// 로그아웃
 	public int userLogout(UserVO user) {
 		int n = 0;
-		String sql = "UPDATE users SET login_check = ? WHERE id = ?";
+		String sql = "UPDATE users SET login_check = ? WHERE user_id = ?";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setBoolean(1, false);
-			pstmt.setInt(2, user.getId());
+			pstmt.setString(2, user.getUserId());
 			n = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

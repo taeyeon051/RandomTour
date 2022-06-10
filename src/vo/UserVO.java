@@ -1,8 +1,8 @@
 package vo;
 
 public class UserVO {
-	private int id;
 	private String userId;
+	private String userName;
 	private String nickname;
 	private String password;
 	private boolean login_check;
@@ -12,22 +12,14 @@ public class UserVO {
 		super();
 	}
 
-	public UserVO(int id, String userId, String nickname, String password, boolean login_check, int now_room) {
+	public UserVO(String userId, String userName, String nickname, String password, boolean login_check, int now_room) {
 		super();
-		this.id = id;
 		this.userId = userId;
+		this.userName = userName;
 		this.nickname = nickname;
 		this.password = password;
 		this.login_check = login_check;
 		this.now_room = now_room;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getUserId() {
@@ -36,6 +28,14 @@ public class UserVO {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getNickname() {

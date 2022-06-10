@@ -24,12 +24,17 @@ public class JoinController implements Controller {
 		}
 		
 		String userId = request.getParameter("user-id");
+		String userName = request.getParameter("user-name");
 		String nickname = request.getParameter("user-nickname");
 		String password = request.getParameter("user-pwd");
 		String passwordCheck = request.getParameter("user-pwdc");
 		
 		if (!userId.matches(userIdRegex)) {
 			request.setAttribute("alert", "아이디는 이메일 형식이어야 합니다.");
+			return new MyView("/views/join.jsp");
+		}
+		if (userName.trim().equals("")) {
+			request.setAttribute("alert", "이름을 입력해주세요.");
 			return new MyView("/views/join.jsp");
 		}
 		if (!nickname.matches(nicknameRegex)) {
@@ -58,7 +63,7 @@ public class JoinController implements Controller {
 			return new MyView("/views/join.jsp");
 		}
 		
-		UserVO vo = new UserVO(0, userId, nickname, password, false, 0);
+		UserVO vo = new UserVO(userId, userName, nickname, password, false, 0);
 		int n = dao.userJoin(vo);
 		if (n > 0) {
 			request.setAttribute("success", "회원가입이 완료되었습니다.");
