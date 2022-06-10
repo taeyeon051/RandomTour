@@ -84,11 +84,7 @@ public class UserDAO {
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				sql = "UPDATE users SET login_check = ? WHERE user_id = ?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setBoolean(1, true);
-				pstmt.setString(2, rs.getString("user_id"));
-				int n = pstmt.executeUpdate();
+				int n = userLoginCheck(rs);
 				if (n > 0) {
 					user = new UserVO(
 						rs.getString("user_id"),
@@ -109,7 +105,19 @@ public class UserDAO {
 	}
 	
 	// 로그인 체크
-	
+	public int userLoginCheck(ResultSet rs) {
+		int n = 0;
+		String sql = "UPDATE users SET login_check = ? WHERE user_id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setBoolean(1, true);
+			pstmt.setString(2, rs.getString("user_id"));
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return n;
+	}
 	
 	// 로그아웃
 	public int userLogout(UserVO user) {
@@ -127,5 +135,26 @@ public class UserDAO {
 			JdbcUtil.close(con, pstmt);
 		}
 		return n;
+	}
+	
+	// 아이디 찾기
+	public String findUserId(String username, String nickname) {
+		String userId = "";
+		String sql = "SELECT user_id FROM users WHERE user_name = ? AND nickname = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, nickname);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				userId = rs.getString("user_id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return userId;
 	}
 }
