@@ -168,7 +168,7 @@
 	
 	<div id="user-chatting" class="bg-white">
 	    <div id="user-info" class="w-100">
-	        <div id="nickname">taeyeon051님</div>
+	        <div id="nickname"><%=user.getNickname()%>님</div>
 	        <a href="<%=path%>/user/mypage">마이페이지</a>
 	        <a href="<%=path%>/user/logout">로그아웃</a>
 	    </div>
