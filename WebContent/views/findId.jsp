@@ -11,7 +11,7 @@
 <jsp:include page="./components/Logo.jsp" />
 
 <form action="<%=path%>/user/login" method="post" id="login-page" class="user-page p-5 text-center border-gray">
-	<h4 class="text-center mb-4 fw-bolder">로그인</h4>
+	<h4 class="text-center mb-4 fw-bolder">아이디 찾기</h4>
 	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-id" />
 		<jsp:param name="type" value="text" />
@@ -27,8 +27,8 @@
 		<jsp:param name="text" value="로그인" />
 	</jsp:include>
 	<div id="user-page-links" class="w-100 mt-4 d-flex justify-content-around">	
+		<a href="<%=path%>/user/login">로그인</a>
 		<a href="<%=path%>/user/join">회원가입</a>
-		<a href="<%=path%>/user/find/id">아이디 찾기</a>
 	</div>
 </form>
 
