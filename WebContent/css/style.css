@@ -79,6 +79,8 @@ a, a:hover {
     width: 26rem;
     height: 18rem;
     border-top: none;
+    border-radius: 0.375rem;
+    border-top-left-radius: 0;
 }
 
 .tab-pane {

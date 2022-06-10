@@ -5,11 +5,13 @@ window.onload = () => {
 class Join {
     constructor() {
         this.userId = document.querySelector("#user-id");
+        this.username = document.querySelector("#user-name");
         this.nickname = document.querySelector("#user-nickname");
         this.password = document.querySelector("#user-pwd");
         this.passwordCheck = document.querySelector("#user-pwdc");
         this.joinBtn = document.querySelector("#join-btn");
         this.userIdRegex = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}/g;
+        this.usernameRegex = /[가-힣a-zA-Z]{2,}/g;
         this.nicknameRegex = /[A-Za-z0-9가-힣]{2,16}/g;
         this.passwordRegex = /(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*().])[A-Za-z\d!@#$%^&*().]{10,}/g;
 
@@ -17,10 +19,11 @@ class Join {
     }
 
     addEvent() {
-        const { userIdRegex, nicknameRegex, passwordRegex } = this;
-        const { userId, nickname, password, passwordCheck, joinBtn } = this;
+        const { userIdRegex, usernameRegex, nicknameRegex, passwordRegex } = this;
+        const { userId, username, nickname, password, passwordCheck, joinBtn } = this;
 
         userId.addEventListener("input", e => { this.dataCheck(e.target, userIdRegex); });
+        username.addEventListener("input", e => { this.dataCheck(e.target, usernameRegex); });
         nickname.addEventListener("input", e => { this.dataCheck(e.target, nicknameRegex); });
         password.addEventListener("input", e => { this.dataCheck(e.target, passwordRegex, 'pwd'); });
         passwordCheck.addEventListener("input", e => { this.dataCheck(e.target, '', 'pwd'); });
@@ -29,8 +32,8 @@ class Join {
     }
 
     formSubmit() {
-        const { userId, nickname, password, passwordCheck } = this;
-        if (userId.value == "" || nickname.value == "" || password.value == "" || passwordCheck.value == "") return new App().alert('danger', '빈 값이 있습니다.');
+        const { userId, username, nickname, password, passwordCheck } = this;
+        if (userId.value == "" || username.value == "" || nickname.value == "" || password.value == "" || passwordCheck.value == "") return new App().alert('danger', '빈 값이 있습니다.');
         if (document.querySelector(".is-invalid")) return new App().alert('danger', '잘못된 값이 있습니다.');
         document.querySelector("form").submit();
     }
