@@ -59,6 +59,38 @@ a, a:hover {
 }
 
 
+/* user-find-page */
+
+#user-find-page {
+	padding: 4rem;
+}
+
+.nav-tabs {
+	border-bottom: none;
+}
+
+.nav-link,
+.nav-link:hover,
+.nav-tabs .nav-link.active {
+	color: var(--black);
+}
+
+.tab-content {
+    width: 26rem;
+    height: 18rem;
+    border-top: none;
+}
+
+.tab-pane {
+	width: 18rem;
+}
+
+.toast {
+    bottom: 5rem;
+    transform: translateX(-50%);
+}
+
+
 /* main-page (room-list-page) */
 
 #main-page {
