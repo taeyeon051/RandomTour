@@ -28,7 +28,7 @@
 	</jsp:include>
 	<div id="user-page-links" class="w-100 mt-4 d-flex justify-content-around">	
 		<a href="<%=path%>/user/join">회원가입</a>
-		<a href="<%=path%>/user/find/id">아이디 찾기</a>
+		<a href="<%=path%>/user/find">아이디  찾기</a>
 	</div>
 </form>
 
