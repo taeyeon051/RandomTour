@@ -25,15 +25,19 @@ class Find {
             this.findId();
         });
 
-        $('#nav-id-tab').hover(e => { $('.tab-content').css('border-top-left-radius', '0'); });
+        $('#nav-id-tab').hover(e => {
+            this.borderRadius(true);
+        }, e => {
+            if (!$('#nav-id-tab').hasClass('active')) this.borderRadius(false);
+        });
         $('.nav-link').click(e => {
             if ($(e.target).attr('id') == "nav-id-tab") {
-                $('.tab-content').css('border-top-left-radius', '0');
+                this.borderRadius(true);
                 $('#find-id').addClass('show active');
                 $('#find-pw').removeClass('show active')
             }
             if ($(e.target).attr('id') == "nav-pw-tab") {
-                $('.tab-content').css('border-top-left-radius', '0.375rem');
+                this.borderRadius(false);
                 $('#find-id').removeClass('show active');
                 $('#find-pw').addClass('show active');
             }
@@ -79,6 +83,14 @@ class Find {
                 dom.classList.remove('is-invalid');
                 dom.classList.add('is-valid');
             }
+        }
+    }
+
+    borderRadius(bool) {
+        if (bool) {
+            $('.tab-content').css('border-top-left-radius', '0');
+        } else {
+            $('.tab-content').css('border-top-left-radius', '0.375rem');
         }
     }
 }
