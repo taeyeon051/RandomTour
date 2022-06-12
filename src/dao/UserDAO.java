@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import common.JdbcUtil;
+import util.JdbcUtil;
 import vo.UserVO;
 
 public class UserDAO {
