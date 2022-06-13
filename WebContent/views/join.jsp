@@ -18,7 +18,7 @@
 	<div id="user-id-box" class="form-floating mb-3">
     	<input type="text" id="user-id" name="user-id" class="form-control" placeholder=" ">
    		<label for="user-id">아이디</label>
-    	<span id="certify-btn" class="btn btn-skyblue">인증하기</span>
+    	<button type="button" id="certify-btn" class="btn btn-skyblue">인증하기</button>
 	</div>
 	<div class="form-floating mb-3">
     	<input type="text" id="certify-number" name="certify-number" class="form-control" placeholder=" " disabled>
