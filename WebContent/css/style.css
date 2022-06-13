@@ -58,6 +58,23 @@ a, a:hover {
     cursor: pointer;
 }
 
+#user-id-box {
+	display: flex;
+}
+
+#user-id {
+	width: 70%;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#certified-btn {
+	width: 30%;
+	padding: 1rem 0.75rem;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
 
 /* user-find-page */
 
@@ -237,6 +254,18 @@ tbody::-webkit-scrollbar-thumb,
 
 .btn-skyblue:hover {
     background-color: var(--blue);
+}
+
+.btn-outline-skyblue,
+.btn-outline-skyblue:hover,
+.btn-outline-skyblue:focus {
+	border: 1px solid var(--skyblue);
+    color: var(--skyblue);
+}
+
+.btn-outline-skyblue:hover {
+    background-color: var(--skyblue);
+    color: var(--white);
 }
 
 .btn-brown,
