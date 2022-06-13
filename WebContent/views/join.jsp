@@ -18,18 +18,28 @@
 	<div id="user-id-box" class="form-floating mb-3">
     	<input type="text" id="user-id" name="user-id" class="form-control" placeholder=" ">
    		<label for="user-id">아이디</label>
-    	<span id="certified-btn" class="btn btn-skyblue">인증번호 받기</span>
+    	<span id="certify-btn" class="btn btn-skyblue">인증하기</span>
 	</div>
-	<jsp:include page="./components/Input.jsp">
-		<jsp:param name="id" value="user-name" />
-		<jsp:param name="type" value="text" />
-		<jsp:param name="label" value="이름" />		
-	</jsp:include>
-	<jsp:include page="./components/Input.jsp">
-		<jsp:param name="id" value="user-nickname" />
-		<jsp:param name="type" value="text" />
-		<jsp:param name="label" value="닉네임" />
-	</jsp:include>
+	<div class="form-floating mb-3">
+    	<input type="text" id="certify-number" name="certify-number" class="form-control" placeholder=" " disabled>
+   		<label for="certify-number">인증번호</label>
+	</div>
+	<div class="row g-2">
+		<div class="col-md">
+			<jsp:include page="./components/Input.jsp">
+				<jsp:param name="id" value="user-name" />
+				<jsp:param name="type" value="text" />
+				<jsp:param name="label" value="이름" />		
+			</jsp:include>
+		</div>
+		<div class="col-md">
+			<jsp:include page="./components/Input.jsp">
+				<jsp:param name="id" value="user-nickname" />
+				<jsp:param name="type" value="text" />
+				<jsp:param name="label" value="닉네임" />
+			</jsp:include>
+		</div>
+	</div>
 	<jsp:include page="./components/Input.jsp">
 		<jsp:param name="id" value="user-pwd" />
 		<jsp:param name="type" value="password" />

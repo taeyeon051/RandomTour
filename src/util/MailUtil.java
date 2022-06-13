@@ -24,9 +24,8 @@ public class MailUtil {
 			
 			InternetAddress to = new InternetAddress(mail);
 			msg.setRecipient(Message.RecipientType.TO, to);
-			msg.setHeader("content-Type", "text/html");
 			msg.setSubject("이메일 인증하기", "UTF-8");
-			msg.setText(content, "UTF-8");
+			msg.setText(content, "UTF-8", "html");
 			
 			Transport.send(msg);
 			return true;

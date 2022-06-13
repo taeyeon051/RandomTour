@@ -62,18 +62,19 @@ a, a:hover {
 	display: flex;
 }
 
-#user-id {
-	width: 70%;
+#join-page #user-id {
+	width: 75%;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
-#certified-btn {
-	width: 30%;
+#certify-btn {
+	width: 25%;
 	padding: 1rem 0.75rem;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
+
 
 
 /* user-find-page */
