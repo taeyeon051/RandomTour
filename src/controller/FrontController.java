@@ -30,7 +30,7 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/user/login", new LoginController());
 		controllerMap.put("/user/join", new JoinController());
 		controllerMap.put("/user/logout", new LogoutController());
-		// 아이디/비밀번호 찾기
+		// 아이디, 비밀번호 찾기
 		controllerMap.put("/user/find", new FindUserController());
 		// 메인페이지 (방목록 페이지)
 		controllerMap.put("/main/roomList", new RoomListController());
