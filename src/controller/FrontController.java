@@ -16,6 +16,7 @@ import controller.user.JoinController;
 import controller.user.LoginController;
 import controller.user.LogoutController;
 import controller.user.SendMailController;
+import controller.user.UpdatePwdController;
 
 @WebServlet(urlPatterns = { "/user/*", "/main/*" })
 public class FrontController extends HttpServlet {
@@ -33,6 +34,7 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/user/logout", new LogoutController());
 		// 아이디, 비밀번호 찾기
 		controllerMap.put("/user/find", new FindUserController());
+		controllerMap.put("/user/updatePwd", new UpdatePwdController());
 		// 이메일 인증번호 전송
 		controllerMap.put("/user/sendMail", new SendMailController());
 		// 메인페이지 (방목록 페이지)

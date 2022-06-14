@@ -203,4 +203,22 @@ public class UserDAO {
 		}
 		return userId;
 	}
+	
+	// 비밀번호 변경
+	public int updatePwd(String userId, String password) {
+		int n = 0;
+		String sql = "UPDATE users SET password = CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))) WHERE user_id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, password);
+			pstmt.setString(2, userId);
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt);
+		}
+		return n;
+	}
 }

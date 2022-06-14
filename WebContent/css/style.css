@@ -62,17 +62,23 @@ a, a:hover {
 	display: flex;
 }
 
-#join-page #user-id {
-	width: 75%;
+#join-page #user-id,
+#find-pw #user-id {
+	width: 70%;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
 #certify-btn {
-	width: 25%;
+	width: 30%;
 	padding: 1rem 0.75rem;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+}
+
+#find-pw input,
+#find-pw button {
+	font-size: 0.875rem;
 }
 
 
