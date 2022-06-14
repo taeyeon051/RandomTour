@@ -40,7 +40,17 @@
 	  		</form>
 	  	</div>
 	  	<div id="find-pw" class="tab-pane fade" id="nav-pw" role="tabpanel" aria-labelledby="nav-pw-tab" tabindex="0">
-	  	
+	  		<form action="<%=path%>/user/find" method="post">
+				<jsp:include page="./components/Input.jsp">
+					<jsp:param name="id" value="user-id" />
+					<jsp:param name="type" value="text" />
+					<jsp:param name="label" value="아이디" />
+				</jsp:include>
+				<jsp:include page="./components/Button.jsp">
+					<jsp:param name="id" value="find-pwd-btn" />
+					<jsp:param name="text" value="확인" />
+				</jsp:include>
+	  		</form>
 	  	</div>
 	</div>
 </section>
