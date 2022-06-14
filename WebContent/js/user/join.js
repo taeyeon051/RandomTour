@@ -13,8 +13,6 @@ class Join {
         this.joinBtn = document.querySelector("#join-btn");
         this.certifyBtn = document.querySelector("#certify-btn");
 
-        // 인증코드
-        this.code = "";
         // 인증하기 버튼 활성화/비활성화
         this.isSendMail = false;
 
@@ -62,7 +60,6 @@ class Join {
                 const result = div.querySelector("#result");
                 if (result.innerHTML != "실패") {
                     document.querySelector("#certify-number").disabled = false;
-                    this.code = result.innerHTML;
                 } else {
                     new App().alert('danger', '인증메일 전송에 실패하였습니다. 이메일을 다시 확인해주세요.');
                     this.isSendMail = false;
@@ -72,11 +69,10 @@ class Join {
     }
 
     formSubmit() {
-        const { userId, certify, username, nickname, password, passwordCheck, code } = this;
+        const { userId, certify, username, nickname, password, passwordCheck } = this;
         if (userId.value == "" || certify.value == "" || username.value == "" || nickname.value == "" || password.value == "" || passwordCheck.value == "") {
             return new App().alert('danger', '빈 값이 있습니다.');
         }
-        if (certify.value !== code) return new App().alert('danger', '인증번호가 틀렸습니다.');
         if (document.querySelector(".is-invalid")) return new App().alert('danger', '잘못된 값이 있습니다.');
         document.querySelector("form").submit();
     }
