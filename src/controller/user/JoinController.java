@@ -13,27 +13,34 @@ import vo.UserVO;
 
 public class JoinController implements Controller {
 	private String userIdRegex = "[0-9a-zA-Z]([-_]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}";
-    private String nicknameRegex = "[A-Za-z0-9가-힣]{2,16}";
-    private String passwordRegex = "(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*().])[A-Za-z\\d!@#$%^&*().]{10,}";
-	
+	private String userNameRegex = "[가-힣a-zA-Z]{2,}";
+	private String nicknameRegex = "[A-Za-z0-9가-힣]{2,16}";
+	private String passwordRegex = "(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*().])[A-Za-z\\d!@#$%^&*().]{10,}";
+
 	@Override
 	public MyView process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getMethod().equals("GET")) {
 			return new MyView("/views/join.jsp");
 		}
-		
+
+		UserDAO dao = new UserDAO();
 		String userId = request.getParameter("user-id");
+		String certifyNumber = request.getParameter("certify-number");
 		String userName = request.getParameter("user-name");
 		String nickname = request.getParameter("user-nickname");
 		String password = request.getParameter("user-pwd");
 		String passwordCheck = request.getParameter("user-pwdc");
-		
+
 		if (!userId.matches(userIdRegex)) {
 			request.setAttribute("alert", "아이디는 이메일 형식이어야 합니다.");
 			return new MyView("/views/join.jsp");
 		}
-		if (userName.trim().equals("")) {
+		if (!certifyNumber.equals(dao.certify(userId))) {
+			request.setAttribute("alert", "인증번호를 다시 확인해주세요.");
+			return new MyView("/views/join.jsp");
+		}
+		if (!userName.matches(userNameRegex)) {
 			request.setAttribute("alert", "이름을 입력해주세요.");
 			return new MyView("/views/join.jsp");
 		}
@@ -49,20 +56,19 @@ public class JoinController implements Controller {
 			request.setAttribute("alert", "비밀번호와 확인이 일치하지 않습니다.");
 			return new MyView("/views/join.jsp");
 		}
-		
-		UserDAO dao = new UserDAO();
+
 		boolean userIdCheck = dao.userIdCheck(userId);
 		boolean nicknameCheck = dao.nicknameCheck(nickname);
-		
+
 		if (userIdCheck) {
 			request.setAttribute("alert", "이미 사용중인 아이디입니다.");
-			return new MyView("/views/join.jsp");			
+			return new MyView("/views/join.jsp");
 		}
 		if (nicknameCheck) {
 			request.setAttribute("alert", "이미 사용중인 닉네임입니다.");
 			return new MyView("/views/join.jsp");
 		}
-		
+
 		UserVO vo = new UserVO(userId, userName, nickname, password, false, 0);
 		int n = dao.userJoin(vo);
 		if (n > 0) {
@@ -71,6 +77,6 @@ public class JoinController implements Controller {
 		} else {
 			request.setAttribute("alert", "데이터베이스 오류로 인하여 회원가입에 실패하였습니다.");
 			return new MyView("/views/join.jsp");
-		}		
+		}
 	}
 }

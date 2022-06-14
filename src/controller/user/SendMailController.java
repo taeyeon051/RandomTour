@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.MyView;
+import dao.UserDAO;
 import util.MailUtil;
 import util.RandomCode;
 
@@ -19,14 +20,21 @@ public class SendMailController implements Controller {
 			return new MyView("/index.jsp");
 		}
 		
+		UserDAO dao = new UserDAO();
+		String userId = request.getParameter("user-id");
 		String certifyNumber = RandomCode.randomNumber(6);
-		boolean sendmail = MailUtil.sendMail(request.getParameter("user-id"), "<h3>인증번호는 " + certifyNumber + "입니다.</h3>");
-		
-		if (sendmail) {
-			request.setAttribute("state", certifyNumber);
+		int n = dao.setCertifyNumber(userId, certifyNumber);
+		if (n > 0) {			
+			boolean sendmail = MailUtil.sendMail(userId, "<h3>인증번호는 " + certifyNumber + "입니다.</h3>");
+			if (sendmail) {
+				request.setAttribute("state", certifyNumber);
+			} else {
+				request.setAttribute("state", "실패");
+			}
 		} else {
 			request.setAttribute("state", "실패");
 		}
+		
 		return new MyView("/views/ajax/sendMail.jsp");
 	}
 

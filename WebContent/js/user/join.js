@@ -15,9 +15,12 @@ class Join {
 
         // 인증코드
         this.code = "";
+        // 인증하기 버튼 활성화/비활성화
+        this.isSendMail = false;
 
         // 정규표현식
         this.userIdRegex = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}/g;
+        this.certifyRegex = /[0-9]{6}/g;
         this.usernameRegex = /[가-힣a-zA-Z]{2,}/g;
         this.nicknameRegex = /[A-Za-z0-9가-힣]{2,16}/g;
         this.passwordRegex = /(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*().])[A-Za-z\d!@#$%^&*().]{10,}/g;
@@ -26,12 +29,12 @@ class Join {
     }
 
     addEvent() {
-        const { userIdRegex, usernameRegex, nicknameRegex, passwordRegex } = this;
+        const { userIdRegex, certifyRegex, usernameRegex, nicknameRegex, passwordRegex } = this;
         const { userId, certify, username, nickname, password, passwordCheck, joinBtn, certifyBtn } = this;
 
         // 입력값 체크
         userId.addEventListener("input", e => { this.dataCheck(e.target, userIdRegex); });
-        certify.addEventListener("input", e => { e.target.value = e.target.value.replace(/\s/g, ""); });
+        certify.addEventListener("input", e => { this.dataCheck(e.target, certifyRegex); });
         username.addEventListener("input", e => { this.dataCheck(e.target, usernameRegex); });
         nickname.addEventListener("input", e => { this.dataCheck(e.target, nicknameRegex); });
         password.addEventListener("input", e => { this.dataCheck(e.target, passwordRegex, 'pwd'); });
@@ -44,9 +47,10 @@ class Join {
     }
 
     sendMail() {
-        const { userId, certifyBtn } = this;
+        const { userId, isSendMail } = this;
         if (userId.value == "" || $(userId).hasClass(".is-invalid")) return new App().alert('danger', '올바른 이메일 형식을 입력 후 인증해주세요.');
-		certifyBtn.disabled = true;
+        if (isSendMail) return new App().alert('warning', '이미 인증메일이 전송되었습니다.');
+        this.isSendMail = true;
         const formData = { "user-id": userId.value };
         $.ajax({
             url: "/user/sendMail",
@@ -61,7 +65,7 @@ class Join {
                     this.code = result.innerHTML;
                 } else {
                     new App().alert('danger', '인증메일 전송에 실패하였습니다. 이메일을 다시 확인해주세요.');
-                    certifyBtn.disabled = false;
+                    this.isSendMail = false;
                 }
             }
         });

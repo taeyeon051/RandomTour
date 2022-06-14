@@ -73,6 +73,52 @@ public class UserDAO {
 		return n;
 	}
 	
+	// 인증번호 설정
+	public int setCertifyNumber(String userId, String number) {
+		int n = 0;
+		String sql = "";
+		
+		String check = certify(userId);
+		if (check.equals("")) {
+			sql = "INSERT INTO certifies (certify_number, user_id) VALUES (?, ?)";
+		} else {
+			sql = "UPDATE certifies SET certify_number = ? WHERE user_id = ?";
+		}
+		
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, number);
+			pstmt.setString(2, userId);
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt);
+		}
+		return n;
+	}
+	
+	// 인증번호 확인
+	public String certify(String userId) {
+		String number = "";
+		String sql = "SELECT certify_number FROM certifies WHERE user_id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				number = rs.getString("certify_number");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return number;
+	}
+	
 	// 로그인
 	public UserVO userLogin(String userId, String password) {
 		UserVO user = null;
