@@ -16,28 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `friends`
+-- Table structure for table `certifies`
 --
 
-DROP TABLE IF EXISTS `friends`;
+DROP TABLE IF EXISTS `certifies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `friends` (
-  `user1_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `user2_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `state` tinyint NOT NULL,
-  `send_date` datetime NOT NULL,
-  `accept_date` datetime DEFAULT NULL
+CREATE TABLE `certifies` (
+  `user_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `certify_number` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `friends`
+-- Dumping data for table `certifies`
 --
 
-LOCK TABLES `friends` WRITE;
-/*!40000 ALTER TABLE `friends` DISABLE KEYS */;
-/*!40000 ALTER TABLE `friends` ENABLE KEYS */;
+LOCK TABLES `certifies` WRITE;
+/*!40000 ALTER TABLE `certifies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `certifies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
