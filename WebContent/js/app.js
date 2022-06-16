@@ -1,7 +1,5 @@
 history.pushState(null, null, location.href);
-window.onpopstate = () => {
-    history.go(1);
-}
+window.onpopstate = () => history.go(1);
 
 class App {
     // url 이동
@@ -65,6 +63,7 @@ class App {
         }
     }
 
+    // 빈 값 체크
     emptyCheck(domList) {
         for (let i = 0; i < domList.length; i++) {
             if (domList[i].value == "") return true;
