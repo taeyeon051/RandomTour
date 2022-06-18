@@ -56,6 +56,7 @@
 	</jsp:include>
 </form>
 
+<script src="<%=path%>/js/user/user.js"></script>
 <script src="<%=path%>/js/user/join.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>
