@@ -23,8 +23,8 @@
 <% if (user != null) { %>
 	<script>
 		setTimeout(() => {
-			alert('세션이 만료되어 로그아웃됩니다.');
-			location.href = '<%=path%>/user/logout';
+			alert("세션이 만료되어 로그아웃됩니다.");
+			location.href = "<%=path%>/user/logout";
 		}, <%=session.getMaxInactiveInterval() * 1000 - 60000 %>);
 	</script>
 <% } %>
