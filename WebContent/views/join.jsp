@@ -15,15 +15,18 @@
 	<a href="<%=path%>/user/login" class="position-absolute fs-3" style="top: 1.2rem; left: 1.5rem;">
 		<i class="bi bi-arrow-left"></i>
 	</a>
-	<div id="user-id-box" class="form-floating mb-3">
-    	<input type="text" id="user-id" name="user-id" class="form-control" placeholder=" ">
-   		<label for="user-id">아이디</label>
-    	<button type="button" id="certify-btn" class="btn btn-skyblue">인증하기</button>
-	</div>
-	<div class="form-floating mb-3">
-    	<input type="text" id="certify-number" name="certify-number" class="form-control" placeholder=" " disabled>
-   		<label for="certify-number">인증번호</label>
-	</div>
+	<jsp:include page="./components/Input.jsp">
+		<jsp:param name="id" value="user-id" />
+		<jsp:param name="type" value="text" />
+		<jsp:param name="label" value="아이디" />
+		<jsp:param name="button" value="certify" />
+	</jsp:include>
+	<jsp:include page="./components/Input.jsp">
+		<jsp:param name="id" value="certify-number" />
+		<jsp:param name="type" value="text" />
+		<jsp:param name="label" value="인증번호" />
+		<jsp:param name="disabled" value="true" />
+	</jsp:include>
 	<div class="row g-2">
 		<div class="col-md">
 			<jsp:include page="./components/Input.jsp">

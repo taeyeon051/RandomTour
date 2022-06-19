@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% String userId = (String) request.getAttribute("userId"); %>
-<div id="result"><%=userId.equals("") ? "false" : "true" %></div>
+<div id="result"><%=userId.equals("") ? "실패" : "성공" %></div>
 
 <div class="toast bg-white position-absolute start-50" role="alert" aria-live="assertive" aria-atomic="true">
 	<div class="toast-header">

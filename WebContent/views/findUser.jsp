@@ -41,15 +41,18 @@
 	  	</div>
 	  	<div id="find-pw" class="tab-pane fade" id="nav-pw" role="tabpanel" aria-labelledby="nav-pw-tab" tabindex="0">
 	  		<form action="<%=path%>/user/find" method="post">
-				<div id="user-id-box" class="form-floating mb-3">
-    				<input type="text" id="user-id" name="user-id" class="form-control" placeholder=" ">
-   					<label for="user-id">아이디</label>
-    				<button type="button" id="certify-btn" class="btn btn-skyblue">인증하기</button>
-				</div>
-				<div class="form-floating mb-3">
-    				<input type="text" id="certify-number" name="certify-number" class="form-control" placeholder=" " disabled>
-   					<label for="certify-number">인증번호</label>
-				</div>
+	  			<jsp:include page="./components/Input.jsp">
+	  				<jsp:param name="id" value="user-id" />
+	  				<jsp:param name="type" value="text" />
+	  				<jsp:param name="label" value="아이디" />
+	  				<jsp:param name="button" value="certify" />
+	  			</jsp:include>
+				<jsp:include page="./components/Input.jsp">
+	  				<jsp:param name="id" value="certify-number" />
+	  				<jsp:param name="type" value="text" />
+	  				<jsp:param name="label" value="인증번호" />
+	  				<jsp:param name="disabled" value="true" />
+	  			</jsp:include>
 				<jsp:include page="./components/Button.jsp">
 					<jsp:param name="id" value="find-pw-btn" />
 					<jsp:param name="text" value="확인" />
@@ -59,6 +62,7 @@
 	</div>
 </section>
 
+<script src="<%=path%>/js/user/user.js"></script>
 <script src="<%=path%>/js/user/find.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>
