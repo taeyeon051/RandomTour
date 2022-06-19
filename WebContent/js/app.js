@@ -53,7 +53,7 @@ class App {
             if (password.value === passwordCheck.value && passwordCheck.value !== "") {
                 passwordCheck.classList.remove('is-invalid');
                 passwordCheck.classList.add('is-valid');
-            } else {
+            } else if (passwordCheck.value !== "") {
                 passwordCheck.classList.remove('is-valid');
                 passwordCheck.classList.add('is-invalid');
             }
@@ -70,8 +70,8 @@ class App {
     }
 
     // 빈값 확인
-	emptyCheck() {
-		const inputList = document.querySelectorAll("input");
+	emptyCheck(domList = []) {
+		const inputList = domList.length > 0 ? domList : document.querySelectorAll("input") ;
 		for (let i = 0; i < inputList.length; i++) {
 			if (inputList[i].value === "") return true;
 		}

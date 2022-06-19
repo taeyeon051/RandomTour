@@ -3,5 +3,6 @@ window.onload = () => {
     app.urlMapping("/logout", "/login");
 
     const loginBtn = document.querySelector("#login-btn");
-    new UserForm(loginBtn).addEvent();
+    new UserForm().inputEvent();
+    new UserForm(loginBtn).buttonEvent();
 }
