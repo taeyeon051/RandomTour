@@ -20,6 +20,7 @@ public class UpdatePwdController implements Controller {
 		}
 		
 		UserDAO dao = new UserDAO();
+		RegexVO regexList = new RegexVO();
 		String userId = request.getParameter("user-id");
 		String password = request.getParameter("user-pwd");
 		String passwordCheck = request.getParameter("user-pwdc");
@@ -41,7 +42,7 @@ public class UpdatePwdController implements Controller {
 		int n = dao.updatePwd(userId, password);
 		if (n > 0) {
 			request.setAttribute("success", "비밀번호가 변경되었습니다.");			
-			return new MyView("/index.jsp");
+			return new MyView("/views/login.jsp");
 		} else {
 			request.setAttribute("alert", "비밀번호 변경에 실패하였습니다. 잠시 후에 다시 시도해주세요.");
 			return new MyView("/views/findUser.jsp");
