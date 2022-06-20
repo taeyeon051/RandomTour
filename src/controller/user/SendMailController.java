@@ -24,13 +24,9 @@ public class SendMailController implements Controller {
 		String userId = request.getParameter("user-id");
 		String certifyNumber = RandomCode.randomNumber(6);
 		int n = dao.setCertifyNumber(userId, certifyNumber);
-		if (n > 0) {			
+		if (n > 0) {
 			boolean sendmail = MailUtil.sendMail(userId, "<h3>인증번호는 " + certifyNumber + "입니다.</h3>");
-			if (sendmail) {
-				request.setAttribute("state", "성공");
-			} else {
-				request.setAttribute("state", "실패");
-			}
+			request.setAttribute("state", sendmail);
 		} else {
 			request.setAttribute("state", "실패");
 		}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../components/Header.jsp" %>
 
-<% String state = (String) request.getAttribute("state"); %>
-<div id="result"><%=state%></div>
+<% Boolean state = (Boolean) request.getAttribute("state"); %>
+<div id="result"><%=state ? "성공" : "실패"%></div>
 
 <%@ include file="../components/Footer.jsp" %>
