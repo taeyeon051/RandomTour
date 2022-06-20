@@ -26,7 +26,7 @@ class App {
         alertBox.innerHTML = `${text} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
         document.body.appendChild(alertBox);
         setTimeout(() => {
-            alertBox.remove();
+            if (state !== "primary") alertBox.remove();
         }, 3500);
     }
 
@@ -77,18 +77,6 @@ class App {
 		}
 		return false;
 	}
-
-    // 빈값 확인 후 form 전송
-    formSubmit() {
-        if (this.emptyCheck()) {
-			return this.alert("danger", "빈 값이 있습니다.");
-		}
-        if (document.querySelector(".is-invalid")) {
-			return this.alert("danger", "잘못된 값이 있습니다.");
-		}
-		
-        document.querySelector("form").submit();
-    }
 
     // ajax 전송 결과 확인
     ajaxResult(data) {
