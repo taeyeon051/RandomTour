@@ -9,14 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.MyView;
 import dao.UserDAO;
+import vo.RegexVO;
 import vo.UserVO;
 
 public class JoinController implements Controller {
-	private String userIdRegex = "[0-9a-zA-Z]([-_]?[0-9a-zA-Z])+@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}";
-	private String userNameRegex = "[가-힣a-zA-Z]{2,}";
-	private String nicknameRegex = "[A-Za-z0-9가-힣]{2,16}";
-	private String passwordRegex = "(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*().])[A-Za-z\\d!@#$%^&*().]{10,}";
-
 	@Override
 	public MyView process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -25,14 +21,15 @@ public class JoinController implements Controller {
 		}
 
 		UserDAO dao = new UserDAO();
+		RegexVO regexList = new RegexVO();
 		String userId = request.getParameter("user-id");
 		String certifyNumber = request.getParameter("certify-number");
 		String userName = request.getParameter("user-name");
 		String nickname = request.getParameter("user-nickname");
 		String password = request.getParameter("user-pwd");
 		String passwordCheck = request.getParameter("user-pwdc");
-
-		if (!userId.matches(userIdRegex)) {
+		
+		if (!userId.matches(regexList.getUserId())) {
 			request.setAttribute("alert", "아이디는 이메일 형식이어야 합니다.");
 			return new MyView("/views/join.jsp");
 		}
@@ -40,16 +37,16 @@ public class JoinController implements Controller {
 			request.setAttribute("alert", "인증번호를 다시 확인해주세요.");
 			return new MyView("/views/join.jsp");
 		}
-		if (!userName.matches(userNameRegex)) {
-			request.setAttribute("alert", "이름을 입력해주세요.");
+		if (!userName.matches(regexList.getUserName())) {
+			request.setAttribute("alert", "이름은 한글, 영문만 사용할 수 있으며 2글자 이상이어야 합니다.");
 			return new MyView("/views/join.jsp");
 		}
-		if (!nickname.matches(nicknameRegex)) {
-			request.setAttribute("alert", "닉네임은 한글,영문,숫자만 사용 가능하며 2글자 이상 16글자 이하여야 합니다.");
+		if (!nickname.matches(regexList.getNickname())) {
+			request.setAttribute("alert", "닉네임은 한글, 영문, 숫자만 사용할 수 있으며 2~16글자여야 합니다.");
 			return new MyView("/views/join.jsp");
 		}
-		if (!password.matches(passwordRegex)) {
-			request.setAttribute("alert", "비밀번호는 영문 대소문자,숫자,기호를 포함하여햐 하며 10글자 이상이여야 합니다.");
+		if (!password.matches(regexList.getPassword())) {
+			request.setAttribute("alert", "비밀번호는 영문 대소문자, 숫자, 기호를 포함하며 10글자 이상이어야 합니다.");
 			return new MyView("/views/join.jsp");
 		}
 		if (!password.equals(passwordCheck)) {

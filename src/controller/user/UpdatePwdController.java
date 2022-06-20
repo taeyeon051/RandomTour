@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.MyView;
 import dao.UserDAO;
+import vo.RegexVO;
 
 public class UpdatePwdController implements Controller {
-	private String passwordRegex = "(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*().])[A-Za-z\\d!@#$%^&*().]{10,}";
-	
 	@Override
 	public MyView process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -30,7 +29,7 @@ public class UpdatePwdController implements Controller {
 			request.setAttribute("alert", "존재하지 않는 아이디입니다.");
 			return new MyView("/views/join.jsp");
 		}
-		if (!password.matches(passwordRegex)) {
+		if (!password.matches(regexList.getPassword())) {
 			request.setAttribute("alert", "비밀번호는 영문 대소문자,숫자,기호를 포함하여햐 하며 10글자 이상이여야 합니다.");
 			return new MyView("/views/findUser.jsp");
 		}
