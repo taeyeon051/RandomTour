@@ -20,6 +20,7 @@ window.onload = () => {
     new UserForm().certifyBtnClickEvent();
 }
 
+// 아이디 찾기
 function findId() {
     const userName = document.querySelector("#user-name");
     const nickname = document.querySelector("#user-nickname");
@@ -53,6 +54,7 @@ function findId() {
     });
 }
 
+// 비밀번호 찾기 이메일 인증
 function certify() {
     const userId = document.querySelector("#user-id");
     const certifyNumber = document.querySelector("#certify-number");
@@ -85,6 +87,7 @@ function certify() {
     });
 }
 
+// 비밀번호 변경
 function updatePwEvent() {
     const password = document.querySelector("#user-pwd");
     const passwordCheck = document.querySelector("#user-pwdc");
@@ -105,8 +108,8 @@ function updatePwEvent() {
     });
 }
 
+// 탭 클릭 이벤트
 function tabClickEvent() {
-    // 탭 클릭 이벤트
     $("#nav-id-tab").hover(() => {
         borderRadius(true);
     }, () => {

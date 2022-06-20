@@ -3,6 +3,7 @@ class UserForm {
         this.app = new App();
         this.inputIdList = ["#user-id", "#certify-number", "#user-name", "#user-nickname", "#user-pwd", "#user-pwdc"];
         this.regexList = ["userId", "certify", "username", "nickname", "password", ""];
+        // 입력창 형식 확인
         this.messageList = [
             "아이디는 이메일 형식이어야 합니다.",
             "인증번호를 다시 확인해주세요.",
@@ -27,7 +28,7 @@ class UserForm {
                 input.addEventListener("input", e => {
 					if (input.id === "user-pwdc") {
                         app.formDataCheck(e.target, "", true);
-                    } else if (input.type === "password" && location.href.indexOf("/login") < 0) {
+                    } else if (input.type === "password" && document.querySelector("#user-pwdc")) {
                         app.formDataCheck(e.target, app.getRegex(regexList[idx]), true);
                     } else {
                         app.formDataCheck(e.target, app.getRegex(regexList[idx]));
@@ -92,6 +93,8 @@ class UserForm {
         this.isSendMail = true;
 
         app.alert("primary", "인증메일이 전송중입니다. 잠시만 기다려주세요.");
+
+        // 메일 전송 ajax 처리
         $.ajax({
             url: "/user/sendMail",
             method: "POST",
