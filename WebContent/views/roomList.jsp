@@ -176,7 +176,7 @@
 	    <div id="chatting" class="position-relative">
 	    	<div id="chatting-list"></div>
 	    	<div id="chatting-form" class="input-group p-2">
-	    		<input type="text" class="form-control">
+	    		<input type="text" id="chatting-input" class="form-control">
 	    		<button class="btn btn-brown" type="button">전송</button>
 	    	</div>
 	    </div>
