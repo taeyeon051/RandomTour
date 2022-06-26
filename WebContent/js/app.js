@@ -2,20 +2,16 @@
 history.pushState(null, null, location.href);
 window.onpopstate = () => history.go(1);
 
-class App {
-    // URL 맵핑
-    urlMapping(check, go) {
-        // 현재 URL 가져오기
-        const url = location.href;
-        // 알림창이 있는지 체크
-        const isAlert = document.querySelector(".alert");
-        if (url.indexOf(check) !== -1 && isAlert) {
-            setTimeout(() => {
-                location.href = url.replace(check, go);
-            }, 500);
-        } 
-    }
+// css 로드
+const url = location.href;
+let link = `<link rel="stylesheet" href="/css/`;
+if (url.indexOf("user") !== -1) link += `user.css">`;
+else if (url.indexOf("main") !== -1) link += `main.css">`;
 
+document.head.innerHTML += link;
+
+// App
+class App {
     // 알림창
     alert(state, text) {
         let alertBox = document.querySelector(".alert");
@@ -51,20 +47,20 @@ class App {
             const password = document.querySelector("#user-pwd");
             const passwordCheck = document.querySelector("#user-pwdc");
             if (password.value === passwordCheck.value && passwordCheck.value !== "") {
-                passwordCheck.classList.remove('is-invalid');
-                passwordCheck.classList.add('is-valid');
+                passwordCheck.classList.remove("is-invalid");
+                passwordCheck.classList.add("is-valid");
             } else if (passwordCheck.value !== "") {
-                passwordCheck.classList.remove('is-valid');
-                passwordCheck.classList.add('is-invalid');
+                passwordCheck.classList.remove("is-valid");
+                passwordCheck.classList.add("is-invalid");
             }
         }
         if (regex !== "") {
             if (value === "" || value.match(regex) === null || value.match(regex)[0] !== value) {
-                input.classList.remove('is-valid');
-                input.classList.add('is-invalid');
+                input.classList.remove("is-valid");
+                input.classList.add("is-invalid");
             } else {
-                input.classList.remove('is-invalid');
-                input.classList.add('is-valid');
+                input.classList.remove("is-invalid");
+                input.classList.add("is-valid");
             }
         }
     }
