@@ -1,0 +1,79 @@
+/* 로그인, 회원가입 페이지 */
+
+.user-page {
+    margin-top: 3rem;
+    border-radius: 1.5rem;
+    background-color: var(--white);
+}
+
+#login-page {
+    width: 22rem;
+    height: 25rem;
+}
+
+#join-page {
+    width: 30.8rem;
+    height: 35rem;
+}
+
+#user-page-links a {
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+#user-id-box {
+    display: flex;
+}
+
+#join-page #user-id,
+#find-pw #user-id {
+    width: 70%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#certify-btn {
+    width: 30%;
+    padding: 1rem 0.75rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#find-pw #user-id-box input,
+#find-pw #user-id-box button {
+    font-size: 0.875rem;
+}
+
+
+/* 아이디, 비밀번호 찾기 페이지 */
+
+#user-find-page {
+    padding: 4rem;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.nav-link,
+.nav-link:hover,
+.nav-tabs .nav-link.active {
+    color: var(--black);
+}
+
+.tab-content {
+    width: 26rem;
+    height: 18rem;
+    border-top: none;
+    border-radius: 0.375rem;
+    border-top-left-radius: 0;
+}
+
+.tab-pane {
+    width: 18rem;
+}
+
+.toast {
+    bottom: 5rem;
+    transform: translateX(-50%);
+}
