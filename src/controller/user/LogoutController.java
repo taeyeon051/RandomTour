@@ -26,9 +26,8 @@ public class LogoutController implements Controller {
 		
 		if (n > 0) {
 			session.removeAttribute("randomtour-user");
-			request.setAttribute("success", "로그아웃 되었습니다.");
 		}
 
-		return new MyView("/views/login.jsp");
+		return new MyView("/user/login", true);
 	}
 }

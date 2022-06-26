@@ -36,8 +36,7 @@ public class LoginController implements Controller {
 			int SESSION_MAX_TIME = 3660;
 			session.setMaxInactiveInterval(SESSION_MAX_TIME);
 			session.setAttribute("randomtour-user", vo);
-			request.setAttribute("success", "성공적으로 로그인 되었습니다.");
-			return new MyView("/views/roomList.jsp");
+			return new MyView("/main/roomList", true);
 		} else {
 			request.setAttribute("alert", "아이디 혹은 비밀번호가 올바르지 않습니다.");
 			return new MyView("/views/login.jsp");
