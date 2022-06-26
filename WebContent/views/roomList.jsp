@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
-<% if (user == null) { %>
-	<script>
-		new App().alert('danger', '로그인 후 이용가능합니다.');
-		location.href = "<%=path%>/user/login";
-	</script>
-<% } %>
 
 <jsp:include page="./components/Background.jsp" />
 <jsp:include page="./components/Logo.jsp" />
@@ -175,9 +169,9 @@
 	    <h3 class="text-center p-2">전체 채팅</h3>
 	    <div id="chatting" class="position-relative">
 	    	<div id="chatting-list"></div>
-	    	<div id="chatting-form" class="input-group p-2">
-	    		<input type="text" id="chatting-input" class="form-control">
-	    		<button class="btn btn-brown" type="button">전송</button>
+	    	<div class="input-group p-2">
+	    		<input type="text" id="chatting-form" class="form-control">
+	    		<button id="chatting-button" class="btn btn-brown" type="button">전송</button>
 	    	</div>
 	    </div>
 	</div>
