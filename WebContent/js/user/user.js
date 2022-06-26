@@ -54,7 +54,7 @@ class UserForm {
         const { app, inputIdList, messageList } = this;
 
         if (app.emptyCheck()) {
-            return this.alert("danger", "빈 값이 있습니다.");
+            return app.alert("danger", "빈 값이 있습니다.");
         }
 
         let inputValueCheck = false;
