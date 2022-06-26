@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
+
 <% if (user != null) { %>
 	<script>
 		location.href = "<%=path%>/main/roomList";
