@@ -39,7 +39,6 @@ function findId() {
             const div = document.createElement("div");
             div.innerHTML = data;
             const result = div.querySelector("#result");
-			console.log(data);
             if (result.innerHTML === "성공") {
                 const toast = div.querySelector(".toast");
                 toast.classList.add("show");
@@ -113,25 +112,25 @@ function tabClickEvent() {
     $("#nav-id-tab").hover(() => {
         borderRadius(true);
     }, () => {
-        borderRadius($("#nav-id-tab").hasClass('active'));
+        borderRadius($("#nav-id-tab").hasClass("active"));
     });
     $(".nav-link").click(e => {
         $("input").val("").removeClass("is-invalid is-valid");
         const tabPaneId = $(e.target).attr("id");
         if (tabPaneId === "nav-id-tab") {
             borderRadius(true);
-            $('#find-id').addClass('show active');
-            $('#find-pw').removeClass('show active')
+            $("#find-id").addClass("show active");
+            $("#find-pw").removeClass("show active")
         }
         if (tabPaneId === "nav-pw-tab") {
             borderRadius(false);
-            $('#find-id').removeClass('show active');
-            $('#find-pw').addClass('show active');
+            $("#find-id").removeClass("show active");
+            $("#find-pw").addClass("show active");
         }
     });
 }
 
 function borderRadius(isIdTab) {
-    if (isIdTab) $('.tab-content').css('border-top-left-radius', '0');
-    else $('.tab-content').css('border-top-left-radius', '0.375rem');
+    if (isIdTab) $(".tab-content").css("border-top-left-radius", "0");
+    else $(".tab-content").css("border-top-left-radius", "0.375rem");
 }
