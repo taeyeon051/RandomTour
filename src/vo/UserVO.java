@@ -5,21 +5,21 @@ public class UserVO {
 	private String userName;
 	private String nickname;
 	private String password;
-	private boolean login_check;
-	private int now_room;
+	private boolean loginCheck;
+	private int nowRoom;
 
 	public UserVO() {
 		super();
 	}
 
-	public UserVO(String userId, String userName, String nickname, String password, boolean login_check, int now_room) {
+	public UserVO(String userId, String userName, String nickname, String password, boolean loginCheck, int nowRoom) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.nickname = nickname;
 		this.password = password;
-		this.login_check = login_check;
-		this.now_room = now_room;
+		this.loginCheck = loginCheck;
+		this.nowRoom = nowRoom;
 	}
 
 	public String getUserId() {
@@ -54,19 +54,19 @@ public class UserVO {
 		this.password = password;
 	}
 
-	public boolean isLogin_check() {
-		return login_check;
+	public boolean isloginCheck() {
+		return loginCheck;
 	}
 
-	public void setLogin_check(boolean login_check) {
-		this.login_check = login_check;
+	public void setloginCheck(boolean loginCheck) {
+		this.loginCheck = loginCheck;
 	}
 
-	public int getNow_room() {
-		return now_room;
+	public int getnowRoom() {
+		return nowRoom;
 	}
 
-	public void setNow_room(int now_room) {
-		this.now_room = now_room;
+	public void setnowRoom(int nowRoom) {
+		this.nowRoom = nowRoom;
 	}
 }
