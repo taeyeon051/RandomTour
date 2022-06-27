@@ -1,62 +1,71 @@
-const app = new App();
-
 window.onload = () => {
-    if (document.referrer.indexOf("/user/login")) {
-        app.alert("success", "성공적으로 로그인 되었습니다.");
+    const roomList = new RoomList();
+}
+
+class RoomList {
+    constructor(userId, nickname) {
+        this.app = new App();
+
+        this.userId = userId;
+        this.nickname = nickname;
+
+        this.chatList = document.querySelector("#chatting-list");
+        this.chatForm = document.querySelector("#chatting-form");
+        this.submitButton = document.querySelector("#chatting-button");
+
+        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
+
+        this.addEvent();
     }
 
-    const chatList = document.querySelector("#chatting-list");
-    const chatForm = document.querySelector("#chatting-form");
-    const submitButton = document.querySelector("#chatting-button");
+    addEvent() {
+        const { submitButton, webSocket } = this;
 
-    const webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
+        window.addEventListener("keydown", e => {
+            if (e.key === "Enter") {
+                this.sendChat();
+            }
+        });
 
-    window.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
-            send();
-        }
-    });
+        submitButton.addEventListener("click", () => {
+            this.sendChat();
+        });
 
-    submitButton.addEventListener("click", e => {
-        send();
-    });
-
-    webSocket.onerror = e => {
-        onError(e);
+        webSocket.onerror = e => { this.onError(e); };
+        webSocket.onopen = e => { this.onOpen(e); };
+        webSocket.onmessage = e => { this.onMessage(e); };
     }
 
-    webSocket.onopen = e => {
-        onOpen(e);
-    }
-
-    webSocket.onmessage = e => {
-        onMessage(e);
-    }
-
-    function onMessage(e) {
+    onMessage = e => {
         console.log(e);
-        const div = document.createElement("div");
-        div.innerHTML = e.data; 
-        chatList.appendChild(div);
+        this.addChat(e.data);
     }
 
-    function onOpen(e) {
-        const div = document.createElement("div");
-        div.innerHTML = "연결 성공";
-        chatList.appendChild(div);
+    onOpen = e => {
+        console.log(e);
+        this.addChat("연결 성공");
     }
 
-    function onError(e) {
+    onError = e => {
+        const { app } = this;
         app.alert(e.data);
     }
 
-    function send() {
-        console.log(chatForm.value);
-        if (chatForm.value.trim() === "") return;
-        const div = document.createElement("div");
-        div.innerHTML = chatForm.value; 
-        webSocket.send(chatForm.value);
+    sendChat() {
+        const { chatForm, webSocket } = this;
+        const { value } = chatForm;
+        if (value.trim() === "") return;
+        this.addChat(value);
+        webSocket.send(value);
         chatForm.value = "";
+    }
+
+    addChat(data, name) {
+        const { nickname, chatList } = this;
+        const div = document.createElement("div");
+        div.innerHTML = data;
+        if (name === nickname) div.classList.add("my-chat");
+        else div.classList.add("chat");
         chatList.appendChild(div);
     }
 }
