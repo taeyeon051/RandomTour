@@ -6,7 +6,7 @@
 <jsp:include page="./components/Logo.jsp" />
 
 <section id="main-page" class="d-flex justify-content-between">
-	<div id="room-list" class="p-5 bg-white">
+	<div id="room-list" class="p-5 bg-white border-gray">
 	    <table class="text-center">
 	        <thead class="d-block">
 	            <tr>
@@ -160,7 +160,7 @@
 	    </table>
 	</div>
 	
-	<div id="user-chatting" class="bg-white">
+	<div id="user-chatting" class="bg-white border-gray">
 	    <div id="user-info" class="w-100">
 	        <div id="nickname"><%=user.getNickname()%>님</div>
 	        <a href="<%=path%>/user/mypage">마이페이지</a>
@@ -179,7 +179,7 @@
 
 <script src="<%=path%>/js/roomList.js"></script>
 <script>
-	const roomList = new RoomList("<%=user.getUserId()%>", "<%=user.getNickname()%>");
+	const roomList = new RoomList("<%=user.getNickname()%>");
 </script>
 
 <%@ include file="./components/Footer.jsp" %>

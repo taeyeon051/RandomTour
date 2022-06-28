@@ -8,47 +8,50 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import vo.ChattingVO;
 import vo.UserVO;
 
 @ServerEndpoint(value = "/chatting", configurator = HttpSessionConfigurator.class)
 public class Chatting {
-	private Map<Session, EndpointConfig> clients = Collections.synchronizedMap(new HashMap<>());
-	private UserVO user = null;
+	private static Map<Session, EndpointConfig> clients = Collections.synchronizedMap(new HashMap<>());
+	
+	@OnOpen
+	public void onOpen(Session session, EndpointConfig config) {
+		clients.put(session, config);
+	}
 
 	@OnMessage
-	@SuppressWarnings("unlikely-arg-type")
 	public void onMessage(String message, Session session) throws IOException {
+		EndpointConfig config = clients.get(session);
 		synchronized (clients) {
 			for (Map.Entry<Session, EndpointConfig> client : clients.entrySet()) {
-				if (!client.equals(session)) {
-					String nickname = this.user.getNickname();
+				HttpSession userSession = (HttpSession) config.getUserProperties().get("Session");
+				if (!client.getKey().equals(session)) {					
+					UserVO user = (UserVO) userSession.getAttribute("randomtour-user");
+					String nickname = user != null ? user.getNickname() : "";
 					String text = "{"
-							+ "\"nickname\" : " + nickname + ", "
-							+ "\"message\" : " + message
-							+ "}";
+							+ "\"nickname\" : \"" + nickname + "\", "
+							+ "\"message\" : \"" + message
+							+ "\"}";
+					System.out.println(text);
 					client.getKey().getBasicRemote().sendText(text);
 				}
 			}
 		}
 	}
-
-	@OnOpen
-	public void onOpen(Session session, EndpointConfig config) {
-		HttpSession userSession = (HttpSession) config.getUserProperties().get("Session");
-		this.user = (UserVO) userSession.getAttribute("randomtour-user");
-		System.out.println(session);
-		clients.put(session, config);
-	}
 	
 	@OnClose
 	public void onClose(Session session) {
-		System.out.println(session);
 		clients.remove(session);
+	}
+	
+	@OnError
+	public void onError(Throwable e, Session session) {
+		e.printStackTrace();
 	}
 }

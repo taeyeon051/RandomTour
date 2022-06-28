@@ -1,51 +1,50 @@
-class RoomList {
-    constructor(userId, nickname) {
-        this.app = new App();
+window.onload = () => {
+    const roomList = new RoomList();
+}
 
-        this.userId = userId;
-        this.nickname = nickname;
+class RoomList {
+    constructor() {
+        this.app = new App();
 
         this.chatList = document.querySelector("#chatting-list");
         this.chatForm = document.querySelector("#chatting-form");
         this.submitButton = document.querySelector("#chatting-button");
 
-        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`, );
+        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
 
+        this.init();
         this.addEvent();
     }
 
-    addEvent() {
-        const { submitButton, webSocket } = this;
-
-        window.addEventListener("keydown", e => {
-            if (e.key === "Enter") {
-                this.sendChat();
-            }
-        });
-
-        submitButton.addEventListener("click", () => {
-            this.sendChat();
-        });
-
+    init() {
+        const { webSocket } = this;
         webSocket.onerror = e => { this.onError(e); };
         webSocket.onopen = e => { this.onOpen(e); };
         webSocket.onmessage = e => { this.onMessage(e); };
     }
 
+    addEvent() {
+        const { submitButton } = this;
+
+        window.addEventListener("keydown", e => {
+            if (e.key === "Enter") this.sendChat();
+        });
+
+        submitButton.addEventListener("click", () => {
+            this.sendChat();
+        });
+    }
+
     onMessage = e => {
-        console.log(e.data);
-        console.log(JSON.parse(JSON.stringify(e.data)));
-        this.addChat(e.data);
+        const data = JSON.parse(e.data.toString());
+        this.addChat(data, false);
     }
 
     onOpen = e => {
-        console.log(e);
-        const { userId, nickname } = this;
-        this.addChat(`${nickname}님이 접속하였습니다.`, userId);
+        this.addChat("채팅방에 오신 것을 환영합니다!");
     }
 
     onError = e => {
-        console.log(e);
         const { app } = this;
         app.alert(e.data);
     }
@@ -54,16 +53,23 @@ class RoomList {
         const { chatForm, webSocket } = this;
         const { value } = chatForm;
         if (value.trim() === "") return;
-        // this.addChat(value);
+        this.addChat(value, true);
         webSocket.send(value);
         chatForm.value = "";
     }
 
-    addChat(data, name) {
-        const { nickname, chatList } = this;
+    addChat(message, send) {
+        console.log(data);
+        const { chatList } = this;
+        const { nickname, message } = data;
         const div = document.createElement("div");
-        div.innerHTML = data;
-        if (name === nickname) div.classList.add("my-chat");
+        if (!send) {
+            div.innerHTML = `${nickname} : `;
+        }
+        div.innerHTML += message;
+
+
+        if (this.nickname === nickname) div.classList.add("my-chat");
         else div.classList.add("chat");
         chatList.appendChild(div);
     }
