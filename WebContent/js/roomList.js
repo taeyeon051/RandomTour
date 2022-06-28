@@ -9,14 +9,9 @@ class RoomList {
         this.chatForm = document.querySelector("#chatting-form");
         this.submitButton = document.querySelector("#chatting-button");
 
-        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
+        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`, );
 
-        this.init();
         this.addEvent();
-    }
-
-    init() {
-        
     }
 
     addEvent() {
@@ -38,16 +33,19 @@ class RoomList {
     }
 
     onMessage = e => {
-        console.log(e);
+        console.log(e.data);
+        console.log(JSON.parse(JSON.stringify(e.data)));
         this.addChat(e.data);
     }
 
     onOpen = e => {
         console.log(e);
-        this.addChat("연결 성공");
+        const { userId, nickname } = this;
+        this.addChat(`${nickname}님이 접속하였습니다.`, userId);
     }
 
     onError = e => {
+        console.log(e);
         const { app } = this;
         app.alert(e.data);
     }
@@ -56,7 +54,7 @@ class RoomList {
         const { chatForm, webSocket } = this;
         const { value } = chatForm;
         if (value.trim() === "") return;
-        this.addChat(value);
+        // this.addChat(value);
         webSocket.send(value);
         chatForm.value = "";
     }
