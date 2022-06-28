@@ -16,7 +16,7 @@ public class Chatting {
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 
 	@OnMessage
-	public void onMessage(String message, Session session) throws IOException {
+	public void onMessage(String message, Session session, String userId) throws IOException {
 		synchronized (clients) {
 			for (Session client : clients) {
 				if (!client.equals(session)) {
@@ -27,13 +27,13 @@ public class Chatting {
 	}
 
 	@OnOpen
-	public void onOpen(Session session) {
+	public void onOpen(Session session, String userId) {
 		System.out.println(session);
 		clients.add(session);
 	}
 	
 	@OnClose
-	public void onClose(Session session) {
+	public void onClose(Session session, String userId) {
 		System.out.println(session);
 		clients.remove(session);
 	}

@@ -1,7 +1,3 @@
-window.onload = () => {
-    const roomList = new RoomList();
-}
-
 class RoomList {
     constructor(userId, nickname) {
         this.app = new App();
@@ -15,7 +11,12 @@ class RoomList {
 
         this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
 
+        this.init();
         this.addEvent();
+    }
+
+    init() {
+        
     }
 
     addEvent() {
