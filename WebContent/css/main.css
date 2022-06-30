@@ -104,3 +104,12 @@ tbody::-webkit-scrollbar-thumb,
     border-radius: 1rem;
     border: 3px solid transparent;
 }
+
+
+/* 메인 페이지 채팅 */
+
+.in-chat {
+    font-size: 0.875rem;
+    color: var(--white);
+    background-color: rgba(0, 0, 0, .2);
+}

@@ -178,8 +178,5 @@
 </section>
 
 <script src="<%=path%>/js/roomList.js"></script>
-<script>
-	const roomList = new RoomList("<%=user.getNickname()%>");
-</script>
 
 <%@ include file="./components/Footer.jsp" %>

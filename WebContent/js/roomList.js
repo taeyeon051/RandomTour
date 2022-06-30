@@ -37,11 +37,11 @@ class RoomList {
 
     onMessage = e => {
         const data = JSON.parse(e.data.toString());
-        this.addChat(data, false);
+        this.addChat(data);
     }
 
     onOpen = e => {
-        this.addChat("채팅방에 오신 것을 환영합니다!");
+        this.addChat({ "message": "채팅방에 오신 것을 환영합니다!" }, "in-chat");
     }
 
     onError = e => {
@@ -53,24 +53,25 @@ class RoomList {
         const { chatForm, webSocket } = this;
         const { value } = chatForm;
         if (value.trim() === "") return;
-        this.addChat(value, true);
+        this.addChat({ "message": value });
         webSocket.send(value);
         chatForm.value = "";
     }
 
-    addChat(message, send) {
-        console.log(data);
+    addChat(data, chat) {
         const { chatList } = this;
         const { nickname, message } = data;
+
         const div = document.createElement("div");
-        if (!send) {
+        if (chat === "in-chat") div.classList.add(chat);
+        if (nickname) {
             div.innerHTML = `${nickname} : `;
+            div.classList.add("chat");
+        } else {
+            div.classList.add("my-chat");
         }
+
         div.innerHTML += message;
-
-
-        if (this.nickname === nickname) div.classList.add("my-chat");
-        else div.classList.add("chat");
         chatList.appendChild(div);
     }
 }

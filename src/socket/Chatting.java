@@ -38,7 +38,6 @@ public class Chatting {
 							+ "\"nickname\" : \"" + nickname + "\", "
 							+ "\"message\" : \"" + message
 							+ "\"}";
-					System.out.println(text);
 					client.getKey().getBasicRemote().sendText(text);
 				}
 			}
