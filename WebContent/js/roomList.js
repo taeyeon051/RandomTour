@@ -12,6 +12,9 @@ class RoomList {
 
         this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
 
+        this.colorList = ["gray", "skyblue", "mint", "wheat", "brown", "silver", "blue"];
+        this.chatColor = 0;
+
         this.init();
         this.addEvent();
     }
@@ -53,25 +56,31 @@ class RoomList {
         const { chatForm, webSocket } = this;
         const { value } = chatForm;
         if (value.trim() === "") return;
-        this.addChat({ "message": value });
+        this.addChat({ "message": value }, "my-chat");
         webSocket.send(value);
         chatForm.value = "";
     }
 
     addChat(data, chat) {
-        const { chatList } = this;
+        const { chatList, colorList, chatColor } = this;
         const { nickname, message } = data;
-
+        
         const div = document.createElement("div");
-        if (chat === "in-chat") div.classList.add(chat);
-        if (nickname) {
-            div.innerHTML = `${nickname} : `;
-            div.classList.add("chat");
-        } else {
-            div.classList.add("my-chat");
+        if (chat === "in-chat") {
+            div.classList.add(chat, "m-0", "text-center", "p-1");
+        } else if (chat === "my-chat") {
+            div.classList.add(chat, "m-2", "text-end");
+        } else if (nickname) {
+            this.chatColor = chatColor >= colorList.length - 1 ? 0 : chatColor + 1;
+            div.innerHTML = 
+                `<div class="nickname text-${colorList[chatColor]}">
+                    ${nickname}
+                </div>`;
+            div.classList.add("m-2");
         }
 
-        div.innerHTML += message;
+        div.innerHTML += `<div class="message">${message}</div>`;
         chatList.appendChild(div);
+        chatList.scrollTop = chatList.scrollHeight;
     }
 }

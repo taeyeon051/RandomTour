@@ -1,11 +1,3 @@
-/* 메인 페이지 */
-
-#main-page {
-    width: 96rem;
-    height: 44rem;
-}
-
-
 /* 방 목록 페이지 */
 
 #room-list {
@@ -53,40 +45,31 @@ tr>th:nth-child(7), tr>td:nth-child(7) { width: 12%; }
     margin-top: 7rem;
 }
 
-#user-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-#user-info>* {
-    padding: 0.5rem 0.75rem;
-    text-align: center;
-    border-left: 1px solid var(--gray);
-    border-bottom: 1px solid var(--gray);
-}
-
 #nickname {
-    border-left: 0;
-    cursor: default;
-    font-size: 0.875rem;
-}
-
-#user-chatting h3 {
-    border-bottom: 1px solid var(--gray);
+	font-size: 0.9rem;
 }
 
 #chatting-list {
-    height: 25rem;
-    margin: 1rem 0.5rem 0.5rem;
-    padding: 1.2rem;
+    height: 28rem;
     overflow-y: scroll;
-    border: 1px solid var(--lightgray);
 }
 
 #chatting-form {
     box-shadow: none;
     border-color: var(--brown);
-    border-width: 2px;
+    border-width: 0.125rem;
+}
+
+
+#chatting-list .nickname {
+    font-size: 0.75rem;
+}
+
+.in-chat {
+    font-size: 0.875rem;
+    border-radius: 1rem;
+    color: var(--gray);
+    background-color: var(--lightgray);
 }
 
 
@@ -103,16 +86,4 @@ tbody::-webkit-scrollbar-thumb,
     background-clip: padding-box;
     border-radius: 1rem;
     border: 3px solid transparent;
-}
-
-
-/* 메인 페이지 채팅 */
-
-.in-chat {
-    font-size: 0.875rem;
-    text-align: center;
-    border-radius: 1rem;
-    padding: 0.25rem;
-    color: var(--white);
-    background-color: rgba(0, 0, 0, .2);
 }
