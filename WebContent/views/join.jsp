@@ -9,56 +9,59 @@
 <% } %>
 
 <jsp:include page="./components/Background.jsp" />
-<jsp:include page="./components/Logo.jsp" />
 
-<form action="<%=path%>/user/join" method="post" id="join-page" class="user-page p-5 text-center border-gray position-relative">
-	<h4 class="text-center mb-4 fw-bolder">회원가입</h4>
-	<a href="<%=path%>/user/login" class="position-absolute fs-3" style="top: 1.2rem; left: 1.5rem;">
-		<i class="bi bi-arrow-left"></i>
-	</a>
-	<jsp:include page="./components/Input.jsp">
-		<jsp:param name="id" value="user-id" />
-		<jsp:param name="type" value="text" />
-		<jsp:param name="label" value="아이디" />
-		<jsp:param name="button" value="certify" />
-	</jsp:include>
-	<jsp:include page="./components/Input.jsp">
-		<jsp:param name="id" value="certify-number" />
-		<jsp:param name="type" value="text" />
-		<jsp:param name="label" value="인증번호" />
-		<jsp:param name="disabled" value="true" />
-	</jsp:include>
-	<div class="row g-2">
-		<div class="col-md">
-			<jsp:include page="./components/Input.jsp">
-				<jsp:param name="id" value="user-name" />
-				<jsp:param name="type" value="text" />
-				<jsp:param name="label" value="이름" />		
-			</jsp:include>
+<section>
+	<jsp:include page="./components/Logo.jsp" />
+
+	<form action="<%=path%>/user/join" method="post" id="join-page" class="user-page p-5 text-center border-gray position-relative">
+		<h4 class="text-center mb-4 fw-bolder">회원가입</h4>
+		<a href="<%=path%>/user/login" class="position-absolute fs-3" style="top: 1.2rem; left: 1.5rem;">
+			<i class="bi bi-arrow-left"></i>
+		</a>
+		<jsp:include page="./components/Input.jsp">
+			<jsp:param name="id" value="user-id" />
+			<jsp:param name="type" value="text" />
+			<jsp:param name="label" value="아이디" />
+			<jsp:param name="button" value="certify" />
+		</jsp:include>
+		<jsp:include page="./components/Input.jsp">
+			<jsp:param name="id" value="certify-number" />
+			<jsp:param name="type" value="text" />
+			<jsp:param name="label" value="인증번호" />
+			<jsp:param name="disabled" value="true" />
+		</jsp:include>
+		<div class="row g-2">
+			<div class="col-md">
+				<jsp:include page="./components/Input.jsp">
+					<jsp:param name="id" value="user-name" />
+					<jsp:param name="type" value="text" />
+					<jsp:param name="label" value="이름" />		
+				</jsp:include>
+			</div>
+			<div class="col-md">
+				<jsp:include page="./components/Input.jsp">
+					<jsp:param name="id" value="user-nickname" />
+					<jsp:param name="type" value="text" />
+					<jsp:param name="label" value="닉네임" />
+				</jsp:include>
+			</div>
 		</div>
-		<div class="col-md">
-			<jsp:include page="./components/Input.jsp">
-				<jsp:param name="id" value="user-nickname" />
-				<jsp:param name="type" value="text" />
-				<jsp:param name="label" value="닉네임" />
-			</jsp:include>
-		</div>
-	</div>
-	<jsp:include page="./components/Input.jsp">
-		<jsp:param name="id" value="user-pwd" />
-		<jsp:param name="type" value="password" />
-		<jsp:param name="label" value="비밀번호" />
-	</jsp:include>
-	<jsp:include page="./components/Input.jsp">
-		<jsp:param name="id" value="user-pwdc" />
-		<jsp:param name="type" value="password" />
-		<jsp:param name="label" value="비밀번호 확인" />
-	</jsp:include>
-	<jsp:include page="./components/Button.jsp">
-		<jsp:param name="id" value="join-btn" />
-		<jsp:param name="text" value="회원가입" />
-	</jsp:include>
-</form>
+		<jsp:include page="./components/Input.jsp">
+			<jsp:param name="id" value="user-pwd" />
+			<jsp:param name="type" value="password" />
+			<jsp:param name="label" value="비밀번호" />
+		</jsp:include>
+		<jsp:include page="./components/Input.jsp">
+			<jsp:param name="id" value="user-pwdc" />
+			<jsp:param name="type" value="password" />
+			<jsp:param name="label" value="비밀번호 확인" />
+		</jsp:include>
+		<jsp:include page="./components/Button.jsp">
+			<jsp:param name="id" value="join-btn" />
+			<jsp:param name="text" value="회원가입" />
+		</jsp:include>
+	</form>
+</section>
 
 <script src="<%=path%>/js/user/user.js"></script>
 <script src="<%=path%>/js/user/join.js"></script>

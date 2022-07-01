@@ -36,6 +36,24 @@ a:hover {
     border: 1px solid var(--gray);
 }
 
+section {
+	width: 96rem;
+	height: 44rem;
+	position: relative;
+}
+
+
+/* 글자 색상 */
+
+.text-gray { color: var(--gray); }
+.text-skyblue { color: var(--skyblue); }
+.text-mint { color: var(--mint); }
+.text-wheat { color: var(--wheat); }
+.text-brown { color: var(--brown); }
+.text-silver { color: var(--silver); }
+.text-blue { color: var(--blue); }
+.text-black { color: var(--black); }
+
 
 /* 컴포넌트 */
 
@@ -45,8 +63,8 @@ a:hover {
 #logo {
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     font-size: 4.5rem;
-    top: 7rem;
-    right: 12rem;
+    top: -0.25rem;
+    right: 0.25rem;
     z-index: 100;
 }
 
@@ -103,4 +121,8 @@ a:hover {
     bottom: 5rem;
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media (max-width: 1280px) {
+    html { font-size: 12px; }
 }
