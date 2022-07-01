@@ -24,12 +24,19 @@
 	<script>
 		setTimeout(() => {
 			new App().alert("primary", "세션이 만료되어 로그아웃됩니다.");
-			setTimeout(() => {			    
+			setTimeout(() => {
 				location.href = "<%=path%>/user/logout";
 			}, 1000);
 		}, <%=session.getMaxInactiveInterval() * 1000 - 60000 %>);
 	</script>
 <% } %>
+
+<script>
+	window.history.forward();
+	function noBack() {
+		window.history.forward();
+	}
+</script>
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">

@@ -1,7 +1,3 @@
-// 뒤로가기 버튼 방지
-history.pushState(null, null, location.href);
-window.onpopstate = () => history.go(1);
-
 // css 로드
 const url = location.href;
 let link = `<link rel="stylesheet" href="/css/`;
