@@ -1,4 +1,4 @@
-package controller.room;
+package controller.main;
 
 import java.io.IOException;
 

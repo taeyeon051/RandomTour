@@ -176,6 +176,6 @@
 	</div>
 </section>
 
-<script src="<%=path%>/js/roomList.js"></script>
+<script src="<%=path%>/js/main/roomList.js"></script>
 
 <%@ include file="./components/Footer.jsp" %>

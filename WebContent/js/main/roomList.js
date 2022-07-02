@@ -5,12 +5,11 @@ window.onload = () => {
 class RoomList {
     constructor() {
         this.app = new App();
+        this.webSocket;
 
         this.chatList = document.querySelector("#chatting-list");
         this.chatForm = document.querySelector("#chatting-form");
         this.submitButton = document.querySelector("#chatting-button");
-
-        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
 
         this.colorList = ["gray", "skyblue", "mint", "wheat", "brown", "silver", "blue"];
         this.chatColor = 0;
@@ -20,6 +19,8 @@ class RoomList {
     }
 
     init() {
+        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
+
         const { webSocket } = this;
         webSocket.onerror = e => { this.onError(e); };
         webSocket.onopen = e => { this.onOpen(e); };
@@ -48,8 +49,7 @@ class RoomList {
     }
 
     onError = e => {
-        const { app } = this;
-        app.alert(e.data);
+        location.href = "/index.jsp";
     }
 
     sendChat() {
@@ -64,7 +64,7 @@ class RoomList {
     addChat(data, chat) {
         const { chatList, colorList, chatColor } = this;
         const { nickname, message } = data;
-        
+
         const div = document.createElement("div");
         if (chat === "in-chat") {
             div.classList.add(chat, "m-0", "text-center", "p-1");
@@ -72,7 +72,7 @@ class RoomList {
             div.classList.add(chat, "m-2", "text-end");
         } else if (nickname) {
             this.chatColor = chatColor >= colorList.length - 1 ? 0 : chatColor + 1;
-            div.innerHTML = 
+            div.innerHTML =
                 `<div class="nickname text-${colorList[chatColor]}">
                     ${nickname}
                 </div>`;
