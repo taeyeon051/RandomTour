@@ -20,17 +20,22 @@ public class LoginController implements Controller {
 			return new MyView("/views/login.jsp");
 		}
 
+		UserDAO dao = new UserDAO();
 		String userId = request.getParameter("user-id");
 		String password = request.getParameter("user-pwd");
-		
+
 		if (userId.trim().equals("") || password.trim().equals("")) {
 			request.setAttribute("alert", "빈 값이 있습니다.");
-			return new MyView("/view/login.jsp");
+			return new MyView("/views/login.jsp");
 		}
 		
-		UserDAO dao = new UserDAO();
-		UserVO vo = dao.userLogin(userId, password);
+		boolean loginCheck = dao.loginCheck(userId);
+		if (loginCheck) {
+			request.setAttribute("alert", "다른 기기에서 로그인중인 아이디입니다.");
+			return new MyView("/views/login.jsp");
+		}
 		
+		UserVO vo = dao.userLogin(userId, password);
 		if (vo != null) {
 			HttpSession session = request.getSession();
 			int SESSION_MAX_TIME = 3660;

@@ -21,7 +21,7 @@ public class LogoutController implements Controller {
 		int n = 0;
 		if (user != null) {
 			UserDAO dao = new UserDAO();
-			n = dao.userLogout(user);
+			n = dao.userLogout(user.getUserId());
 		}
 		
 		if (n > 0) {

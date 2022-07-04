@@ -150,7 +150,25 @@ public class UserDAO {
 		return user;
 	}
 	
-	// 로그인 체크
+	// 로그인 확인
+	public boolean loginCheck(String userId) {
+		boolean loginCheck = false;
+		String sql = "SELECT login_check FROM users WHERE user_id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				loginCheck = rs.getBoolean("login_check");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return loginCheck;
+	}
+	
+	// 로그인 체크 표시
 	public int userLoginCheck(ResultSet rs) {
 		int n = 0;
 		String sql = "UPDATE users SET login_check = ? WHERE user_id = ?";
@@ -166,14 +184,14 @@ public class UserDAO {
 	}
 	
 	// 로그아웃
-	public int userLogout(UserVO user) {
+	public int userLogout(String userId) {
 		int n = 0;
 		String sql = "UPDATE users SET login_check = ? WHERE user_id = ?";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setBoolean(1, false);
-			pstmt.setString(2, user.getUserId());
+			pstmt.setString(2, userId);
 			n = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

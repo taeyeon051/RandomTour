@@ -36,7 +36,16 @@
 	function noBack() {
 		window.history.forward();
 	}
+	
+	window.addEventListener("unload", e => {
+		$.ajax({
+			url: "/user/logout",
+			method: "GET",
+			data: { "user-id": "<%=user != null ? user.getUserId() : ""%>" },
+			success: e => {}
+		});
+	});
 </script>
 </head>
 
-<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();">
