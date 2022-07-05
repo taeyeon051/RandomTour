@@ -15,11 +15,165 @@
 				</a>
 			</li>
 			<li>친구목록</li>
-			<li>요청</li>
+			<li>친구요청</li>
 			<li>친구추가</li>
-			<li>설정</li>
-			<li>1:1문의</li>
 		</ul>
+		<div class="d-flex justify-content-between">
+			<div id="friend-chatting-list">
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+				<div class="friend">nickname</div>
+			</div>
+			<div id="friend-main" class="position-relative">
+				<div id="friend-chatting" class="d-none">
+			    	<div id="friend-chat">
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+						<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-end">
+							<div class="message">message</div>
+						</div>
+			    		<div class="m-2 text-start">
+							<div class="message">message</div>
+						</div>
+			    	</div>
+			    	<div class="w-100 input-group mt-2 position-absolute bottom-0">
+			    		<input type="text" id="friend-chat-form" class="form-control">
+			    		<button id="chatting-button" class="btn btn-skyblue" type="button">전송</button>
+			    	</div>
+				</div>
+				<div id="friend-list" class="dd-none">
+					<table class="text-center">
+						<tbody class="d-block">
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
+								<td class="friend-item-nickname">nickname</td>
+								<td class="btn btn-red">친구삭제</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="friend-request" class="d-none">
+				
+				</div>
+				<div id="friend-add" class="d-none">
+				
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<div id="mypage-user-info" class="px-4 py-3 bg-white border-gray">

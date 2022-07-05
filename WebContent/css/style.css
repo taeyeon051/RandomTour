@@ -12,6 +12,7 @@
     --wheat: #e1d5b3;
     --brown: #c7a777;
     --silver: #92a8b6;
+    --red: #d44e4e;
     --blue: #3890a3;
     --black: #000000;
     --white: #ffffff;
@@ -109,6 +110,14 @@ section {
 .btn-brown:focus {
     background-color: var(--brown);
     border: 1px solid var(--brown);
+    color: var(--white);
+}
+
+.btn-red,
+.btn-red:hover,
+.btn-red:focus {
+    background-color: var(--red);
+    border: 1px solid var(--red);
     color: var(--white);
 }
 

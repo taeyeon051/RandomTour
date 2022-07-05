@@ -19,23 +19,23 @@ thead {
     cursor: default;
 }
 
-tbody {
+#room-list tbody {
     height: 32rem;
     cursor: pointer;
     overflow-y: scroll;
 }
 
-tbody tr:hover {
+#room-list tbody tr:hover {
     background-color: var(--wheat);
 }
 
-tr>th:nth-child(1), tr>td:nth-child(1) { width: 12%; }
-tr>th:nth-child(2), tr>td:nth-child(2) { width: 26%; }
-tr>th:nth-child(3), tr>td:nth-child(3) { width: 14%; }
-tr>th:nth-child(4), tr>td:nth-child(4) { width: 12%; }
-tr>th:nth-child(5), tr>td:nth-child(5) { width: 12%; }
-tr>th:nth-child(6), tr>td:nth-child(6) { width: 12%; }
-tr>th:nth-child(7), tr>td:nth-child(7) { width: 12%; }
+#room-list tr>th:nth-child(1), #room-list tr>td:nth-child(1) { width: 12%; }
+#room-list tr>th:nth-child(2), #room-list tr>td:nth-child(2) { width: 26%; }
+#room-list tr>th:nth-child(3), #room-list tr>td:nth-child(3) { width: 14%; }
+#room-list tr>th:nth-child(4), #room-list tr>td:nth-child(4) { width: 12%; }
+#room-list tr>th:nth-child(5), #room-list tr>td:nth-child(5) { width: 12%; }
+#room-list tr>th:nth-child(6), #room-list tr>td:nth-child(6) { width: 12%; }
+#room-list tr>th:nth-child(7), #room-list tr>td:nth-child(7) { width: 12%; }
 
 
 /* 메인 페이지  */
@@ -77,15 +77,13 @@ tr>th:nth-child(7), tr>td:nth-child(7) { width: 12%; }
 
 /* 방 목록, 채팅 스크롤 */
 
-tbody::-webkit-scrollbar,
-#chatting-list::-webkit-scrollbar,
-#inquiry-form::-webkit-scrollbar {
+#room-list tbody::-webkit-scrollbar,
+#chatting-list::-webkit-scrollbar {
     width: 0.75rem;
 }
 
-tbody::-webkit-scrollbar-thumb,
-#chatting-list::-webkit-scrollbar-thumb,
-#inquiry-form::-webkit-scrollbar-thumb {
+#room-list tbody::-webkit-scrollbar-thumb,
+#chatting-list::-webkit-scrollbar-thumb {
     background-color: var(--mint);
     background-clip: padding-box;
     border-radius: 1rem;
@@ -95,13 +93,98 @@ tbody::-webkit-scrollbar-thumb,
 
 /* 마이페이지 */
 
+#mypage-main li {
+	margin-right: 3.5rem;
+    cursor: pointer;
+}
+
+#friend-chatting-list {
+	width: 12rem;
+	height: 34rem;
+	overflow-y: scroll;
+}
+
+#friend-main {
+	width: 45rem;
+	height: 34rem;
+}
+
+#friend-main>* {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.friend {
+	width: 100%;
+	height: 4rem;
+	font-size: 1.2rem;
+    text-align: center;
+    line-height: 4rem;
+    cursor: pointer;
+}
+
+.friend:hover {
+	background-color: var(--wheat);
+}
+
 #mypage-user-info label {
 	font-size: 0.875rem;
 	text-align: center;
 }
 
 #mypage-user-info textarea {
-	width: 100%;
 	height: 9rem;
 	resize: none;
+}
+
+#friend-chat-form {
+	box-shadow: none;
+	border: 2px solid var(--skyblue);
+}
+
+#friend-chat {
+	height: 30rem;
+	overflow-y: scroll;
+}
+
+#friend-chat .message {
+	border-radius: 3rem;
+	padding: 0.5rem 0.75rem;
+	display: inline-block;
+	color: var(--white);
+	background-color: var(--skyblue);	
+}
+
+#friend-list table {
+	width: 100%;
+	cursor: default;
+}
+
+#friend-list tbody {
+	height: 34rem;
+	overflow-y: scroll;
+}
+
+#friend-list tr:nth-child(1) {
+	border-top: 1px solid var(--gray);
+}
+
+#inquiry-form::-webkit-scrollbar,
+#friend-chatting-list::-webkit-scrollbar,
+#friend-chat::-webkit-scrollbar,
+#friend-list tbody::-webkit-scrollbar {
+	width: 0.75rem;
+}
+
+#inquiry-form::-webkit-scrollbar-thumb,
+#friend-chatting-list::-webkit-scrollbar-thumb,
+#friend-chat::-webkit-scrollbar-thumb,
+#friend-list tbody::-webkit-scrollbar-thumb {
+	background-color: var(--skyblue);
+    background-clip: padding-box;
+    border-radius: 1rem;
+    border: 3px solid transparent;
 }
