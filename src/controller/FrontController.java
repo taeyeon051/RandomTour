@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.main.MyPageController;
 import controller.main.RoomListController;
 import controller.user.FindUserController;
 import controller.user.JoinController;
 import controller.user.LoginController;
 import controller.user.LogoutController;
-import controller.user.MyPageController;
 import controller.user.SendMailController;
 import controller.user.UpdatePwdController;
 
@@ -38,10 +38,10 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/user/updatePwd", new UpdatePwdController());
 		// 이메일 인증번호 전송
 		controllerMap.put("/user/sendMail", new SendMailController());
-		// 마이페이지
-		controllerMap.put("/user/mypage", new MyPageController());
 		// 메인페이지 (방목록 페이지)
 		controllerMap.put("/main/roomList", new RoomListController());
+		// 마이페이지
+		controllerMap.put("/main/mypage", new MyPageController());
 	}
 
 
