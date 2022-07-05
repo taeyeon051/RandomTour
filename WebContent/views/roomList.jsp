@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
 
-<jsp:include page="./components/Background.jsp" />
+<jsp:include page="./components/Background.jsp"/>
 
-<section id="main-page" class="d-flex justify-content-between">
-	<jsp:include page="./components/Logo.jsp" />
+<section class="d-flex justify-content-between">
+	<jsp:include page="./components/Logo.jsp"/>
 	
 	<div id="room-list" class="p-5 bg-white border-gray">
 	    <table class="text-center">
@@ -163,7 +163,7 @@
 	
 	<div id="user-chatting" class="bg-white border-gray">
 	    <div id="user-info" class="w-100 d-flex justify-content-between align-items-center p-3">
-	        <a href="<%=path%>/user/mypage" id="nickname"><%=user.getNickname()%>님</a>
+	        <a href="<%=path%>/main/mypage" id="nickname"><%=user.getNickname()%>님</a>
 	        <a id="logout-btn" class="btn btn-brown" href="<%=path%>/user/logout">로그아웃</a>
 	    </div>
 	    <div id="chatting" class="p-3 pt-0">

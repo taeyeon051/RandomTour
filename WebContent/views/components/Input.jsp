@@ -12,8 +12,8 @@
     <label for="<%=id%>"><%=label%></label>
     <% if (button != null && button.equals("certify")) { %>
     	<jsp:include page="./Button.jsp">
-			<jsp:param name="id" value="certify-btn" />
-			<jsp:param name="text" value="인증하기" />
+			<jsp:param name="id" value="certify-btn"/>
+			<jsp:param name="text" value="인증하기"/>
     	</jsp:include>
     <% } %>
 </div>

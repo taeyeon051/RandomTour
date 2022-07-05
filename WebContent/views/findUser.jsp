@@ -8,10 +8,10 @@
 	</script>
 <% } %>
 
-<jsp:include page="./components/Background.jsp" />
+<jsp:include page="./components/Background.jsp"/>
 
 <section>
-	<jsp:include page="./components/Logo.jsp" />
+	<jsp:include page="./components/Logo.jsp"/>
 	
 	<div id="user-find-page" class="user-page text-center border-gray position-relative">
 		<a href="<%=path%>/user/login" class="position-absolute fs-3" style="top: 1.2rem; left: 1.5rem;">
@@ -27,38 +27,38 @@
 		  	<div id="find-id" class="tab-pane fade show active" id="nav-id" role="tabpanel" aria-labelledby="nav-id-tab" tabindex="0">
 		  		<form action="<%=path%>/user/find" method="post">
 					<jsp:include page="./components/Input.jsp">
-						<jsp:param name="id" value="user-name" />
-						<jsp:param name="type" value="text" />
-						<jsp:param name="label" value="이름" />
+						<jsp:param name="id" value="user-name"/>
+						<jsp:param name="type" value="text"/>
+						<jsp:param name="label" value="이름"/>
 					</jsp:include>
 					<jsp:include page="./components/Input.jsp">
-						<jsp:param name="id" value="user-nickname" />
-						<jsp:param name="type" value="text" />
-						<jsp:param name="label" value="닉네임" />
+						<jsp:param name="id" value="user-nickname"/>
+						<jsp:param name="type" value="text"/>
+						<jsp:param name="label" value="닉네임"/>
 					</jsp:include>
 					<jsp:include page="./components/Button.jsp">
-						<jsp:param name="id" value="find-id-btn" />
-						<jsp:param name="text" value="확인" />
+						<jsp:param name="id" value="find-id-btn"/>
+						<jsp:param name="text" value="확인"/>
 					</jsp:include>
 		  		</form>
 		  	</div>
 		  	<div id="find-pw" class="tab-pane fade" id="nav-pw" role="tabpanel" aria-labelledby="nav-pw-tab" tabindex="0">
 		  		<form action="<%=path%>/user/find" method="post">
 		  			<jsp:include page="./components/Input.jsp">
-		  				<jsp:param name="id" value="user-id" />
-		  				<jsp:param name="type" value="text" />
-		  				<jsp:param name="label" value="아이디" />
-		  				<jsp:param name="button" value="certify" />
+		  				<jsp:param name="id" value="user-id"/>
+		  				<jsp:param name="type" value="text"/>
+		  				<jsp:param name="label" value="아이디"/>
+		  				<jsp:param name="button" value="certify"/>
 		  			</jsp:include>
 					<jsp:include page="./components/Input.jsp">
-		  				<jsp:param name="id" value="certify-number" />
-		  				<jsp:param name="type" value="text" />
-		  				<jsp:param name="label" value="인증번호" />
-		  				<jsp:param name="disabled" value="true" />
+		  				<jsp:param name="id" value="certify-number"/>
+		  				<jsp:param name="type" value="text"/>
+		  				<jsp:param name="label" value="인증번호"/>
+		  				<jsp:param name="disabled" value="true"/>
 		  			</jsp:include>
 					<jsp:include page="./components/Button.jsp">
-						<jsp:param name="id" value="find-pw-btn" />
-						<jsp:param name="text" value="확인" />
+						<jsp:param name="id" value="find-pw-btn"/>
+						<jsp:param name="text" value="확인"/>
 					</jsp:include>
 		  		</form>
 		  	</div>
