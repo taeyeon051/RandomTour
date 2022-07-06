@@ -7,7 +7,7 @@
 <section class="d-flex justify-content-between">
 	<jsp:include page="./components/Logo.jsp"/>
 	
-	<div id="room-list" class="p-5 bg-white border-gray">
+	<div id="room-list" class="p-5 bg-white">
 	    <table class="text-center">
 	        <thead class="d-block">
 	            <tr>

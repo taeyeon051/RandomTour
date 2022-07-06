@@ -7,7 +7,7 @@
 <section class="d-flex justify-content-between">
 	<jsp:include page="./components/Logo.jsp"/>
 	
-	<div id="mypage-main" class="p-5 bg-white border-gray">
+	<div id="mypage-main" class="p-5 bg-white">
 		<ul class="list-unstyled d-flex align-items-center">
 			<li>
 				<a href="<%=path%>/main/roomList" class="fs-3">
@@ -124,7 +124,7 @@
 			    		<button id="chatting-button" class="btn btn-skyblue" type="button">전송</button>
 			    	</div>
 				</div>
-				<div id="friend-list" class="dd-none">
+				<div id="friend-list" class="d-none">
 					<table class="text-center">
 						<tbody class="d-block">
 							<tr class="friend-item d-flex justify-content-between align-items-center px-3">
@@ -166,8 +166,8 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="friend-request" class="d-none">
-				
+				<div id="friend-request" class="dd-none">
+					
 				</div>
 				<div id="friend-add" class="d-none">
 				

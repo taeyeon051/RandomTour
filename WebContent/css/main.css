@@ -48,7 +48,7 @@ thead {
 }
 
 #nickname {
-	font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 #chatting-list {
@@ -61,7 +61,6 @@ thead {
     border-color: var(--brown);
     border-width: 0.125rem;
 }
-
 
 #chatting-list .nickname {
     font-size: 0.75rem;
@@ -87,104 +86,105 @@ thead {
     background-color: var(--mint);
     background-clip: padding-box;
     border-radius: 1rem;
-    border: 3px solid transparent;
+    border: 0.1875rem solid transparent;
 }
 
 
 /* 마이페이지 */
 
 #mypage-main li {
-	margin-right: 3.5rem;
+    margin-right: 3.5rem;
     cursor: pointer;
 }
 
 #friend-chatting-list {
-	width: 12rem;
-	height: 34rem;
-	overflow-y: scroll;
+    width: 12rem;
+    height: 34rem;
+    overflow-y: scroll;
 }
 
 #friend-main {
-	width: 45rem;
-	height: 34rem;
+    width: 45rem;
+    height: 34rem;
 }
 
 #friend-main>* {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .friend {
-	width: 100%;
-	height: 4rem;
-	font-size: 1.2rem;
+    width: 100%;
+    height: 4rem;
+    font-size: 1.2rem;
     text-align: center;
     line-height: 4rem;
     cursor: pointer;
 }
 
 .friend:hover {
-	background-color: var(--wheat);
+    background-color: var(--wheat);
 }
 
 #mypage-user-info label {
-	font-size: 0.875rem;
-	text-align: center;
+    font-size: 0.875rem;
+    text-align: center;
 }
 
 #mypage-user-info textarea {
-	height: 9rem;
-	resize: none;
+    height: 9rem;
+    resize: none;
 }
 
 #friend-chat-form {
-	box-shadow: none;
-	border: 2px solid var(--skyblue);
+    box-shadow: none;
+    border-color: var(--skyblue);
+    border-width: 0.125rem;
 }
 
 #friend-chat {
-	height: 30rem;
-	overflow-y: scroll;
+    height: 30rem;
+    overflow-y: scroll;
 }
 
 #friend-chat .message {
-	border-radius: 3rem;
-	padding: 0.5rem 0.75rem;
-	display: inline-block;
-	color: var(--white);
-	background-color: var(--skyblue);	
+    border-radius: 3rem;
+    padding: 0.5rem 0.75rem;
+    display: inline-block;
+    color: var(--white);
+    background-color: var(--skyblue);
 }
 
 #friend-list table {
-	width: 100%;
-	cursor: default;
+    width: 100%;
+    cursor: default;
 }
 
 #friend-list tbody {
-	height: 34rem;
-	overflow-y: scroll;
+    height: 34rem;
+    overflow-y: scroll;
 }
 
 #friend-list tr:nth-child(1) {
-	border-top: 1px solid var(--gray);
+    border-top: 1px solid var(--gray);
 }
 
 #inquiry-form::-webkit-scrollbar,
 #friend-chatting-list::-webkit-scrollbar,
 #friend-chat::-webkit-scrollbar,
 #friend-list tbody::-webkit-scrollbar {
-	width: 0.75rem;
+    width: 0.75rem;
 }
 
 #inquiry-form::-webkit-scrollbar-thumb,
 #friend-chatting-list::-webkit-scrollbar-thumb,
 #friend-chat::-webkit-scrollbar-thumb,
 #friend-list tbody::-webkit-scrollbar-thumb {
-	background-color: var(--skyblue);
+    background-color: var(--skyblue);
     background-clip: padding-box;
     border-radius: 1rem;
-    border: 3px solid transparent;
+    border: 0.1875rem solid transparent;
 }
