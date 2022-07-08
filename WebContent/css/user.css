@@ -27,10 +27,6 @@ section {
     cursor: pointer;
 }
 
-#user-id-box {
-    display: flex;
-}
-
 #join-page #user-id,
 #find-pw #user-id {
     width: 70%;
