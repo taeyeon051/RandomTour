@@ -41,7 +41,7 @@ function findId() {
             const result = div.querySelector("#result");
             if (result.innerHTML === "성공") {
                 const toast = div.querySelector(".toast");
-                toast.classList.add("show");
+                $(toast).addClass("show");
                 document.body.appendChild(toast);
                 setTimeout(() => { toast.remove(); }, 12000);
             } else {

@@ -2,8 +2,8 @@
 const url = location.href;
 let link = `<link rel="stylesheet" href="/css/`;
 if (url.indexOf("user") !== -1) link += `user.css">`;
+else if (url.indexOf("mypage") !== -1) link += `mypage.css">`;
 else if (url.indexOf("main") !== -1) link += `main.css">`;
-
 document.head.innerHTML += link;
 
 // App
@@ -13,7 +13,7 @@ class App {
         let alertBox = document.querySelector(".alert");
         if (alertBox) return;
         alertBox = document.createElement("div");
-        alertBox.classList.add("alert", `alert-${state}`, "alert-dismissible", "fade", "show");
+        $(alertBox).addClass(`alert alert-${state} alert-dismissible fade show`);
         alertBox.setAttribute("role", "alert");
         alertBox.innerHTML = `${text} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
         document.body.appendChild(alertBox);
@@ -43,38 +43,35 @@ class App {
             const password = document.querySelector("#user-pwd");
             const passwordCheck = document.querySelector("#user-pwdc");
             if (password.value === passwordCheck.value && passwordCheck.value !== "") {
-                passwordCheck.classList.remove("is-invalid");
-                passwordCheck.classList.add("is-valid");
+                $(passwordCheck).removeClass("is-invalid").addClass("is-valid");
             } else if (passwordCheck.value !== "") {
-                passwordCheck.classList.remove("is-valid");
-                passwordCheck.classList.add("is-invalid");
+                $(passwordCheck).removeClass("is-valid").addClass("is-invalid");
             }
         }
         if (regex !== "") {
             if (value === "" || value.match(regex) === null || value.match(regex)[0] !== value) {
-                input.classList.remove("is-valid");
-                input.classList.add("is-invalid");
+                $(input).removeClass("is-valid").addClass("is-invalid");
             } else {
-                input.classList.remove("is-invalid");
-                input.classList.add("is-valid");
+                $(input).removeClass("is-invalid").addClass("is-valid");
             }
         }
     }
 
     // 빈값 확인
 	emptyCheck(domList = []) {
-		const inputList = domList.length > 0 ? domList : document.querySelectorAll("input") ;
-		for (let i = 0; i < inputList.length; i++) {
-			if (inputList[i].value === "") return true;
-		}
-		return false;
+        let result = false;
+		const inputList = domList.length > 0 ? domList : document.querySelectorAll("input");
+        inputList.forEach(input => {
+            if (input.value === "") result = true;
+        });
+		return result;
 	}
 
     // ajax 전송 결과 확인
     ajaxResult(data) {
         const div = document.createElement("div");
         div.innerHTML = data;
-        const result = div.querySelector("#result");
-        return result.innerHTML === "성공";
+        const result = div.querySelector("#result").innerHTML === "성공";
+        return result;
     }
 }

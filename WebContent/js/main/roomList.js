@@ -67,16 +67,16 @@ class RoomList {
 
         const div = document.createElement("div");
         if (chat === "in-chat") {
-            div.classList.add(chat, "m-0", "text-center", "p-1");
+            $(div).addClass(`${chat} m-0 text-center p-1`);
         } else if (chat === "my-chat") {
-            div.classList.add(chat, "m-2", "text-end");
+            $(div).addClass(`${chat} m-2 text-end`);
         } else if (nickname) {
             this.chatColor = chatColor >= colorList.length - 1 ? 0 : chatColor + 1;
             div.innerHTML =
                 `<div class="nickname text-${colorList[chatColor]}">
                     ${nickname}
                 </div>`;
-            div.classList.add("m-2");
+            $(div).addClass(`m-2`);
         }
 
         div.innerHTML += `<div class="message">${message}</div>`;
