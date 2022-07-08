@@ -34,13 +34,17 @@ a:hover {
 }
 
 .border-gray {
-    border: 1px solid var(--gray);
+    border: 0.1rem solid var(--gray);
 }
 
 section {
 	width: 96rem;
 	height: 44rem;
 	position: relative;
+}
+
+table {
+	border-collapse: separate;
 }
 
 
@@ -52,6 +56,7 @@ section {
 .text-wheat { color: var(--wheat); }
 .text-brown { color: var(--brown); }
 .text-silver { color: var(--silver); }
+.text-red { color: var(--red); }
 .text-blue { color: var(--blue); }
 .text-black { color: var(--black); }
 
@@ -85,7 +90,7 @@ section {
 .btn-skyblue:hover,
 .btn-skyblue:focus {
     background-color: var(--skyblue);
-    border: 1px solid var(--skyblue);
+    border: 0.1rem solid var(--skyblue);
     color: var(--white);
 }
 
@@ -96,7 +101,7 @@ section {
 .btn-outline-skyblue,
 .btn-outline-skyblue:hover,
 .btn-outline-skyblue:focus {
-    border: 1px solid var(--skyblue);
+    border: 0.1rem solid var(--skyblue);
     color: var(--skyblue);
 }
 
@@ -109,7 +114,7 @@ section {
 .btn-brown:hover,
 .btn-brown:focus {
     background-color: var(--brown);
-    border: 1px solid var(--brown);
+    border: 0.1rem solid var(--brown);
     color: var(--white);
 }
 
@@ -117,7 +122,7 @@ section {
 .btn-red:hover,
 .btn-red:focus {
     background-color: var(--red);
-    border: 1px solid var(--red);
+    border: 0.1rem solid var(--red);
     color: var(--white);
 }
 
