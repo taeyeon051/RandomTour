@@ -59,6 +59,7 @@
 		<jsp:include page="./components/Button.jsp">
 			<jsp:param name="id" value="join-btn"/>
 			<jsp:param name="text" value="회원가입"/>
+			<jsp:param name="margin" value="2"/>
 		</jsp:include>
 	</form>
 </section>

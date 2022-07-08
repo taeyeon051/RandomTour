@@ -28,6 +28,7 @@
 		<jsp:include page="./components/Button.jsp">
 			<jsp:param name="id" value="login-btn"/>
 			<jsp:param name="text" value="로그인"/>
+			<jsp:param name="margin" value="2"/>
 		</jsp:include>
 		<div id="user-page-links" class="w-100 mt-4 d-flex justify-content-around">	
 			<a href="<%=path%>/user/join">회원가입</a>

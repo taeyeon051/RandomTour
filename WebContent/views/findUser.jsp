@@ -39,6 +39,7 @@
 					<jsp:include page="./components/Button.jsp">
 						<jsp:param name="id" value="find-id-btn"/>
 						<jsp:param name="text" value="확인"/>
+						<jsp:param name="margin" value="2"/>
 					</jsp:include>
 		  		</form>
 		  	</div>
@@ -59,6 +60,7 @@
 					<jsp:include page="./components/Button.jsp">
 						<jsp:param name="id" value="find-pw-btn"/>
 						<jsp:param name="text" value="확인"/>
+						<jsp:param name="margin" value="2"/>
 					</jsp:include>
 		  		</form>
 		  	</div>

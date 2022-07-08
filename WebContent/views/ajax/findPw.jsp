@@ -19,6 +19,7 @@
 	<jsp:include page="../components/Button.jsp">
 		<jsp:param name="id" value="update-pw-btn"/>
 		<jsp:param name="text" value="확인"/>
+		<jsp:param name="margin" value="2"/>
 	</jsp:include>
 </form>
 		
