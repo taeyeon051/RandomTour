@@ -1,6 +1,7 @@
 class UserForm {
     constructor(submitButton) {
         this.app = new App();
+        this.certify = document.querySelector("#certify-number");
         this.inputIdList = ["#user-id", "#certify-number", "#user-name", "#user-nickname", "#user-pwd", "#user-pwdc"];
         this.regexList = ["userId", "certify", "username", "nickname", "password", ""];
         // 입력창 형식 확인
@@ -15,17 +16,25 @@ class UserForm {
         this.submitButton = submitButton;
 
         // 인증하기 버튼 활성화/비활성화
+        this.userId = "";
         this.isSendMail = false;
     }
 
     // 빈 값 체크
     inputEvent() {
-        const { app, inputIdList, regexList } = this;
+        const { app, certify, inputIdList, regexList } = this;
         
         inputIdList.forEach((inputId, idx) => {
             const input = document.querySelector(inputId);
             if (input) {
                 input.addEventListener("input", e => {
+                    if (input.id === "user-id") {
+                        if (this.userId !== e.target.value) {
+                            this.userId = e.target.value;
+                            this.isSendMail = false;
+                            $(certify).val("").removeClass("is-invalid is-valid").attr("disabled", true);
+                        }
+                    }
 					if (input.id === "user-pwdc") {
                         app.formDataCheck(e.target, "", true);
                     } else if (input.type === "password" && document.querySelector("#user-pwdc")) {
@@ -40,7 +49,7 @@ class UserForm {
     
     // 폼 전송
     buttonEvent() {
-        const { app, submitButton } = this;
+        const { submitButton } = this;
         window.addEventListener("keydown", e => {
             if (e.key === "Enter") this.formSubmit();
         });
@@ -60,7 +69,7 @@ class UserForm {
         let inputValueCheck = false;
         inputIdList.forEach((inputId, idx) => {
             const input = document.querySelector(inputId);
-            if (input && input.classList.contains("is-invalid")) {
+            if (input && $(input).hasClass("is-invalid")) {
                 inputValueCheck = true;
                 app.alert("danger", messageList[idx]);
             }
@@ -79,11 +88,10 @@ class UserForm {
 
     // 메일 전송
     sendMail() {
-        const { app } = this;
+        const { app, certify } = this;
 
         const userId = document.querySelector("#user-id");
-        const certify = document.querySelector("#certify-number");
-        if (userId.value === "" || userId.classList.contains("is-invalid")) {
+        if (userId.value === "" || $(userId).hasClass("is-invalid")) {
             return app.alert("danger", "올바른 이메일 형식을 입력 후 인증해주세요.");
         }
         if (this.isSendMail) {
