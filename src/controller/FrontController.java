@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.main.MyPageController;
 import controller.main.RoomListController;
+import controller.main.UpdateUserController;
 import controller.user.FindUserController;
 import controller.user.JoinController;
 import controller.user.LoginController;
@@ -42,6 +43,7 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/main/roomList", new RoomListController());
 		// 마이페이지
 		controllerMap.put("/main/mypage", new MyPageController());
+		controllerMap.put("/main/updateUser", new UpdateUserController());
 	}
 
 

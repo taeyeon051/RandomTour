@@ -239,4 +239,20 @@ public class UserDAO {
 		}
 		return n;
 	}
+	
+	// 유정 정보 수정
+	public int updateUser(UserVO vo) {
+		int n = 0;
+		String sql = "";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt);
+		}
+		return n;
+	}
 }
