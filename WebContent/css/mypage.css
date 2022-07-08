@@ -1,0 +1,199 @@
+/* 마이페이지 */
+
+#mypage-main {
+    width: 64rem;
+}
+
+#mypage-main li {
+    margin-right: 3.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#friend-main {
+    width: 45rem;
+    height: 34rem;
+}
+
+#friend-main>* {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.nickname,
+.request-btn {
+    font-size: 1.5rem;
+}
+
+
+/* 친구 채팅 목록 */
+
+#friend-chatting-list {
+    width: 12rem;
+    height: 34rem;
+}
+
+.friend {
+    width: 100%;
+    height: 4rem;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 4rem;
+    cursor: pointer;
+}
+
+.friend:hover {
+    background-color: var(--wheat);
+}
+
+
+/* 개인채팅 */
+
+#friend-chat-form,
+#send-nickname {
+    box-shadow: none;
+    border-color: var(--skyblue);
+    border-width: 0.125rem;
+}
+
+#friend-chat {
+    height: 30rem;
+    overflow-y: scroll;
+}
+
+#friend-chat .message {
+    border-radius: 3rem;
+    padding: 0.5rem 0.75rem;
+    display: inline-block;
+    color: var(--white);
+    background-color: var(--skyblue);
+}
+
+
+/* 친구목록 */
+
+table {
+    width: 100%;
+}
+
+#friend-list tbody,
+#friend-request tbody {
+    height: 34rem;
+}
+
+#friend-list tr {
+    cursor: pointer;
+}
+
+tr {
+    width: 100%;
+    height: 4rem; 
+    border-bottom: 0.1rem solid var(--gray);
+    transition: .15s;
+}
+
+tr:first-child {
+    border-top: 0.1rem solid var(--gray);
+}
+
+
+/* 친구요청 */
+
+
+/* 친구추가 */
+
+#send-nickname,
+#certify {
+    width: 70%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#send-btn,
+#certify-btn {
+    width: 30%;
+    padding: 1rem 0.75rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#friend-addition tbody {
+	font-size: 1.25rem;
+	height: 27rem;
+}
+
+
+/* 회원정보 */
+
+#mypage-user-info {
+    width: 24rem;
+    height: 37rem;
+    margin-top: 7rem;
+}
+
+#user-update-btn {
+    padding: 0.375rem 1rem;
+}
+
+#user-id {
+	outline: none;
+	cursor: default;
+}
+
+#mypage-user-info label {
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+#mypage-user-info textarea {
+    height: 9rem;
+    resize: none;
+}
+
+.popup {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.inner {
+	width: 75%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+/* 스크롤 (채팅목록, 채팅, 친구목록, 친구요청, 친구추가, 문의하기) */
+
+#inquiry-form,
+#friend-chatting-list,
+#friend-chat,
+tbody {
+    overflow-y: scroll;
+}
+
+#inquiry-form::-webkit-scrollbar,
+#friend-chatting-list::-webkit-scrollbar,
+#friend-chat::-webkit-scrollbar,
+tbody::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+#inquiry-form::-webkit-scrollbar-thumb,
+#friend-chatting-list::-webkit-scrollbar-thumb,
+#friend-chat::-webkit-scrollbar-thumb,
+tbody::-webkit-scrollbar-thumb {
+    background-color: var(--skyblue);
+    background-clip: padding-box;
+    border-radius: 1rem;
+    border: 0.1875rem solid transparent;
+}
