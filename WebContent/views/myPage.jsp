@@ -20,19 +20,45 @@
 		</ul>
 		<div class="d-flex justify-content-between">
 			<div id="friend-chatting-list">
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
-				<div class="friend">nickname</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					가나다라마바사아자차카타파하히히
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
+				<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+					nickname
+				</div>
 			</div>
 			<div id="friend-main" class="position-relative">
 				<jsp:include page="./components/mypage/Chatting.jsp"/>

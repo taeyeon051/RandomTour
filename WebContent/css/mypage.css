@@ -26,7 +26,7 @@
 
 .nickname,
 .request-btn {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 
@@ -38,11 +38,8 @@
 }
 
 .friend {
-    width: 100%;
     height: 4rem;
-    font-size: 1.2rem;
-    text-align: center;
-    line-height: 4rem;
+    word-break: break-all;
     cursor: pointer;
 }
 
@@ -108,22 +105,21 @@ tr:first-child {
 
 #send-nickname,
 #certify {
-    width: 70%;
+    width: 75%;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 #send-btn,
 #certify-btn {
-    width: 30%;
+    width: 25%;
     padding: 1rem 0.75rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
 #friend-addition tbody {
-	font-size: 1.25rem;
-	height: 27rem;
+	height: 26.5rem;
 }
 
 
