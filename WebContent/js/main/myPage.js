@@ -13,11 +13,35 @@ class Mypage {
 		this.init();
 		this.menuClickEvent();
 		this.updateUserFormEvent();
+		this.friendEvent();
 	}
 
 	init() {
 		const { username, nickname } = this;
 		this.userData = { "username": username.value, "nickname": nickname.value };
+	}
+
+	menuClickEvent() {
+		const domList = document.querySelectorAll("#friend-main>div");
+		const menuList = document.querySelectorAll("#mypage-main>ul>li:not(:first-child)");
+		menuList.forEach(menu => {
+			menu.addEventListener("click", e => {
+				const domId = e.target.dataset.id;
+				$(menuList).removeClass("text-blue");
+				$(e.target).addClass("text-blue");
+				$(domList).removeClass("d-block").addClass("d-none");
+				$(`#${domId}`).removeClass("d-none").addClass("d-block");
+			});
+		});
+
+		const chatList = document.querySelectorAll("#friend-chatting-list>div");
+		chatList.forEach(chat => {
+			chat.addEventListener("click", e => {
+				$(menuList).removeClass("text-blue");
+				$(domList).removeClass("d-block").addClass("d-none");
+				$("#friend-chatting").removeClass("d-none").addClass("d-block");
+			});
+		});
 	}
 
 	updateUserFormEvent() {
@@ -47,34 +71,31 @@ class Mypage {
 		if (app.emptyCheck([username, nickname])) return app.alert("danger", "빈 값이 있습니다.");
 		if ($(username).hasClass("is-invalid")) return app.alert("danger", "이름은 한글, 영문만 사용할 수 있으며 2글자 이상이어야 합니다.");
 		if ($(nickname).hasClass("is-invalid")) return app.alert("danger", "닉네임은 한글, 영문, 숫자만 사용할 수 있으며 2~16글자여야 합니다.");
-
-		
 	}
 
 	changePassword() {
 
 	}
 
-	menuClickEvent() {
-		const domList = document.querySelectorAll("#friend-main>div");
-		const menuList = document.querySelectorAll("#mypage-main>ul>li:not(:first-child)");
-		menuList.forEach(menu => {
-			menu.addEventListener("click", e => {
-				const domId = e.target.dataset.id;
-				$(menuList).removeClass("text-blue");
-				$(e.target).addClass("text-blue");
-				$(domList).removeClass("d-block").addClass("d-none");
-				$(`#${domId}`).removeClass("d-none").addClass("d-block");
-			});
-		});
+	friendEvent() {
+		const sendBtn = document.querySelector("#send-btn");
+		sendBtn.addEventListener("click", () => { this.addFriend(); });
+	}
 
-		const chatList = document.querySelectorAll("#friend-chatting-list>div");
-		chatList.forEach(chat => {
-			chat.addEventListener("click", e => {
-				$(menuList).removeClass("text-blue");
-				$(domList).removeClass("d-block").addClass("d-none");
-				$("#friend-chatting").removeClass("d-none").addClass("d-block");
-			});
+	addFriend() {
+		const { app, userId } = this;
+		const nickname = document.querySelector("#send-nickname");
+		
+		if (nickname.value.trim() === "") return;
+		if (nickname.value.match(app.getRegex("nickname")) === null || nickname.value.match(app.getRegex("nickname"))[0] !== nickname.value) return;
+		
+		$.ajax({
+			url: "/main/friend/add",
+			type: "POST",
+			data: { "user-id": userId, "user-nickname": nickname.value },
+			success: data => {
+				console.log(data);
+			}
 		});
 	}
 }
