@@ -104,8 +104,8 @@ public class FriendDAO {
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getSendUserId());
-			pstmt.setString(2, vo.getAcceptUserId());
+			pstmt.setString(1, vo.getSendNickname());
+			pstmt.setString(2, vo.getAcceptNickname());
 			pstmt.setBoolean(3, false);
 			n = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -124,8 +124,8 @@ public class FriendDAO {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setBoolean(1, true);
-			pstmt.setString(2, vo.getSendUserId());
-			pstmt.setString(3, vo.getAcceptUserId());
+			pstmt.setString(2, vo.getSendNickname());
+			pstmt.setString(3, vo.getAcceptNickname());
 			n = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,8 +142,8 @@ public class FriendDAO {
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getSendUserId());
-			pstmt.setString(2, vo.getAcceptUserId());
+			pstmt.setString(1, vo.getSendNickname());
+			pstmt.setString(2, vo.getAcceptNickname());
 			n = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
