@@ -27,18 +27,29 @@ public class AddFriendController implements Controller {
 		
 		boolean nicknameCheck = userDao.nicknameCheck(nickname);
 		if (!nicknameCheck) {
-			request.setAttribute("alert", "존재하지 않는 닉네임입니다.");
-			return new MyView("/main/mypage");
+			request.setAttribute("state", "danger");
+			request.setAttribute("message", "존재하지 않는 닉네임입니다.");
+			return new MyView("/views/ajax/alert.jsp");
 		}
 		
-		FriendVO vo = new FriendVO(userId, nickname, false);
+		boolean friendCheck = friendDao.friendCheck(userId, nickname);
+		if (friendCheck) {
+			request.setAttribute("state", "danger");
+			request.setAttribute("message", "이미 친구추가가 된 닉네임입니다.");
+			return new MyView("/views/ajax/alert.jsp");
+		}
+		
+		String sendNickname = userDao.getUserNickname(userId);
+		FriendVO vo = new FriendVO(sendNickname, nickname, false);
 		int n = friendDao.sendFriend(vo);
 		if (n > 0) {
-			request.setAttribute("success", "친구요청이 전송되었습니다.");
+			request.setAttribute("state", "success");
+			request.setAttribute("message", "친구요청이 전송되었습니다.");
 		} else {
-			request.setAttribute("alert", "친구요청 전송에 실패하였습니다.");
+			request.setAttribute("state", "danger");
+			request.setAttribute("message", "친구요청 전송에 실패하였습니다.");
 		}
 		
-		return new MyView("/main/mypage");
+		return new MyView("/views/ajax/alert.jsp");
 	}
 }

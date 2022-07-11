@@ -89,12 +89,32 @@ class Mypage {
 		if (nickname.value.trim() === "") return;
 		if (nickname.value.match(app.getRegex("nickname")) === null || nickname.value.match(app.getRegex("nickname"))[0] !== nickname.value) return;
 		
+		let isSend = false;
+		const table = document.querySelector("#friend-addition tbody");
+		table.querySelectorAll("tr").forEach(tr => {
+			if (tr.querySelector(".nickname").innerText === nickname.value) {
+				isSend = true;
+				return false;
+			}
+		});
+		if (isSend) return app.alert("warning", "이미 친구요청이 전송되었습니다.");
+		
 		$.ajax({
 			url: "/main/friend/add",
 			type: "POST",
 			data: { "user-id": userId, "user-nickname": nickname.value },
 			success: data => {
-				console.log(data);
+				const div = document.createElement("div");
+				div.innerHTML = data;
+				document.body.appendChild(div);
+				if (div.querySelector("alert-success")) {
+					const tr = document.createElement("tr");
+					tr.innerHTML = `<td class="nickname px-3">${nickname.value}</td>`;
+					table.prepend(tr);
+				}
+				setTimeout(() => {
+					div.remove();
+				}, 3500);
 			}
 		});
 	}

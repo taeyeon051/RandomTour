@@ -240,6 +240,26 @@ public class UserDAO {
 		return n;
 	}
 	
+	// 유저 아이디로 닉네임 찾기
+	public String getUserNickname(String userId) {
+		String nickname = "";
+		String sql = "SELECT nickname FROM users WHERE user_id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				nickname = rs.getString("nickname");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return nickname;
+	}
+	
 	// 유정 정보 수정
 	public int updateUser(UserVO vo) {
 		int n = 0;
