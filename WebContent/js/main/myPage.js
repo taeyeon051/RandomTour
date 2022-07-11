@@ -26,7 +26,7 @@ class Mypage {
 		requestTable.forEach(tr => {
 			const name = tr.querySelector(".nickname").innerHTML;
 			const btnDom = tr.querySelector(".request-btn");
-			this.nicknameList.push({ "nickname": name, "btnDom": btnDom });
+			this.nicknameList.push({ "name": name, "btnDom": btnDom });
 		});
 	}
 
@@ -91,12 +91,11 @@ class Mypage {
 		sendBtn.addEventListener("click", () => { this.addFriend(); });
 
 		const { nicknameList } = this;
-		nicknameList.forEach(li => {
-			const nickname = li.nickname;
-			const acceptBtn = li.btnDom.querySelector(".accept-btn");
-			const refuseBtn = li.btnDom.querySelector(".refuse-btn");
-			acceptBtn.addEventListener("click", () => { this.acceptFriend(nickname); });
-			refuseBtn.addEventListener("click", () => { this.refuseFriend(nickname); });
+		nicknameList.forEach(nickname => {
+			const acceptBtn = nickname.btnDom.querySelector(".accept-btn");
+			const refuseBtn = nickname.btnDom.querySelector(".refuse-btn");
+			acceptBtn.addEventListener("click", () => { this.acceptFriend(nickname, true); });
+			refuseBtn.addEventListener("click", () => { this.acceptFriend(nickname, false); });
 		});
 	}
 
@@ -122,26 +121,42 @@ class Mypage {
 			type: "POST",
 			data: { "user-id": userId, "user-nickname": nickname.value },
 			success: data => {
-				const div = document.createElement("div");
-				div.innerHTML = data;
-				document.body.appendChild(div);
-				if (div.querySelector("alert-success")) {
-					const tr = document.createElement("tr");
-					tr.innerHTML = `<td class="nickname px-3">${nickname.value}</td>`;
-					table.prepend(tr);
-				}
-				setTimeout(() => {
-					div.remove();
-				}, 3500);
+				this.ajaxAlert(data, "add");
 			}
 		});
 	}
 
-	acceptFriend(nickname) {
-		console.log(nickname);
+	acceptFriend(nickname, accept) {
+		const { userId } = this;
+		$.ajax({
+			url: "/main/friend/accept",
+			type: "POST",
+			data: { "user-id": userId, "user-nickname": nickname.name, "accept": accept },
+			success: data => {
+				this.ajaxAlert(data, "accept", nickname.btnDom.parentElement);
+			}
+		});
 	}
 
-	refuseFriend(nickname) {
-		console.log(nickname);
+	ajaxAlert(data, friend, dom) {
+		const div = document.createElement("div");
+		div.innerHTML = data;
+		document.body.appendChild(div);
+
+		if (friend === "add") {
+			if (div.querySelector("alert-success")) {
+				const tr = document.createElement("tr");
+				tr.innerHTML = `<td class="nickname px-3">${nickname.value}</td>`;
+				table.prepend(tr);
+			}
+		} else if (friend === "accept") {
+			if (!div.querySelector("alert-warning")) {
+				dom.remove();
+			}
+		}
+
+		setTimeout(() => {
+			div.remove();
+		}, 3500);
 	}
 }

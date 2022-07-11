@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.main.AcceptFriendController;
 import controller.main.AddFriendController;
 import controller.main.MyPageController;
 import controller.main.RoomListController;
@@ -47,6 +48,8 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/main/updateUser", new UpdateUserController());
 		// 친구 추가
 		controllerMap.put("/main/friend/add", new AddFriendController());
+		// 받은 요청 수락
+		controllerMap.put("/main/friend/accept", new AcceptFriendController());
 	}
 
 
