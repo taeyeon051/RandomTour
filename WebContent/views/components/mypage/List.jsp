@@ -15,10 +15,10 @@
 		<tbody class="d-block">
 			<% for (FriendVO vo : list) { %>
 				<tr class="friend-item d-flex justify-content-between align-items-center px-3">
-					<% if (vo.getSendUserId().equals(user.getUserId())) { %>
-						<td class="nickname"><%= vo.getAcceptUserId() %></td>
-					<% } else if (vo.getAcceptUserId().equals(user.getUserId())) { %>
-						<td class="nickname"><%= vo.getSendUserId() %></td>
+					<% if (vo.getSendNickname().equals(user.getNickname())) { %>
+						<td class="nickname"><%= vo.getAcceptNickname() %></td>
+					<% } else if (vo.getAcceptNickname().equals(user.getNickname())) { %>
+						<td class="nickname"><%= vo.getSendNickname() %></td>
 					<% } %>
 					<td class="btn btn-red">친구삭제</td>
 				</tr>
