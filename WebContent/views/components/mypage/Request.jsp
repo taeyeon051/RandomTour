@@ -17,10 +17,10 @@
 				<tr class="request d-flex justify-content-between align-items-center p-3">
 					<td class="nickname"><%= vo.getSendUserId() %></td>
 					<td class="request-btn d-flex">
-						<div class="yes-btn text-success mx-3">
+						<div class="accept-btn text-success mx-3">
 							<i class="bi bi-check-circle-fill"></i>
 						</div>
-						<div class="no-btn text-danger">
+						<div class="refuse-btn text-danger">
 							<i class="bi bi-x-circle-fill"></i>
 						</div>
 					</td>

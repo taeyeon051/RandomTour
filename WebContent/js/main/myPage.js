@@ -10,6 +10,8 @@ class Mypage {
 		this.password = document.querySelector("#user-pwd");
 		this.passwordCheck = document.querySelector("#user-pwdc");
 
+		this.nicknameList = [];
+
 		this.init();
 		this.menuClickEvent();
 		this.updateUserFormEvent();
@@ -19,6 +21,13 @@ class Mypage {
 	init() {
 		const { username, nickname } = this;
 		this.userData = { "username": username.value, "nickname": nickname.value };
+
+		const requestTable = document.querySelectorAll("#friend-request tbody>tr");
+		requestTable.forEach(tr => {
+			const name = tr.querySelector(".nickname").innerHTML;
+			const btnDom = tr.querySelector(".request-btn");
+			this.nicknameList.push({ "nickname": name, "btnDom": btnDom });
+		});
 	}
 
 	menuClickEvent() {
@@ -80,15 +89,24 @@ class Mypage {
 	friendEvent() {
 		const sendBtn = document.querySelector("#send-btn");
 		sendBtn.addEventListener("click", () => { this.addFriend(); });
+
+		const { nicknameList } = this;
+		nicknameList.forEach(li => {
+			const nickname = li.nickname;
+			const acceptBtn = li.btnDom.querySelector(".accept-btn");
+			const refuseBtn = li.btnDom.querySelector(".refuse-btn");
+			acceptBtn.addEventListener("click", () => { this.acceptFriend(nickname); });
+			refuseBtn.addEventListener("click", () => { this.refuseFriend(nickname); });
+		});
 	}
 
 	addFriend() {
 		const { app, userId } = this;
 		const nickname = document.querySelector("#send-nickname");
-		
+
 		if (nickname.value.trim() === "") return;
 		if (nickname.value.match(app.getRegex("nickname")) === null || nickname.value.match(app.getRegex("nickname"))[0] !== nickname.value) return;
-		
+
 		let isSend = false;
 		const table = document.querySelector("#friend-addition tbody");
 		table.querySelectorAll("tr").forEach(tr => {
@@ -98,7 +116,7 @@ class Mypage {
 			}
 		});
 		if (isSend) return app.alert("warning", "이미 친구요청이 전송되었습니다.");
-		
+
 		$.ajax({
 			url: "/main/friend/add",
 			type: "POST",
@@ -117,5 +135,13 @@ class Mypage {
 				}, 3500);
 			}
 		});
+	}
+
+	acceptFriend(nickname) {
+		console.log(nickname);
+	}
+
+	refuseFriend(nickname) {
+		console.log(nickname);
 	}
 }
