@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
+<%
+	String mypage = request.getParameter("p");
+	if (mypage == null) {
+		response.sendRedirect("/main/mypage?p=list");
+		return;
+	}
+%>
 
 <jsp:include page="./components/Background.jsp"/>
 
@@ -14,9 +21,9 @@
 					<i class="bi bi-arrow-left"></i>
 				</a>
 			</li>
-			<li data-id="friend-list" class="text-blue">친구목록</li>
-			<li data-id="friend-request">친구요청</li>
-			<li data-id="friend-addition">친구추가</li>
+			<li><a href="<%=path%>/main/mypage?p=list" class="<%=mypage.equals("list") ? "text-blue" : ""%>">친구목록</a></li>
+			<li><a href="<%=path%>/main/mypage?p=send" class="<%=mypage.equals("send") ? "text-blue" : ""%>">친구요청</a></li>
+			<li><a href="<%=path%>/main/mypage?p=add" class="<%=mypage.equals("add") ? "text-blue" : ""%>">친구추가</a></li>
 		</ul>
 		<div class="d-flex justify-content-between">
 			<div id="friend-chatting-list">
@@ -61,10 +68,15 @@
 				</div>
 			</div>
 			<div id="friend-main" class="position-relative">
-				<jsp:include page="./components/mypage/Chatting.jsp"/>
-				<jsp:include page="./components/mypage/List.jsp"/>
-				<jsp:include page="./components/mypage/Request.jsp"/>
-				<jsp:include page="./components/mypage/Addition.jsp"/>
+				<% if (mypage.equals("send")) { %>
+					<jsp:include page="./components/mypage/Send.jsp"/>
+				<% } else if (mypage.equals("add")) { %>
+					<jsp:include page="./components/mypage/Addition.jsp"/>
+				<% } else if (mypage.equals("chat")) { %>						
+					<jsp:include page="./components/mypage/Chatting.jsp"/>
+				<% } else { %>
+					<jsp:include page="./components/mypage/List.jsp"/>
+				<% } %>
 			</div>
 		</div>
 	</div>

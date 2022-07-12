@@ -3,6 +3,8 @@ const log = console.log;
 class Mypage {
 	constructor(userId) {
 		this.app = new App();
+		this.url = new URL(location.href);
+
 		this.userId = userId;
 		this.userData;
 		this.username = document.querySelector("#user-name");
@@ -12,44 +14,78 @@ class Mypage {
 
 		this.nicknameList = [];
 
-		this.init();
-		this.menuClickEvent();
+		this.addEvent();
 		this.updateUserFormEvent();
-		this.friendEvent();
 	}
 
-	init() {
-		const { username, nickname } = this;
-		this.userData = { "username": username.value, "nickname": nickname.value };
-
-		const requestTable = document.querySelectorAll("#friend-request tbody>tr");
-		requestTable.forEach(tr => {
-			const name = tr.querySelector(".nickname").innerHTML;
-			const btnDom = tr.querySelector(".request-btn");
-			this.nicknameList.push({ "name": name, "btnDom": btnDom });
-		});
-	}
-
-	menuClickEvent() {
-		const domList = document.querySelectorAll("#friend-main>div");
-		const menuList = document.querySelectorAll("#mypage-main>ul>li:not(:first-child)");
-		menuList.forEach(menu => {
-			menu.addEventListener("click", e => {
-				const domId = e.target.dataset.id;
-				$(menuList).removeClass("text-blue");
-				$(e.target).addClass("text-blue");
-				$(domList).removeClass("d-block").addClass("d-none");
-				$(`#${domId}`).removeClass("d-none").addClass("d-block");
+	addEvent() {
+		const { url } = this;
+		const page = url.searchParams.get("p");
+		if (page === "chat") this.chatEvent();
+		else if (page === "add") {
+			const sendBtn = document.querySelector("#send-btn");
+			sendBtn.addEventListener("click", () => { this.addFriend(); });
+		} else if (page === "send") {
+			this.getNicknameList();
+			const { nicknameList } = this;
+			nicknameList.forEach(nickname => {
+				const acceptBtn = nickname.btnDom.querySelector(".accept-btn");
+				const refuseBtn = nickname.btnDom.querySelector(".refuse-btn");
+				acceptBtn.addEventListener("click", () => { this.acceptFriend(nickname, true); });
+				refuseBtn.addEventListener("click", () => { this.acceptFriend(nickname, false); });
 			});
+		} else if (page === "list") {
+			this.deleteFriendEvent();
+		}
+	}
+
+	deleteFriendEvent() {
+		const nicknameList = [];
+		const list = document.querySelectorAll("#friend-list tr");
+		list.forEach(tr => {
+			const name = tr.querySelector(".nickname").innerText;
+			const btn = tr.querySelector(".btn");
+			nicknameList.push({ "name": name, "btn": btn });
 		});
 
+		nicknameList.forEach(nickname => {
+			const deleteBtn = nickname.btn;
+			deleteBtn.addEventListener("click", () => { this.deleteFriend(nickname); });
+		});
+	}
+
+	deleteFriend(nickname) {
+		const { userId } = this;
+		$.ajax({
+			url: "/main/friend/accept",
+			type: "POST",
+			data: { "user-id": userId, "user-nickname": nickname.name, "accept": false },
+			success: data => {
+				this.ajaxAlert(data, "accept", nickname.btn.parentElement);
+			}
+		});
+	}
+
+	chatEvent() {
 		const chatList = document.querySelectorAll("#friend-chatting-list>div");
 		chatList.forEach(chat => {
-			chat.addEventListener("click", e => {
+			chat.addEventListener("click", () => {
 				$(menuList).removeClass("text-blue");
 				$(domList).removeClass("d-block").addClass("d-none");
 				$("#friend-chatting").removeClass("d-none").addClass("d-block");
 			});
+		});
+	}
+
+	getNicknameList() {
+		const { username, nickname } = this;
+		this.userData = { "username": username.value, "nickname": nickname.value };
+
+		const sendTable = document.querySelectorAll("#friend-send tbody>tr");
+		sendTable.forEach(tr => {
+			const name = tr.querySelector(".nickname").innerHTML;
+			const btnDom = tr.querySelector(".send-btn");
+			this.nicknameList.push({ "name": name, "btnDom": btnDom });
 		});
 	}
 
@@ -84,19 +120,6 @@ class Mypage {
 
 	changePassword() {
 
-	}
-
-	friendEvent() {
-		const sendBtn = document.querySelector("#send-btn");
-		sendBtn.addEventListener("click", () => { this.addFriend(); });
-
-		const { nicknameList } = this;
-		nicknameList.forEach(nickname => {
-			const acceptBtn = nickname.btnDom.querySelector(".accept-btn");
-			const refuseBtn = nickname.btnDom.querySelector(".refuse-btn");
-			acceptBtn.addEventListener("click", () => { this.acceptFriend(nickname, true); });
-			refuseBtn.addEventListener("click", () => { this.acceptFriend(nickname, false); });
-		});
 	}
 
 	addFriend() {
