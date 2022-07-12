@@ -138,12 +138,14 @@ public class FriendDAO {
 	// 친구 요청 거절, 친구 삭제
 	public int deleteFriend(FriendVO vo) {
 		int n = 0;
-		String sql = "DELETE FROM friends WHERE send_nickname = ? AND accept_nickname = ?";
+		String sql = "DELETE FROM friends WHERE (send_nickname = ? AND accept_nickname = ?) OR (accept_nickname = ? AND send_nickname = ?)";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getSendNickname());
 			pstmt.setString(2, vo.getAcceptNickname());
+			pstmt.setString(3, vo.getSendNickname());
+			pstmt.setString(4, vo.getAcceptNickname());
 			n = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,7 +166,7 @@ public class FriendDAO {
 			pstmt.setString(1, sendNickname);
 			pstmt.setString(2, nickname);
 			pstmt.setString(3, nickname);
-			pstmt.setString(4, sendNickname);			
+			pstmt.setString(4, sendNickname);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				check = true;

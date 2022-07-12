@@ -55,11 +55,12 @@ class Mypage {
 	}
 
 	deleteFriend(nickname) {
+		if (!confirm("정말 삭제하시겠습니까?")) return;
 		const { userId } = this;
 		$.ajax({
-			url: "/main/friend/accept",
+			url: "/main/friend/delete",
 			type: "POST",
-			data: { "user-id": userId, "user-nickname": nickname.name, "accept": false },
+			data: { "user-id": userId, "user-nickname": nickname.name },
 			success: data => {
 				this.ajaxAlert(data, "accept", nickname.btn.parentElement);
 			}
@@ -165,12 +166,15 @@ class Mypage {
 		const div = document.createElement("div");
 		div.innerHTML = data;
 		document.body.appendChild(div);
-
+		
 		if (friend === "add") {
-			if (div.querySelector("alert-success")) {
+			const table = document.querySelector("#friend-addition tbody");
+			const nickname = document.querySelector("#send-nickname");
+			if (data.indexOf("success") !== -1) {
 				const tr = document.createElement("tr");
 				tr.innerHTML = `<td class="nickname px-3">${nickname.value}</td>`;
 				table.prepend(tr);
+				nickname.value = "";
 			}
 		} else if (friend === "accept") {
 			if (!div.querySelector("alert-warning")) {

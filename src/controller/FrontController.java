@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.main.AcceptFriendController;
 import controller.main.AddFriendController;
+import controller.main.DeleteFriendController;
 import controller.main.MyPageController;
 import controller.main.RoomListController;
 import controller.main.UpdateUserController;
@@ -43,6 +44,7 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/user/sendMail", new SendMailController());
 		// 메인페이지 (방목록 페이지)
 		controllerMap.put("/main/roomList", new RoomListController());
+		
 		// 마이페이지
 		controllerMap.put("/main/mypage", new MyPageController());
 		controllerMap.put("/main/updateUser", new UpdateUserController());
@@ -50,6 +52,8 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/main/friend/add", new AddFriendController());
 		// 받은 요청 수락
 		controllerMap.put("/main/friend/accept", new AcceptFriendController());
+		// 친구 삭제
+		controllerMap.put("/main/friend/delete", new DeleteFriendController());
 	}
 
 
