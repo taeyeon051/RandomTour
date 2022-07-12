@@ -10,13 +10,13 @@
 	ArrayList<FriendVO> list = dao.getFriendRequestList(user.getUserId());
 %>
 
-<div id="friend-request">
+<div id="friend-send">
 	<table class="text-center">
 		<tbody class="d-block">
 			<% for (FriendVO vo : list) { %>				
-				<tr class="request d-flex justify-content-between align-items-center p-3">
+				<tr class="send d-flex justify-content-between align-items-center p-3">
 					<td class="nickname"><%= vo.getSendNickname() %></td>
-					<td class="request-btn d-flex">
+					<td class="send-btn d-flex">
 						<div class="accept-btn text-success mx-3">
 							<i class="bi bi-check-circle-fill"></i>
 						</div>

@@ -10,6 +10,10 @@
     font-weight: bold;
 }
 
+#mypage-main li:not(:first-child)>a:hover {
+    color: var(--blue);
+}
+
 #friend-main {
     width: 45rem;
     height: 34rem;
@@ -21,11 +25,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    display: none;
 }
 
 .nickname,
-.request-btn {
+.send-btn {
     font-size: 1.25rem;
 }
 
@@ -78,7 +81,7 @@ table {
 }
 
 #friend-list tbody,
-#friend-request tbody {
+#friend-send tbody {
     height: 34rem;
 }
 
