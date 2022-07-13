@@ -261,14 +261,18 @@ public class UserDAO {
 	}
 	
 	// 유정 정보 수정
-	public int updateUser(UserVO vo) {
+	public int userUpdate(UserVO user) {
 		int n = 0;
-		String sql = "";
+		String sql = "UPDATE users SET user_name = ?, nickname = ?, password = CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))) WHERE user_id = ?";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
-		} catch (SQLException e) {
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getNickname());
+			pstmt.setString(3, user.getPassword());
+			pstmt.setString(4, user.getUserId());
+			n = pstmt.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(con, pstmt);

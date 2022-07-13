@@ -7,10 +7,6 @@ class Mypage {
 
 		this.userId = userId;
 		this.userData;
-		this.username = document.querySelector("#user-name");
-		this.nickname = document.querySelector("#user-nickname");
-		this.password = document.querySelector("#user-pwd");
-		this.passwordCheck = document.querySelector("#user-pwdc");
 
 		this.nicknameList = [];
 
@@ -91,36 +87,20 @@ class Mypage {
 	}
 
 	updateUserFormEvent() {
-		const { app, userId, userData, username, nickname, password, passwordCheck } = this;
+		const userForm = new UserForm();
+		userForm.inputEvent();
+		userForm.certifyBtnClickEvent();
+
 		const updateBtn = document.querySelector("#user-update-btn");
-
-		username.addEventListener("input", e => {
-			app.formDataCheck(e.target, app.getRegex("username"));
-			if (e.target.value === userData.username) $(e.target).removeClass("is-invalid is-valid");
-		});
-		nickname.addEventListener("input", e => {
-			app.formDataCheck(e.target, app.getRegex("nickname"));
-			if (e.target.value === userData.nickname) $(e.target).removeClass("is-invalid is-valid");
-		});
-		password.addEventListener("input", e => { app.formDataCheck(e.target, app.getRegex("password"), true); });
-		passwordCheck.addEventListener("input", e => { app.formDataCheck(e.target, "", true); });
-
 		updateBtn.addEventListener("click", () => {
-			this.updateUserCheck();
-			this.changePassword();
+
 		});
-	}
-
-	updateUserCheck() {
-		const { app, userData, username, nickname } = this;
-		if (username.value === userData.username && nickname.value === userData.nickname) return;
-		if (app.emptyCheck([username, nickname])) return app.alert("danger", "빈 값이 있습니다.");
-		if ($(username).hasClass("is-invalid")) return app.alert("danger", "이름은 한글, 영문만 사용할 수 있으며 2글자 이상이어야 합니다.");
-		if ($(nickname).hasClass("is-invalid")) return app.alert("danger", "닉네임은 한글, 영문, 숫자만 사용할 수 있으며 2~16글자여야 합니다.");
-	}
-
-	changePassword() {
-
+		const inputList = document.querySelectorAll("#mypage-user-info input");
+		inputList.forEach(input => {
+			input.addEventListener("focus", e => {
+				log(e);
+			});
+		});
 	}
 
 	addFriend() {
