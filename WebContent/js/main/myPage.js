@@ -3,10 +3,12 @@ const log = console.log;
 class Mypage {
 	constructor(userId) {
 		this.app = new App();
+		this.userForm = new UserForm();
 		this.url = new URL(location.href);
 
 		this.userId = userId;
 		this.userData;
+		this.isUpdateUserFocus = false;
 
 		this.nicknameList = [];
 
@@ -35,6 +37,7 @@ class Mypage {
 		}
 	}
 
+	// 친구 삭제 이벤트
 	deleteFriendEvent() {
 		const nicknameList = [];
 		const list = document.querySelectorAll("#friend-list tr");
@@ -50,6 +53,7 @@ class Mypage {
 		});
 	}
 
+	// 친구 삭제
 	deleteFriend(nickname) {
 		if (!confirm("정말 삭제하시겠습니까?")) return;
 		const { userId } = this;
@@ -74,6 +78,7 @@ class Mypage {
 		});
 	}
 
+	// 친구 요청 페이지 닉네임, 버튼 리스트에 저장
 	getNicknameList() {
 		const { username, nickname } = this;
 		this.userData = { "username": username.value, "nickname": nickname.value };
@@ -86,23 +91,59 @@ class Mypage {
 		});
 	}
 
+	// 회원정보 수정 폼 이벤트
 	updateUserFormEvent() {
-		const userForm = new UserForm();
+		const { userForm } = this;
 		userForm.inputEvent();
 		userForm.certifyBtnClickEvent();
 
 		const updateBtn = document.querySelector("#user-update-btn");
-		updateBtn.addEventListener("click", () => {
+		updateBtn.addEventListener("click", () => { this.updateUser(); });
 
-		});
 		const inputList = document.querySelectorAll("#mypage-user-info input");
 		inputList.forEach(input => {
-			input.addEventListener("focus", e => {
-				log(e);
-			});
+			input.addEventListener("focusin", () => { this.isUpdateUserFocus = true; });
+			input.addEventListener("focusout", () => { this.isUpdateUserFocus = false; });
+		});
+
+		window.addEventListener("keydown", e => {
+			if (e.key === "Enter" && this.isUpdateUserFocus) this.updateUser();
 		});
 	}
 
+	// 회원정보 수정
+	updateUser() {
+		const { app, userForm, userId } = this;
+		const { inputIdList, messageList } = userForm;
+		const formData = {};
+
+		if (app.emptyCheck()) return app.alert("danger", "빈 값이 있습니다.");
+		let inputValueCheck = false;
+        inputIdList.forEach((inputId, idx) => {
+            const input = document.querySelector(inputId);
+			formData[`${inputIdList[idx].substring(1)}`] = input.value;
+            if ($(input).hasClass("is-invalid")) {
+                inputValueCheck = true;
+                app.alert("danger", messageList[idx]);
+            }
+        });
+		if (inputValueCheck) return;
+		if (userId !== formData["user-id"]) return;
+
+		$.ajax({
+			url: "/user/update",
+			type: "POST",
+			data: formData,
+			success: data => {
+				this.ajaxAlert(data);
+				setTimeout(() => {
+					location.href = "/main/mypage";
+				}, 1000);
+			}
+		});
+	}
+
+	// 친구 추가
 	addFriend() {
 		const { app, userId } = this;
 		const nickname = document.querySelector("#send-nickname");
@@ -130,6 +171,7 @@ class Mypage {
 		});
 	}
 
+	// 친구 요청 수락, 거절
 	acceptFriend(nickname, accept) {
 		const { userId } = this;
 		$.ajax({
@@ -142,6 +184,7 @@ class Mypage {
 		});
 	}
 
+	// ajax 알림창
 	ajaxAlert(data, friend, dom) {
 		const div = document.createElement("div");
 		div.innerHTML = data;

@@ -110,6 +110,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				number = rs.getString("certify_number");
+				deleteCertify(userId);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -117,6 +118,23 @@ public class UserDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 		return number;
+	}
+	
+	// 인증번호 삭제
+	public int deleteCertify(String userId) {
+		int n = 0;
+		String sql = "DELETE FROM certifies WHERE user_id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return n;
 	}
 	
 	// 로그인
