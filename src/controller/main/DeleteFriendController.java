@@ -17,7 +17,7 @@ public class DeleteFriendController implements Controller {
 	public MyView process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getMethod().equals("GET")) {
-			return new MyView("/main/mypage");
+			return new MyView("/main/mypage", true);
 		}
 		
 		UserDAO userDao = new UserDAO();
