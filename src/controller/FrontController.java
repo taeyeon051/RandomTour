@@ -15,6 +15,7 @@ import controller.main.AddFriendController;
 import controller.main.DeleteFriendController;
 import controller.main.MyPageController;
 import controller.main.RoomListController;
+import controller.main.SendInquiryController;
 import controller.user.FindUserController;
 import controller.user.JoinController;
 import controller.user.LoginController;
@@ -48,6 +49,7 @@ public class FrontController extends HttpServlet {
 		// 마이페이지
 		controllerMap.put("/main/mypage", new MyPageController());
 		controllerMap.put("/user/update", new UpdateUserController());
+		controllerMap.put("/main/inquiry", new SendInquiryController());
 		// 친구 추가
 		controllerMap.put("/main/friend/add", new AddFriendController());
 		// 받은 요청 수락

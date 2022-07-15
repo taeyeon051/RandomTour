@@ -7,7 +7,6 @@ class Mypage {
 		this.url = new URL(location.href);
 
 		this.userId = userId;
-		this.userData;
 		this.isUpdateUserFocus = false;
 
 		this.nicknameList = [];
@@ -34,7 +33,39 @@ class Mypage {
 			});
 		} else if (page === "list") {
 			this.deleteFriendEvent();
+		} else if (page === "inquiry") {
+			this.inquiryEvent();
 		}
+	}
+
+	inquiryEvent() {
+		const { app } = this;
+
+		const title = document.querySelector("#inquiry-title");
+		const select = document.querySelector("#inquiry-select");
+		const content = document.querySelector("#inquiry-content");
+		const inquiryBtn = document.querySelector("#inquiry-btn");
+		inquiryBtn.addEventListener("click", () => {
+			if (title.value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
+			if (select.value.trim() === "") return app.alert("danger", "질문 유형을 선택해주세요.");
+			if (content.innerHTML.trim() === "") return app.alert("danger", "내용을 입력해주세요.");
+
+			this.inquirySend(title, select, content);
+		});
+	}
+
+	inquirySend(title, select, content) {
+		const { userId } = this;
+		const inquiryData = { "user-id": userId, "title": title.value, "select": select.value, "content": content.innerHTML };
+		$.ajax({
+			url: "/main/inquiry",
+			type: "POST",
+			data: inquiryData,
+			success: data => {
+				title.value, select.value, content.innerHTML = "";
+				this.ajaxAlert(data);
+			}
+		});
 	}
 
 	// 친구 삭제 이벤트
@@ -60,7 +91,7 @@ class Mypage {
 		$.ajax({
 			url: "/main/friend/delete",
 			type: "POST",
-			data: { "user-id": userId, "user-nickname": nickname.name },
+			data: { "user-id": userId, "nickname": nickname.name },
 			success: data => {
 				this.ajaxAlert(data, "accept", nickname.btn.parentElement);
 			}
@@ -80,9 +111,6 @@ class Mypage {
 
 	// 친구 요청 페이지 닉네임, 버튼 리스트에 저장
 	getNicknameList() {
-		const { username, nickname } = this;
-		this.userData = { "username": username.value, "nickname": nickname.value };
-
 		const sendTable = document.querySelectorAll("#friend-send tbody>tr");
 		sendTable.forEach(tr => {
 			const name = tr.querySelector(".nickname").innerHTML;
@@ -117,16 +145,17 @@ class Mypage {
 		const { inputIdList, messageList } = userForm;
 		const formData = {};
 
-		if (app.emptyCheck()) return app.alert("danger", "빈 값이 있습니다.");
+		const inputList = document.querySelectorAll("#mypage-user-info input");
+		if (app.emptyCheck(inputList)) return app.alert("danger", "빈 값이 있습니다.");
 		let inputValueCheck = false;
-        inputIdList.forEach((inputId, idx) => {
-            const input = document.querySelector(inputId);
+		inputIdList.forEach((inputId, idx) => {
+			const input = document.querySelector(inputId);
 			formData[`${inputIdList[idx].substring(1)}`] = input.value;
-            if ($(input).hasClass("is-invalid")) {
-                inputValueCheck = true;
-                app.alert("danger", messageList[idx]);
-            }
-        });
+			if ($(input).hasClass("is-invalid")) {
+				inputValueCheck = true;
+				app.alert("danger", messageList[idx]);
+			}
+		});
 		if (inputValueCheck) return;
 		if (userId !== formData["user-id"]) return;
 
@@ -136,9 +165,11 @@ class Mypage {
 			data: formData,
 			success: data => {
 				this.ajaxAlert(data);
-				setTimeout(() => {
-					location.href = "/main/mypage";
-				}, 1000);
+				if (data.indexOf("success") !== -1) {
+					setTimeout(() => {
+						location.href = "/user/logout";
+					}, 700);
+				}
 			}
 		});
 	}
@@ -148,8 +179,10 @@ class Mypage {
 		const { app, userId } = this;
 		const nickname = document.querySelector("#send-nickname");
 
-		if (nickname.value.trim() === "") return;
-		if (nickname.value.match(app.getRegex("nickname")) === null || nickname.value.match(app.getRegex("nickname"))[0] !== nickname.value) return;
+		if (nickname.value.trim() === "") return app.alert("danger", "빈 값이 있습니다.");
+		if (nickname.value.match(app.getRegex("nickname")) === null || nickname.value.match(app.getRegex("nickname"))[0] !== nickname.value) {
+			return app.alert("danger", "존재하지 않는 닉네임입니다.");
+		}
 
 		let isSend = false;
 		const table = document.querySelector("#friend-addition tbody");
@@ -164,7 +197,7 @@ class Mypage {
 		$.ajax({
 			url: "/main/friend/add",
 			type: "POST",
-			data: { "user-id": userId, "user-nickname": nickname.value },
+			data: { "user-id": userId, "nickname": nickname.value },
 			success: data => {
 				this.ajaxAlert(data, "add");
 			}
@@ -177,7 +210,7 @@ class Mypage {
 		$.ajax({
 			url: "/main/friend/accept",
 			type: "POST",
-			data: { "user-id": userId, "user-nickname": nickname.name, "accept": accept },
+			data: { "user-id": userId, "nickname": nickname.name, "accept": accept },
 			success: data => {
 				this.ajaxAlert(data, "accept", nickname.btnDom.parentElement);
 			}
@@ -189,7 +222,7 @@ class Mypage {
 		const div = document.createElement("div");
 		div.innerHTML = data;
 		document.body.appendChild(div);
-		
+
 		if (friend === "add") {
 			const table = document.querySelector("#friend-addition tbody");
 			const nickname = document.querySelector("#send-nickname");
