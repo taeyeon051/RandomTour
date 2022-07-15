@@ -87,7 +87,10 @@
 	</div>
 	
 	<div id="mypage-user-info" class="p-4 bg-white d-flex flex-column justify-content-center">
-		<h4 class="text-center text-blue fw-bold mb-2">회원정보 수정</h4>
+		<div class="d-flex justify-content-center align-items-center mb-3">
+			<h4 class="text-blue fw-bold mb-0">회원정보 수정</h4>
+			<i id="explanation-icon" class="bi bi-exclamation-circle ms-2" data-bs-toggle="modal" data-bs-target="#user-update-explanation"></i>
+		</div>
 		<jsp:include page="./components/mypage/Input.jsp">
 			<jsp:param name="id" value="user-id"/>
 			<jsp:param name="type" value="text"/>
@@ -136,6 +139,21 @@
 		</jsp:include>
 	</div>
 </section>
+
+<div class="modal fade" id="user-update-explanation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content p-3">
+			<div class="d-flex justify-content-end">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>* 회원 정보 수정 시 자동으로 로그아웃됩니다.</p>
+				<p>* 이름과 닉네임은 수정하는 경우에만 변경을 해주시면 됩니다.</p>
+				<p>* 비밀번호는 변경하지 않을 경우 기존 비밀번호를 입력해주세요.</p>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script src="<%=path%>/js/user/user.js"></script>
 <script src="<%=path%>/js/main/myPage.js"></script>

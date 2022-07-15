@@ -47,6 +47,14 @@ table {
 	border-collapse: separate;
 }
 
+#explanation-icon {
+	font-size: 1.25rem;
+}
+
+.modal-dialog {
+	min-width: 38rem;
+}
+
 
 /* 글자 색상 */
 
