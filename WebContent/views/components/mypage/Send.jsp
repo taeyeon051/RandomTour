@@ -13,9 +13,9 @@
 <div id="friend-send">
 	<table class="text-center">
 		<tbody class="d-block">
-			<% for (FriendVO vo : list) { %>				
+			<% for (FriendVO vo : list) { %>
 				<tr class="send d-flex justify-content-between align-items-center p-3">
-					<td class="nickname"><%= vo.getSendNickname() %></td>
+					<td class="nickname"><%= dao.getNickname(vo.getSendUserId()) %></td>
 					<td class="send-btn d-flex">
 						<div class="accept-btn text-success mx-3">
 							<i class="bi bi-check-circle-fill"></i>

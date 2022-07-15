@@ -23,9 +23,15 @@ public class AddFriendController implements Controller {
 		UserDAO userDao = new UserDAO();
 		FriendDAO friendDao = new FriendDAO();
 		String userId = request.getParameter("user-id");
-		String nickname = request.getParameter("user-nickname");
+		String nickname = request.getParameter("nickname");
 		
-		boolean nicknameCheck = userDao.nicknameCheck(nickname);
+		if (userId.equals(friendDao.getUserId(nickname))) {
+			request.setAttribute("state", "danger");
+			request.setAttribute("message", "자기 자신에게 친구 요청을 보낼 수 없습니다.");
+			return new MyView("/views/ajax/alert.jsp");
+		}
+		
+		boolean nicknameCheck = userDao.nicknameCheck(nickname, userId);
 		if (!nicknameCheck) {
 			request.setAttribute("state", "danger");
 			request.setAttribute("message", "존재하지 않는 닉네임입니다.");
@@ -39,8 +45,8 @@ public class AddFriendController implements Controller {
 			return new MyView("/views/ajax/alert.jsp");
 		}
 		
-		String sendNickname = userDao.getUserNickname(userId);
-		FriendVO vo = new FriendVO(sendNickname, nickname, false);
+		String friendId = friendDao.getUserId(nickname);
+		FriendVO vo = new FriendVO(userId, friendId, false);
 		int n = friendDao.sendFriend(vo);
 		if (n > 0) {
 			request.setAttribute("state", "success");

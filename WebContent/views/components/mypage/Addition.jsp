@@ -24,7 +24,7 @@
 		<tbody class="d-block">
 			<% for (FriendVO vo : list) { %>
 				<tr>
-					<td class="nickname px-3"><%= vo.getAcceptNickname() %></td>
+					<td class="nickname px-3"><%= dao.getNickname(vo.getAcceptUserId()) %></td>
 				</tr>
 			<% } %>
 		</tbody>
