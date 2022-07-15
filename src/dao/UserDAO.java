@@ -34,13 +34,16 @@ public class UserDAO {
 	}
 
 	// 닉네임 중복 체크
-	public boolean nicknameCheck(String nickname) {
+	public boolean nicknameCheck(String nickname, String userId) {
 		boolean check = false;
+		boolean update = userId != null && !userId.equals("");
 		String sql = "SELECT * FROM users WHERE nickname = ?";
+		if (update) sql += " AND user_id != ?";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
+			if (update) pstmt.setString(2, userId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				check = true;
@@ -110,7 +113,6 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				number = rs.getString("certify_number");
-				deleteCertify(userId);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -256,26 +258,6 @@ public class UserDAO {
 			JdbcUtil.close(con, pstmt);
 		}
 		return n;
-	}
-	
-	// 유저 아이디로 닉네임 찾기
-	public String getUserNickname(String userId) {
-		String nickname = "";
-		String sql = "SELECT nickname FROM users WHERE user_id = ?";
-		try {
-			con = JdbcUtil.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				nickname = rs.getString("nickname");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(con, pstmt, rs);
-		}
-		return nickname;
 	}
 	
 	// 유정 정보 수정
