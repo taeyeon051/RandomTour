@@ -30,8 +30,6 @@ public class SendMailController implements Controller {
 		} else {
 			request.setAttribute("state", "실패");
 		}
-		
 		return new MyView("/views/ajax/sendMail.jsp");
 	}
-
 }

@@ -18,8 +18,6 @@ public class MyPageController implements Controller {
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO) session.getAttribute("randomtour-user");
 		if (user == null) return new MyView("/user/login", true);
-		
 		return new MyView("/views/myPage.jsp");
 	}
-
 }

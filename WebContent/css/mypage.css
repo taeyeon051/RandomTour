@@ -166,7 +166,6 @@ tr:first-child {
 
 /* 스크롤 (채팅목록, 채팅, 친구목록, 친구요청, 친구추가, 문의하기) */
 
-#inquiry-form,
 #friend-chatting-list,
 #friend-chat,
 tbody,
@@ -174,7 +173,6 @@ tbody,
     overflow-y: scroll;
 }
 
-#inquiry-form::-webkit-scrollbar,
 #friend-chatting-list::-webkit-scrollbar,
 #friend-chat::-webkit-scrollbar,
 tbody::-webkit-scrollbar,
@@ -182,7 +180,6 @@ tbody::-webkit-scrollbar,
     width: 0.75rem;
 }
 
-#inquiry-form::-webkit-scrollbar-thumb,
 #friend-chatting-list::-webkit-scrollbar-thumb,
 #friend-chat::-webkit-scrollbar-thumb,
 tbody::-webkit-scrollbar-thumb,
