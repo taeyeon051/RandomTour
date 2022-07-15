@@ -55,7 +55,7 @@ public class JoinController implements Controller {
 		}
 
 		boolean userIdCheck = dao.userIdCheck(userId);
-		boolean nicknameCheck = dao.nicknameCheck(nickname);
+		boolean nicknameCheck = dao.nicknameCheck(nickname, "");
 
 		if (userIdCheck) {
 			request.setAttribute("alert", "이미 사용중인 아이디입니다.");
@@ -69,6 +69,7 @@ public class JoinController implements Controller {
 		UserVO vo = new UserVO(userId, userName, nickname, password, false, 0);
 		int n = dao.userJoin(vo);
 		if (n > 0) {
+			dao.deleteCertify(userId);
 			request.setAttribute("success", "회원가입이 완료되었습니다.");
 			return new MyView("/views/login.jsp");
 		} else {

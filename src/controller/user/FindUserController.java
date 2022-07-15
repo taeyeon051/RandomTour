@@ -31,6 +31,7 @@ public class FindUserController implements Controller {
 			String userId = request.getParameter("user-id");
 			String certify = request.getParameter("certify-number");
 			request.setAttribute("state", !certify.equals(dao.certify(userId)));
+			dao.deleteCertify(userId);
 			return new MyView("/views/ajax/findPw.jsp");
 		}
 		
