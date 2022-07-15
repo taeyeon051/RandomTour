@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../components/Header.jsp" %>    
     
-<% Boolean state = (boolean) request.getAttribute("state"); %>
+<% Boolean state = Boolean.parseBoolean(request.getAttribute("state").toString()); %>
 <div id="result"><%=state ? "실패" : "성공"%></div>
 
 <form id="update-pw-form" action="<%=path%>/user/updatePwd" method="post">
