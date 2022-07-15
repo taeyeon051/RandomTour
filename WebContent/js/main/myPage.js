@@ -55,15 +55,26 @@ class Mypage {
 	}
 
 	inquirySend(title, select, content) {
-		const { userId } = this;
-		const inquiryData = { "user-id": userId, "title": title.value, "select": select.value, "content": content.innerHTML };
+		const { app, userId } = this;
+		const selectList = { "util": "이용 문의", "design": "디자인 제안", "service": "서비스 제안", "error": "오류 신고", "etc": "기타" };
+		const inquiryData = { "user-id": userId, "title": title.value, "select": selectList[select.value], "content": content.innerHTML };
+		
+		app.alert("primary", "문의 메일이 전송중입니다. 잠시만 기다려주세요.");
 		$.ajax({
 			url: "/main/inquiry",
 			type: "POST",
 			data: inquiryData,
 			success: data => {
-				title.value, select.value, content.innerHTML = "";
-				this.ajaxAlert(data);
+				const result = app.ajaxResult(data);
+				document.querySelector(".alert").remove();
+                if (result) {
+                    title.value = "";
+					select.value = "util";
+					content.innerHTML = "";
+					app.alert("success", "성공적으로 전송되었습니다. 확인 후 빠른 시일 내에 수정할 수 있도록 하겠습니다.");
+                } else {
+                    app.alert("danger", "문의 메일 전송에 실패하였습니다. 계속 안 될 경우 randomtour@naver.com으로 문의하시기 바랍니다.");
+                }
 			}
 		});
 	}
