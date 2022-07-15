@@ -1,35 +1,35 @@
 package vo;
 
 public class FriendVO {
-	private String sendNickname;
-	private String acceptNickname;
+	private String sendUserId;
+	private String acceptUserId;
 	private boolean state;
 
 	public FriendVO() {
 		super();
 	}
 
-	public FriendVO(String sendNickname, String acceptNickname, boolean state) {
+	public FriendVO(String sendUserId, String acceptUserId, boolean state) {
 		super();
-		this.sendNickname = sendNickname;
-		this.acceptNickname = acceptNickname;
+		this.sendUserId = sendUserId;
+		this.acceptUserId = acceptUserId;
 		this.state = state;
 	}
 
-	public String getSendNickname() {
-		return sendNickname;
+	public String getSendUserId() {
+		return sendUserId;
 	}
 
-	public void setSendNickname(String sendNickname) {
-		this.sendNickname = sendNickname;
+	public void setSendUserId(String sendUserId) {
+		this.sendUserId = sendUserId;
 	}
 
-	public String getAcceptNickname() {
-		return acceptNickname;
+	public String getAcceptUserId() {
+		return acceptUserId;
 	}
 
-	public void setAcceptNickname(String acceptNickname) {
-		this.acceptNickname = acceptNickname;
+	public void setAcceptUserId(String acceptUserId) {
+		this.acceptUserId = acceptUserId;
 	}
 
 	public boolean isState() {
