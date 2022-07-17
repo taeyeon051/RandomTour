@@ -59,7 +59,7 @@ public class UserDAO {
 	// 회원가입
 	public int userJoin(UserVO user) {
 		int n = 0;
-		String sql = "INSERT INTO users (user_id, user_name, nickname, password) VALUES (?, ?, ?, CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))))";
+		String sql = "INSERT INTO users VALUES (?, ?, ?, CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))))";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class UserDAO {
 		
 		String check = certify(userId);
 		if (check.equals("")) {
-			sql = "INSERT INTO certifies (certify_number, user_id) VALUES (?, ?)";
+			sql = "INSERT INTO certifies VALUES (?, ?)";
 		} else {
 			sql = "UPDATE certifies SET certify_number = ? WHERE user_id = ?";
 		}

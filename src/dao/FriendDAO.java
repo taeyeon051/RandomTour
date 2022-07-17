@@ -136,7 +136,7 @@ public class FriendDAO {
 	// 친구 요청 전송
 	public int sendFriend(FriendVO vo) {
 		int n = 0;
-		String sql = "INSERT INTO friends (send_user_id, accept_user_id, state, send_date) VALUES (?, ?, ?, NOW())";
+		String sql = "INSERT INTO friends VALUES (?, ?, ?, NOW())";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -213,5 +213,25 @@ public class FriendDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 		return check;
+	}
+	
+	// 문의하기 내용 DB 저장
+	public int sendInquiry(String userId, String title, String select, String content) {
+		int n = 0;
+		String sql = "INSERT INTO inquiries VALUES (NULL, ?, ?, ?, ?)";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, title);
+			pstmt.setString(3, select);
+			pstmt.setString(4, content);
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt);
+		}
+		return n;
 	}
 }
