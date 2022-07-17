@@ -8,6 +8,7 @@ class Mypage {
 
 		this.userId = userId;
 		this.isUpdateUserFocus = false;
+		this.isSendInquiry = false;
 
 		this.nicknameList = [];
 
@@ -49,6 +50,8 @@ class Mypage {
 			if (title.value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
 			if (select.value.trim() === "") return app.alert("danger", "질문 유형을 선택해주세요.");
 			if (content.innerHTML.trim() === "") return app.alert("danger", "내용을 입력해주세요.");
+			if (this.isSendInquiry) return app.alert("warning", "문의 메일이 이미 전송되었습니다.");
+			this.isSendInquiry = true;
 
 			this.inquirySend(title, select, content);
 		});
@@ -60,10 +63,12 @@ class Mypage {
 		const inquiryData = { "user-id": userId, "title": title.value, "select": selectList[select.value], "content": content.innerHTML };
 		
 		app.alert("primary", "문의 메일이 전송중입니다. 잠시만 기다려주세요.");
+		log(inquiryData);
 		$.ajax({
 			url: "/main/inquiry",
 			type: "POST",
 			data: inquiryData,
+			dataType: "json",
 			success: data => {
 				const result = app.ajaxResult(data);
 				document.querySelector(".alert").remove();
@@ -75,6 +80,10 @@ class Mypage {
                 } else {
                     app.alert("danger", "문의 메일 전송에 실패하였습니다. 계속 안 될 경우 randomtour@naver.com으로 문의하시기 바랍니다.");
                 }
+				setTimeout(() => { this.isSendInquiry = false; }, 5000);
+			},
+			error: e => {
+				log(e);
 			}
 		});
 	}
