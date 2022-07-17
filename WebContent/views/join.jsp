@@ -15,7 +15,7 @@
 
 	<form action="<%=path%>/user/join" method="post" id="join-page" class="user-page p-5 text-center border-gray position-relative">
 		<div class="d-flex justify-content-center align-items-center mb-4">
-			<h4 class="fw-bolder">회원가입</h4>
+			<h4 class="fw-bolder mb-0">회원가입</h4>
 			<i id="explanation-icon" class="bi bi-exclamation-circle ms-2" data-bs-toggle="modal" data-bs-target="#join-explanation"></i>
 		</div>
 		<a href="<%=path%>/user/login" class="position-absolute fs-3" style="top: 1.2rem; left: 1.5rem;">

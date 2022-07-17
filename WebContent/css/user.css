@@ -41,8 +41,8 @@ section {
     border-bottom-left-radius: 0;
 }
 
-#find-pw #user-id-box input,
-#find-pw #user-id-box button {
+#find-pw input,
+#find-pw button {
     font-size: 0.875rem;
 }
 

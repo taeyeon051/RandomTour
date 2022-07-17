@@ -161,7 +161,7 @@
 	    </table>
 	</div>
 	
-	<div id="user-chatting" class="bg-white border-gray">
+	<div id="user-chatting" class="bg-white">
 	    <div id="user-info" class="w-100 d-flex justify-content-between align-items-center p-3">
 	        <a href="<%=path%>/main/mypage" id="nickname"><%=user.getNickname()%>님</a>
 	        <a id="logout-btn" class="btn btn-brown" href="<%=path%>/user/logout">로그아웃</a>
