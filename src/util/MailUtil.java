@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class MailUtil {
-	public static boolean sendMail(String userId, String title, String select, String content) {
+	public static boolean sendMail(String mail, String content) {
 		try {
 			Properties props = System.getProperties();
 			props.put("mail.smtp.starttls.enable", "true");
@@ -19,16 +19,12 @@ public class MailUtil {
 			MimeMessage msg = new MimeMessage(session);
 			msg.setSentDate(new Date());
 			
-			boolean isCertify = select.equals("certify");
-			userId = isCertify ? userId : "";
-			title = isCertify ? title : title + " (" + select + ") <" + userId + ">";
-			
 			InternetAddress from = new InternetAddress("RandomTour<randomtour@naver.com>");
 			msg.setFrom(from);
 			
-			InternetAddress to = new InternetAddress(userId);
+			InternetAddress to = new InternetAddress(mail);
 			msg.setRecipient(Message.RecipientType.TO, to);
-			msg.setSubject(title, "UTF-8");
+			msg.setSubject("이메일 인증하기", "UTF-8");
 			msg.setText(content, "UTF-8", "html");
 			
 			Transport.send(msg);
