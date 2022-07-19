@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.MyView;
 import dao.FriendDAO;
-import util.MailUtil;
 
 public class SendInquiryController implements Controller {
 	@Override
@@ -26,10 +25,14 @@ public class SendInquiryController implements Controller {
 		String content = request.getParameter("content");
 
 		int n = dao.sendInquiry(userId, title, select, content);
-		
-//		boolean sendmail = MailUtil.sendMail(userId, title, select, content);
-		request.setAttribute("state", n > 0);
+		if (n > 0) {
+			request.setAttribute("state", "success");
+			request.setAttribute("message", "성공적으로 전송되었습니다.");
+		} else {
+			request.setAttribute("state", "danger");
+			request.setAttribute("message", "전송에 실패하였습니다. 계속 안 될 경우 randomtour@naver.com으로 문의하시기 바랍니다.");
+		}
 
-		return new MyView("/views/ajax/sendMail.jsp");
+		return new MyView("/views/ajax/alert.jsp");
 	}
 }

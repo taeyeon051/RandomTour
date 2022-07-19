@@ -39,6 +39,7 @@ class Mypage {
 		}
 	}
 
+	// 문의하기 페이지 이벤트
 	inquiryEvent() {
 		const { app } = this;
 
@@ -50,40 +51,31 @@ class Mypage {
 			if (title.value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
 			if (select.value.trim() === "") return app.alert("danger", "질문 유형을 선택해주세요.");
 			if (content.innerHTML.trim() === "") return app.alert("danger", "내용을 입력해주세요.");
-			if (this.isSendInquiry) return app.alert("warning", "문의 메일이 이미 전송되었습니다.");
+			if (this.isSendInquiry) return app.alert("warning", "문의 내용이 이미 전송되었습니다.");
 			this.isSendInquiry = true;
 
 			this.inquirySend(title, select, content);
 		});
 	}
 
+	// 문의하기 전송
 	inquirySend(title, select, content) {
-		const { app, userId } = this;
+		const { userId } = this;
 		const selectList = { "util": "이용 문의", "design": "디자인 제안", "service": "서비스 제안", "error": "오류 신고", "etc": "기타" };
 		const inquiryData = { "user-id": userId, "title": title.value, "select": selectList[select.value], "content": content.innerHTML };
 		
-		app.alert("primary", "문의 메일이 전송중입니다. 잠시만 기다려주세요.");
-		log(inquiryData);
 		$.ajax({
 			url: "/main/inquiry",
 			type: "POST",
 			data: inquiryData,
-			dataType: "json",
 			success: data => {
-				const result = app.ajaxResult(data);
-				document.querySelector(".alert").remove();
-                if (result) {
+				this.ajaxAlert(data);
+                if (data.indexOf("success") !== -1) {
                     title.value = "";
 					select.value = "util";
 					content.innerHTML = "";
-					app.alert("success", "성공적으로 전송되었습니다. 확인 후 빠른 시일 내에 수정할 수 있도록 하겠습니다.");
-                } else {
-                    app.alert("danger", "문의 메일 전송에 실패하였습니다. 계속 안 될 경우 randomtour@naver.com으로 문의하시기 바랍니다.");
                 }
 				setTimeout(() => { this.isSendInquiry = false; }, 5000);
-			},
-			error: e => {
-				log(e);
 			}
 		});
 	}
@@ -139,7 +131,7 @@ class Mypage {
 		});
 	}
 
-	// 회원정보 수정 폼 이벤트
+	// 회원 정보 수정 form 이벤트
 	updateUserFormEvent() {
 		const { userForm } = this;
 		userForm.inputEvent();
@@ -159,7 +151,7 @@ class Mypage {
 		});
 	}
 
-	// 회원정보 수정
+	// 회원 정보 수정
 	updateUser() {
 		const { app, userForm, userId } = this;
 		const { inputIdList, messageList } = userForm;
