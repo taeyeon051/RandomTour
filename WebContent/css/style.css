@@ -51,8 +51,12 @@ table {
 	font-size: 1.25rem;
 }
 
+#explanation-icon:hover {
+    cursor: pointer;
+}
+
 .modal-dialog {
-	min-width: 38rem;
+	min-width: 40rem;
 }
 
 
