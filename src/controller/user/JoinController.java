@@ -58,11 +58,11 @@ public class JoinController implements Controller {
 		boolean nicknameCheck = dao.nicknameCheck(nickname, "");
 
 		if (userIdCheck) {
-			request.setAttribute("alert", "이미 사용중인 아이디입니다.");
+			request.setAttribute("alert", "이미 사용 중인 아이디입니다.");
 			return new MyView("/views/join.jsp");
 		}
 		if (nicknameCheck) {
-			request.setAttribute("alert", "이미 사용중인 닉네임입니다.");
+			request.setAttribute("alert", "이미 사용 중인 닉네임입니다.");
 			return new MyView("/views/join.jsp");
 		}
 
@@ -73,7 +73,7 @@ public class JoinController implements Controller {
 			request.setAttribute("success", "회원가입이 완료되었습니다.");
 			return new MyView("/views/login.jsp");
 		} else {
-			request.setAttribute("alert", "데이터베이스 오류로 인하여 회원가입에 실패하였습니다.");
+			request.setAttribute("alert", "잘못된 정보이거나 DB 오류로 인하여 회원가입에 실패하였습니다. 잠시 후 다시 시도해주세요.");
 			return new MyView("/views/join.jsp");
 		}
 	}

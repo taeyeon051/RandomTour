@@ -19,7 +19,7 @@
 	    <% } else if (button.equals("send")) { %>
 	    	<jsp:include page="./Button.jsp">
 	    		<jsp:param name="id" value="send-btn"/>
-	    		<jsp:param name="text" value="친구요청 보내기"/>
+	    		<jsp:param name="text" value="친구 요청 보내기"/>
 	    	</jsp:include>
 	    <% } %>
     <% } %>

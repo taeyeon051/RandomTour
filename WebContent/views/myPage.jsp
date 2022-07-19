@@ -22,7 +22,7 @@
 				</a>
 			</li>
 			<li><a href="<%=path%>/main/mypage?p=list" class="<%=mypage.equals("list") ? "text-blue" : ""%>">친구목록</a></li>
-			<li><a href="<%=path%>/main/mypage?p=send" class="<%=mypage.equals("send") ? "text-blue" : ""%>">친구요청</a></li>
+			<li><a href="<%=path%>/main/mypage?p=send" class="<%=mypage.equals("send") ? "text-blue" : ""%>">친구 요청</a></li>
 			<li><a href="<%=path%>/main/mypage?p=add" class="<%=mypage.equals("add") ? "text-blue" : ""%>">친구추가</a></li>
 			<li><a href="<%=path%>/main/mypage?p=inquiry" class="<%=mypage.equals("inquiry") ? "text-blue" : "" %>">문의하기</a></li>
 		</ul>
@@ -88,7 +88,7 @@
 	
 	<div id="mypage-user-info" class="p-4 bg-white d-flex flex-column justify-content-center">
 		<div class="d-flex justify-content-center align-items-center mb-3">
-			<h4 class="text-blue fw-bold mb-0">회원정보 수정</h4>
+			<h4 class="text-blue fw-bold mb-0">회원 정보 수정</h4>
 			<i id="explanation-icon" class="bi bi-exclamation-circle ms-2" data-bs-toggle="modal" data-bs-target="#user-update-explanation"></i>
 		</div>
 		<jsp:include page="./components/mypage/Input.jsp">

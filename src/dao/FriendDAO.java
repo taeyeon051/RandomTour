@@ -107,7 +107,7 @@ public class FriendDAO {
 		return list;
 	}
 	
-	// 요청 후 대기중인 목록
+	// 요청 후 대기 중인 목록
 	public ArrayList<FriendVO> getFriendSendList(String userId) {
 		ArrayList<FriendVO> list = new ArrayList<>();
 		String sql = "SELECT * FROM friends WHERE state = ? AND send_user_id = ? ORDER BY send_date DESC";

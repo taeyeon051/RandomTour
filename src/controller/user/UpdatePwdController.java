@@ -31,7 +31,7 @@ public class UpdatePwdController implements Controller {
 			return new MyView("/views/join.jsp");
 		}
 		if (!password.matches(regexList.getPassword())) {
-			request.setAttribute("alert", "비밀번호는 영문 대소문자,숫자,기호를 포함하여햐 하며 10글자 이상이여야 합니다.");
+			request.setAttribute("alert", "비밀번호는 영문 대소문자, 숫자, 기호를 포함하며 10글자 이상이어야 합니다.");
 			return new MyView("/views/findUser.jsp");
 		}
 		if (!password.equals(passwordCheck)) {

@@ -63,7 +63,7 @@ public class UpdateUserController implements Controller {
 		boolean nicknameCheck = dao.nicknameCheck(nickname, userId);
 		if (nicknameCheck) {
 			request.setAttribute("state", "danger");
-			request.setAttribute("message", "이미 사용중인 닉네임입니다.");
+			request.setAttribute("message", "이미 사용 중인 닉네임입니다.");
 			return new MyView("/views/ajax/alert.jsp");
 		}
 
@@ -72,10 +72,10 @@ public class UpdateUserController implements Controller {
 		if (n > 0) {
 			dao.deleteCertify(userId);
 			request.setAttribute("state", "success");
-			request.setAttribute("message", "회원정보가 수정되었습니다.");
+			request.setAttribute("message", "회원 정보가 수정되었습니다.");
 		} else {
 			request.setAttribute("state", "danger");
-			request.setAttribute("message", "데이터베이스 오류로 인하여 회원정보 수정에 실패하였습니다.");
+			request.setAttribute("message", "잘못된 정보이거나 DB 오류로 인하여 회원 정보 수정에 실패하였습니다. 잠시 후 다시 시도해주세요.");
 		}
 		return new MyView("/views/ajax/alert.jsp");
 	}

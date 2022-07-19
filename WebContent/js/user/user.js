@@ -47,7 +47,7 @@ class UserForm {
         });
     }
     
-    // 폼 전송
+    // form 전송
     buttonEvent() {
         const { submitButton } = this;
         window.addEventListener("keydown", e => {
@@ -58,7 +58,7 @@ class UserForm {
         });
     }
 
-    // 빈값 확인 후 form 전송
+    // 빈 값 확인 후 form 전송
     formSubmit() {
         const { app, inputIdList, messageList } = this;
 
@@ -95,12 +95,12 @@ class UserForm {
             return app.alert("danger", "올바른 이메일 형식을 입력 후 인증해주세요.");
         }
         if (this.isSendMail) {
-            return app.alert("warning", "이미 인증메일이 전송되었습니다.");
+            return app.alert("warning", "이미 인증 메일이 전송되었습니다.");
         }
 
         this.isSendMail = true;
 
-        app.alert("primary", "인증메일이 전송중입니다. 잠시만 기다려주세요.");
+        app.alert("primary", "인증 메일이 전송 중입니다. 잠시만 기다려주세요.");
 
         // 메일 전송 ajax 처리
         $.ajax({
@@ -112,7 +112,7 @@ class UserForm {
                 if (result) {
                     certify.disabled = false;
                 } else {
-                    app.alert("danger", "인증메일 전송에 실패하였습니다. 이메일을 다시 확인해주세요.");
+                    app.alert("danger", "인증 메일 전송에 실패하였습니다. 이메일을 다시 확인해주세요.");
                     this.isSendMail = false;
                 }
                 

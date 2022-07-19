@@ -50,10 +50,10 @@ public class AddFriendController implements Controller {
 		int n = friendDao.sendFriend(vo);
 		if (n > 0) {
 			request.setAttribute("state", "success");
-			request.setAttribute("message", "친구요청이 전송되었습니다.");
+			request.setAttribute("message", "친구 요청이 전송되었습니다.");
 		} else {
 			request.setAttribute("state", "danger");
-			request.setAttribute("message", "친구요청 전송에 실패하였습니다.");
+			request.setAttribute("message", "친구 요청 전송에 실패하였습니다.");
 		}
 		
 		return new MyView("/views/ajax/alert.jsp");

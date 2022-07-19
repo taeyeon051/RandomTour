@@ -20,7 +20,7 @@
 					<% } else if (vo.getAcceptUserId().equals(user.getUserId())) { %>
 						<td class="nickname"><%= dao.getNickname(vo.getSendUserId()) %></td>
 					<% } %>
-					<td class="btn btn-red">친구삭제</td>
+					<td class="btn btn-red">친구 삭제</td>
 				</tr>
 			<% } %>
 		</tbody>

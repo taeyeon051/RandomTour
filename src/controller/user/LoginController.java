@@ -31,7 +31,7 @@ public class LoginController implements Controller {
 		
 		boolean loginCheck = dao.loginCheck(userId);
 		if (loginCheck) {
-			request.setAttribute("alert", "다른 기기에서 로그인중인 아이디입니다.");
+			request.setAttribute("alert", "다른 기기에서 로그인 중인 아이디입니다.");
 			return new MyView("/views/login.jsp");
 		}
 		

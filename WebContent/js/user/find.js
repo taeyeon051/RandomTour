@@ -2,7 +2,7 @@ const app = new App();
 
 // 아이디 찾기 버튼 활성화/비활성화
 let findIdBtnClick = false;
-// 비밀번호 변경시 필요한 유저 아이디
+// 비밀번호 변경 시 필요한 유저 아이디
 let userIdValue = "";
 
 window.onload = () => {
@@ -78,7 +78,7 @@ function certify() {
                 findPw.querySelector("form").remove();
                 findPw.appendChild(div.querySelector("form"));
                 updatePwEvent();
-                app.alert("success", "인증되었습니다. 새비밀번호를 입력해주세요.");
+                app.alert("success", "인증되었습니다. 새 비밀번호를 입력해주세요.");
             } else {
                 app.alert("danger", "인증번호를 다시 확인해주세요.");
             }

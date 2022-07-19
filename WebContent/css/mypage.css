@@ -51,7 +51,7 @@
 }
 
 
-/* 개인채팅 */
+/* 개인 채팅 */
 
 #friend-chat-form,
 #send-nickname {
@@ -101,7 +101,7 @@ tr:first-child {
 }
 
 
-/* 친구요청 */
+/* 친구 요청 */
 
 .accept-btn,
 .refuse-btn {
@@ -137,7 +137,7 @@ tr:first-child {
 }
 
 
-/* 회원정보 */
+/* 회원 정보 */
 
 #mypage-user-info {
     width: 24rem;
@@ -164,7 +164,7 @@ tr:first-child {
 }
 
 
-/* 스크롤 (채팅목록, 채팅, 친구목록, 친구요청, 친구추가, 문의하기) */
+/* 스크롤 (채팅 목록, 채팅, 친구목록, 친구 요청, 친구추가, 문의하기) */
 
 #friend-chatting-list,
 #friend-chat,

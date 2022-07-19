@@ -57,7 +57,7 @@ class App {
         }
     }
 
-    // 빈값 확인
+    // 빈 값 확인
 	emptyCheck(domList = []) {
         let result = false;
 		const inputList = domList.length > 0 ? domList : document.querySelectorAll("input");
