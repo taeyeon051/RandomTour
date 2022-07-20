@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.MyView;
-import dao.FriendDAO;
+import dao.InquiryDAO;
+import vo.InquiryVO;
 
 public class SendInquiryController implements Controller {
 	@Override
@@ -18,13 +19,14 @@ public class SendInquiryController implements Controller {
 			return new MyView("/main/mypage", true);
 		}
 
-		FriendDAO dao = new FriendDAO();
+		InquiryDAO dao = new InquiryDAO();
 		String userId = request.getParameter("user-id");
 		String title = request.getParameter("title");
 		String select = request.getParameter("select");
 		String content = request.getParameter("content");
+		InquiryVO vo = new InquiryVO(0, userId, title, select, content);
 
-		int n = dao.sendInquiry(userId, title, select, content);
+		int n = dao.sendInquiry(vo);
 		if (n > 0) {
 			request.setAttribute("state", "success");
 			request.setAttribute("message", "성공적으로 전송되었습니다.");

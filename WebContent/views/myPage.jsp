@@ -7,6 +7,13 @@
 		response.sendRedirect("/main/mypage?p=list");
 		return;
 	}
+	
+	boolean admin = false;
+	if (user.getUserId().equals("randomtour@naver.com") && user.getUserName().equals("관리자") && user.getNickname().equals("admin")) admin = true;
+	if (!admin && mypage.equals("admin")) {
+		response.sendRedirect("/main/mypage?p=list");
+		return;
+	}
 %>
 
 <jsp:include page="./components/Background.jsp"/>
@@ -25,15 +32,17 @@
 			<li><a href="<%=path%>/main/mypage?p=send" class="<%=mypage.equals("send") ? "text-blue" : ""%>">친구 요청</a></li>
 			<li><a href="<%=path%>/main/mypage?p=add" class="<%=mypage.equals("add") ? "text-blue" : ""%>">친구추가</a></li>
 			<li><a href="<%=path%>/main/mypage?p=inquiry" class="<%=mypage.equals("inquiry") ? "text-blue" : "" %>">문의하기</a></li>
+			<% if (admin) { %>
+				<li><a href="<%=path%>/main/mypage?p=admin" class="<%=mypage.equals("admin") ? "text-blue" : ""%>">관리자</a></li>
+			<% } %>
 		</ul>
 		<div class="d-flex justify-content-between">
 			<% if (mypage.equals("inquiry")) { %>
-					<jsp:include page="./components/mypage/Inquiry.jsp"/>
+				<jsp:include page="./components/mypage/Inquiry.jsp"/>
+			<% } else if (mypage.equals("admin") && admin) { %>
+				<jsp:include page="./components/mypage/Admin.jsp"/>
 			<% } else { %>
 				<div id="friend-chatting-list">
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						가나다라마바사아자차카타파하히히
-					</div>
 					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
 						nickname
 					</div>
