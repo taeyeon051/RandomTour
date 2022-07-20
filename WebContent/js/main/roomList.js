@@ -19,7 +19,7 @@ class RoomList {
     }
 
     init() {
-        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting`);
+        this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting/all`);
 
         const { webSocket } = this;
         webSocket.onerror = e => { this.onError(e); };

@@ -16,7 +16,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import vo.UserVO;
 
-@ServerEndpoint(value = "/chatting", configurator = HttpSessionConfigurator.class)
+@ServerEndpoint(value = "/chatting/all", configurator = HttpSessionConfigurator.class)
 public class Chatting {
 	private static Map<Session, EndpointConfig> clients = Collections.synchronizedMap(new HashMap<>());
 	
