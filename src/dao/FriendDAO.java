@@ -214,24 +214,4 @@ public class FriendDAO {
 		}
 		return check;
 	}
-	
-	// 문의하기 내용 DB 저장
-	public int sendInquiry(String userId, String title, String select, String content) {
-		int n = 0;
-		String sql = "INSERT INTO inquiries VALUES (NULL, ?, ?, ?, ?)";
-		try {
-			con = JdbcUtil.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, title);
-			pstmt.setString(3, select);
-			pstmt.setString(4, content);
-			n = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(con, pstmt);
-		}
-		return n;
-	}
 }
