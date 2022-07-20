@@ -3,6 +3,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../Header.jsp" %>
 <%
+	if (user == null) {
+		response.sendRedirect("/");
+		return;
+	}
+
 	if (!user.getUserId().equals("randomtour@naver.com")) {
 		response.sendRedirect("/main/mypage?p=list");
 		return;
@@ -16,7 +21,7 @@
 <div id="inquiry-popup" class="bg-white d-flex justify-content-center align-items-center">
 	<div id="get-inquiry" class="row g-2">
 		<div class="col-1 pt-2 ps-2">
-			<a href="<%=path%>/main/mypage" class="fs-3">
+			<a href="<%=path%>/main/mypage?p=admin" class="fs-3">
 				<i class="bi bi-arrow-left"></i>
 			</a>
 		</div>
