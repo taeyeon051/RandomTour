@@ -136,7 +136,7 @@ public class FriendDAO {
 	// 친구 요청 전송
 	public int sendFriend(FriendVO vo) {
 		int n = 0;
-		String sql = "INSERT INTO friends VALUES (?, ?, ?, NOW())";
+		String sql = "INSERT INTO friends (send_user_id, accept_user_id, state, send_date) VALUES (?, ?, ?, NOW())";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
