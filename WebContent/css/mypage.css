@@ -164,6 +164,35 @@ tr:first-child {
 }
 
 
+/* 관리자 페이지 */
+
+#admin-page tbody {
+    height: 28rem;
+    cursor: default;
+    overflow-y: scroll;
+}
+
+#admin-page tr>td:nth-child(1) { width: 18rem; }
+#admin-page tr>td:nth-child(2) { width: 10rem; }
+#admin-page tr>td:nth-child(3) { width: 27rem; }
+
+#admin-page td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#inquiry-popup {
+    width: 64rem;
+    height: 44rem;
+}
+
+#get-inquiry {
+    width: 45rem;
+    height: 34rem;
+}
+
+
 /* 스크롤 (채팅 목록, 채팅, 친구목록, 친구 요청, 친구추가, 문의하기) */
 
 #friend-chatting-list,

@@ -8,7 +8,6 @@ class Mypage {
 
 		this.userId = userId;
 		this.isUpdateUserFocus = false;
-		this.isSendInquiry = false;
 
 		this.nicknameList = [];
 
@@ -51,8 +50,6 @@ class Mypage {
 			if (title.value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
 			if (select.value.trim() === "") return app.alert("danger", "질문 유형을 선택해주세요.");
 			if (content.innerHTML.trim() === "") return app.alert("danger", "내용을 입력해주세요.");
-			if (this.isSendInquiry) return app.alert("warning", "문의 내용이 이미 전송되었습니다.");
-			this.isSendInquiry = true;
 
 			this.inquirySend(title, select, content);
 		});
@@ -75,7 +72,6 @@ class Mypage {
 					select.value = "util";
 					content.innerHTML = "";
                 }
-				setTimeout(() => { this.isSendInquiry = false; }, 5000);
 			}
 		});
 	}
