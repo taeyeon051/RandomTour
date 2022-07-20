@@ -30,11 +30,11 @@
 			<div class="form-floating">
 				<select class="form-select" id="inquiry-select">
 					<% String sel = vo.getSelect(); %>
-					<option value="util" <%=sel.equals("util") ? "selected" : ""%>>이용 문의</option>
-					<option value="design" <%=sel.equals("design") ? "selected" : ""%>>디자인 제안</option>
-					<option value="service" <%=sel.equals("service") ? "selected" : ""%>>서비스 제안</option>
-					<option value="error" <%=sel.equals("error") ? "selected" : ""%>>오류 신고</option>
-					<option value="etc" <%=sel.equals("etc") ? "selected" : ""%>>기타</option>
+					<option value="util" <%=sel.equals("이용 문의") ? "selected" : ""%>>이용 문의</option>
+					<option value="design" <%=sel.equals("디자인 제안") ? "selected" : ""%>>디자인 제안</option>
+					<option value="service" <%=sel.equals("서비스 제안") ? "selected" : ""%>>서비스 제안</option>
+					<option value="error" <%=sel.equals("오류 신고") ? "selected" : ""%>>오류 신고</option>
+					<option value="etc" <%=sel.equals("기타") ? "selected" : ""%>>기타</option>
 				</select>
 				<label for="inquiry-select">질문 유형을 선택해주세요.</label>
 			</div>
