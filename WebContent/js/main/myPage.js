@@ -5,8 +5,10 @@ class Mypage {
 		this.app = new App();
 		this.userForm = new UserForm();
 		this.url = new URL(location.href);
+		this.webSocket;
 
 		this.userId = userId;
+		this.chatNickname;
 		this.isUpdateUserFocus = false;
 
 		this.nicknameList = [];
