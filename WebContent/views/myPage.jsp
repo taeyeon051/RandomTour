@@ -1,3 +1,7 @@
+<%@page import="dao.FriendDAO"%>
+<%@page import="vo.ChattingVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.MyPageDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
@@ -14,6 +18,11 @@
 		response.sendRedirect("/main/mypage?p=list");
 		return;
 	}
+	
+	FriendDAO friendDao = new FriendDAO();
+	MyPageDAO mypageDao = new MyPageDAO();
+	ArrayList<ChattingVO> list = mypageDao.getChattingList(user.getUserId());
+	ArrayList<String> nicknameList = new ArrayList<>();
 %>
 
 <jsp:include page="./components/Background.jsp"/>
@@ -43,42 +52,22 @@
 				<jsp:include page="./components/mypage/Admin.jsp"/>
 			<% } else { %>
 				<div id="friend-chatting-list">
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
-					<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-						nickname
-					</div>
+					<%
+						for (ChattingVO vo : list) {
+							String nickname = "";
+							if (vo.getSendUserId().equals(user.getUserId())) nickname = friendDao.getNickname(vo.getAcceptUserId());
+							else if (vo.getAcceptUserId().equals(user.getUserId())) nickname = friendDao.getNickname(vo.getSendUserId());
+							if (nicknameList.contains(nickname)) continue;
+							nicknameList.add(nickname);
+							if (!nickname.equals("")) {
+					%>
+								<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
+									<a href="<%=path%>/main/mypage?p=chat&nickname=<%=nickname%>"><%=nickname%></a>
+								</div>
+					<%
+							}
+						}
+					%>
 				</div>
 				<div id="friend-main" class="position-relative">
 					<% if (mypage.equals("send")) { %>

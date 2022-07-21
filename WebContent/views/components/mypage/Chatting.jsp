@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div id="friend-chatting" class="d-none">
+<div id="friend-chatting">
    	<div id="friend-chat">
    		<div class="m-2 text-end">
 			<div class="message">message</div>

@@ -109,14 +109,7 @@ class Mypage {
 	}
 
 	chatEvent() {
-		const chatList = document.querySelectorAll("#friend-chatting-list>div");
-		chatList.forEach(chat => {
-			chat.addEventListener("click", () => {
-				$(menuList).removeClass("text-blue");
-				$(domList).removeClass("d-block").addClass("d-none");
-				$("#friend-chatting").removeClass("d-none").addClass("d-block");
-			});
-		});
+
 	}
 
 	// 친구 요청 페이지 닉네임, 버튼 리스트에 저장
