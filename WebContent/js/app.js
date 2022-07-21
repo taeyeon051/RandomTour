@@ -30,7 +30,7 @@ class App {
             "certify": /[0-9]{6}/g,
             "username": /[가-힣a-zA-Z]{2,}/g,
             "nickname": /[A-Za-z0-9가-힣]{2,16}/g,
-            "password": /(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*().])[A-Za-z\d!@#$%^&*().]{10,}/g,
+            "password": /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*().])[A-Za-z\d!@#$%^&*().]{10,}/g,
         };
         return regexList[type];
     }
