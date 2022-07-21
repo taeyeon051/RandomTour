@@ -1,15 +1,17 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.JdbcUtil;
+import vo.ChattingVO;
 import vo.InquiryVO;
 
-public class InquiryDAO {
+public class MyPageDAO {
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -34,6 +36,7 @@ public class InquiryDAO {
 		return n;
 	}
 	
+	// 문의하기 목록 가져오기
 	public ArrayList<InquiryVO> getInquiryList() {
 		ArrayList<InquiryVO> list = new ArrayList<>();
 		String sql = "SELECT `id`, `user_id`, `title`, `select` FROM inquiries ORDER BY id DESC";
@@ -57,6 +60,7 @@ public class InquiryDAO {
 		return list;
 	}
 	
+	// 문의하기 내용 하나만 가져오기
 	public InquiryVO getInquiry(int id) {
 		InquiryVO vo = null;
 		String sql = "SELECT * FROM inquiries WHERE id = ?";
@@ -80,5 +84,32 @@ public class InquiryDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 		return vo;
+	}
+	
+	public ArrayList<ChattingVO> getChattingList(String userId) {
+		ArrayList<ChattingVO> list = new ArrayList<>();
+		String sql = "SELECT * FROM chattings WHERE send_user_id = ? OR accept_user_id = ?";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ChattingVO vo = new ChattingVO(
+					rs.getString("send_user_id"),
+					rs.getString("accept_user_id"),
+					"",
+					rs.getDate("send_date"),
+					null
+				);
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return list;
 	}
 }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import controller.MyView;
-import dao.InquiryDAO;
+import dao.MyPageDAO;
 import vo.InquiryVO;
 
 public class SendInquiryController implements Controller {
@@ -19,7 +19,7 @@ public class SendInquiryController implements Controller {
 			return new MyView("/main/mypage", true);
 		}
 
-		InquiryDAO dao = new InquiryDAO();
+		MyPageDAO dao = new MyPageDAO();
 		String userId = request.getParameter("user-id");
 		String title = request.getParameter("title");
 		String select = request.getParameter("select");

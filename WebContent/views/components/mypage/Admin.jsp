@@ -1,10 +1,10 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="dao.InquiryDAO"%>
+<%@page import="dao.MyPageDAO"%>
 <%@page import="vo.InquiryVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	InquiryDAO dao = new InquiryDAO();
+	MyPageDAO dao = new MyPageDAO();
 	ArrayList<InquiryVO> list = dao.getInquiryList();
 %>
 
