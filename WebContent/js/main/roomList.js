@@ -49,7 +49,7 @@ class RoomList {
     }
 
     onError = e => {
-        location.href = "/index.jsp";
+        location.href = "/";
     }
 
     sendChat() {
