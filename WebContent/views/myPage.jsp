@@ -60,9 +60,14 @@
 							if (nicknameList.contains(nickname)) continue;
 							nicknameList.add(nickname);
 							if (!nickname.equals("")) {
+								String nick = request.getParameter("nickname");
+								boolean hover = false;
+								if (nick != null && nick.equals(nickname)) hover = true; 
 					%>
-								<div class="friend w-100 px-3 py-2 d-flex justify-content-center align-items-center">
-									<a href="<%=path%>/main/mypage?p=chat&nickname=<%=nickname%>"><%=nickname%></a>
+								<div class="friend w-100 px-3 py-2 <%=hover ? "hover" : ""%>">
+									<a href="<%=path%>/main/mypage?p=chat&nickname=<%=nickname%>" class="w-100 h-100 d-flex justify-content-center align-items-center">
+										<%=nickname%>
+									</a>
 								</div>
 					<%
 							}

@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +14,7 @@ public class MyPageDAO {
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	FriendDAO friendDao = new FriendDAO();
 	
 	// 문의하기 내용 DB 저장
 	public int sendInquiry(InquiryVO vo) {
@@ -102,6 +102,78 @@ public class MyPageDAO {
 					"",
 					rs.getDate("send_date"),
 					null
+				);
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return list;
+	}
+	
+	public int insertChat(ChattingVO vo) {
+		int n = 0;
+		if (chatCheck(vo)) return 1;
+		String sql = "INSERT INTO chattings VALUES (?, ?, ?, NOW(), null)";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getSendUserId());
+			pstmt.setString(2, vo.getAcceptUserId());
+			pstmt.setString(3, vo.getChatting());
+			n = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt);
+		}
+		return n;
+	}
+	
+	public boolean chatCheck(ChattingVO vo) {
+		boolean check = false;
+		String sql = "SELECT * FROM chattings WHERE (send_user_id = ? AND accept_user_id = ?) OR (send_user_id = ? AND accept_user_id = ?)";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getSendUserId());
+			pstmt.setString(2, vo.getAcceptUserId());
+			pstmt.setString(3, vo.getAcceptUserId());
+			pstmt.setString(4, vo.getSendUserId());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				check = true;
+				break;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+		return check;
+	}
+	
+	public ArrayList<ChattingVO> getChatting(String userId, String nickname) {
+		ArrayList<ChattingVO> list = new ArrayList<>();
+		String friendId = friendDao.getUserId(nickname);
+		String sql = "SELECT * FROM chattings WHERE (send_user_id = ? AND accept_user_id = ?) OR (send_user_id = ? AND accept_user_id = ?)";
+		try {
+			con = JdbcUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, friendId);
+			pstmt.setString(3, friendId);
+			pstmt.setString(4, userId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ChattingVO vo = new ChattingVO(
+					rs.getString("send_user_id"),
+					rs.getString("accept_user_id"),
+					rs.getString("chat"),
+					rs.getDate("send_date"),
+					rs.getDate("accept_date")
 				);
 				list.add(vo);
 			}
