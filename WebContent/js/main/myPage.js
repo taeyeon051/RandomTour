@@ -10,6 +10,7 @@ class Mypage {
 		this.userId = userId;
 		this.chatNickname;
 		this.isUpdateUserFocus = false;
+		this.isChatFocus = false;
 
 		this.nicknameList = [];
 
@@ -109,7 +110,36 @@ class Mypage {
 	}
 
 	chatEvent() {
+		this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting/friend`);
 
+		const { webSocket } = this;
+		webSocket.onerror = e => { this.onError(e); };
+		webSocket.onopen = e => { this.onOpen(e); };
+		webSocket.onmessage = e => { this.onMessage(e); };
+
+		const chatForm = document.querySelector("#friend-chat-form");
+		const submitButton = document.querySelector("#chatting-button");
+		chatForm.addEventListener("focusin", () => { this.isChatFocus = true; });
+		submitButton.addEventListener("click", () => { this.sendChatting(); });
+		window.addEventListener("keydown", e => {
+			if (e.key === "Enter" && this.isChatFocus) this.sendChatting();
+		});
+	}
+
+	sendChatting() {
+
+	}
+
+	onOpen = e => {
+
+	}
+
+	onMessage = e => {
+
+	}
+
+	onError = e => {
+		location.href = "/";
 	}
 
 	// 친구 요청 페이지 닉네임, 버튼 리스트에 저장
