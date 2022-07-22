@@ -8,7 +8,7 @@
 	ArrayList<InquiryVO> list = dao.getInquiryList();
 %>
 
-<div id="admin-page">
+<div id="admin-page" class="w-100">
 	<h4 class="my-3 text-center">문의목록</h4>
 	<table class="text-center">
 		<tbody class="d-block">

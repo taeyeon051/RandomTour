@@ -46,6 +46,10 @@
     cursor: pointer;
 }
 
+.friend.hover {
+	background-color: var(--wheat);
+}
+
 .friend:hover {
     background-color: var(--wheat);
 }
