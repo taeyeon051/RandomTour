@@ -77,6 +77,14 @@
     background-color: var(--skyblue);
 }
 
+#chatting-button:hover {
+    background-color: var(--skyblue);
+}
+
+.msg-date {
+    font-size: 0.75rem;
+}
+
 
 /* 친구목록 */
 
