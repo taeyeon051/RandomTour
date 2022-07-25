@@ -63,18 +63,18 @@ class Mypage {
 		const { userId } = this;
 		const selectList = { "util": "이용 문의", "design": "디자인 제안", "service": "서비스 제안", "error": "오류 신고", "etc": "기타" };
 		const inquiryData = { "user-id": userId, "title": title.value, "select": selectList[select.value], "content": content.innerHTML };
-		
+
 		$.ajax({
 			url: "/main/inquiry",
 			type: "POST",
 			data: inquiryData,
 			success: data => {
 				this.ajaxAlert(data);
-                if (data.indexOf("success") !== -1) {
-                    title.value = "";
+				if (data.indexOf("success") !== -1) {
+					title.value = "";
 					select.value = "util";
 					content.innerHTML = "";
-                }
+				}
 			}
 		});
 	}
@@ -111,10 +111,10 @@ class Mypage {
 
 	chatEvent() {
 		this.webSocket = new WebSocket(`ws://${location.href.split("/")[2]}/chatting/friend`);
+		const { url, webSocket } = this;
+		this.chatNickname = url.searchParams.get("nickname");
 
-		const { webSocket } = this;
 		webSocket.onerror = e => { this.onError(e); };
-		webSocket.onopen = e => { this.onOpen(e); };
 		webSocket.onmessage = e => { this.onMessage(e); };
 
 		const chatForm = document.querySelector("#friend-chat-form");
@@ -124,22 +124,69 @@ class Mypage {
 		window.addEventListener("keydown", e => {
 			if (e.key === "Enter" && this.isChatFocus) this.sendChatting();
 		});
+
+		const chatList = document.querySelector("#friend-chat");
+		chatList.scrollTop = chatList.scrollHeight;
 	}
 
 	sendChatting() {
-
-	}
-
-	onOpen = e => {
-
+		const { userId, chatNickname, webSocket } = this;
+		const chatForm = document.querySelector("#friend-chat-form");
+		const { value } = chatForm;
+		if (value.trim() === "") return;
+		const data = { "sendId": userId, "accept": chatNickname, "date": new Date(), "message": value };
+		this.addChatting(data);
+		webSocket.send(JSON.stringify(data));
+		chatForm.value = "";
 	}
 
 	onMessage = e => {
-
+		const data = JSON.parse(e.data.toString());
+		const { userId, chatNickname } = this;
+		if (data.accept !== userId) return;
+		if (data.sendNickname !== chatNickname) return;
+		this.addChatting(data);
 	}
 
 	onError = e => {
 		location.href = "/";
+	}
+
+	addChatting(data) {
+		const { userId } = this;
+		let text = "";
+		if (userId === data.sendId) text = "end";
+		else text = "start";
+
+		const chatList = document.querySelector("#friend-chat");
+		chatList.appendChild(this.getMessageDom(data.message, data.date, text));
+		chatList.scrollTop = chatList.scrollHeight;
+	}
+
+	getMessageDom(message, date, text) {
+		const div = document.createElement("div");
+		$(div).addClass(`m-2 d-flex justify-content-${text}`);
+		const getDate = new Date(date);
+		const dateText = this.getDateFormat(getDate);
+		if (text === "end") {
+			div.innerHTML = 
+				`<div class="msg-date d-flex align-items-end text-gray m-1">${dateText}</div>
+				<div class="message">${message}</div>`;
+		} else {
+			div.innerHTML = 
+			`<div class="message">${message}</div>
+			<div class="msg-date d-flex align-items-end text-gray m-1">${dateText}</div>`;
+		}
+		return div;
+	}
+
+	getDateFormat(date) {
+		const year = date.getFullYear();
+		const month = (date.getMonth() + 1).toString().padStart(2, "0");
+		const day = (date.getDate()).toString().padStart(2, "0");
+		const hour = (date.getHours()).toString().padStart(2, "0");
+		const min = (date.getMinutes()).toString().padStart(2, "0");
+		return `${year}-${month}-${day} ${hour}:${min}`;
 	}
 
 	// 친구 요청 페이지 닉네임, 버튼 리스트에 저장

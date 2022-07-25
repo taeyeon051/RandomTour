@@ -88,7 +88,7 @@ public class MyPageDAO {
 	
 	public ArrayList<ChattingVO> getChattingList(String userId) {
 		ArrayList<ChattingVO> list = new ArrayList<>();
-		String sql = "SELECT * FROM chattings WHERE send_user_id = ? OR accept_user_id = ?";
+		String sql = "SELECT * FROM chattings WHERE send_user_id = ? OR accept_user_id = ? ORDER BY send_date DESC";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -100,8 +100,8 @@ public class MyPageDAO {
 					rs.getString("send_user_id"),
 					rs.getString("accept_user_id"),
 					"",
-					rs.getDate("send_date"),
-					null
+					rs.getString("send_date"),
+					""
 				);
 				list.add(vo);
 			}
@@ -144,7 +144,9 @@ public class MyPageDAO {
 			pstmt.setString(4, vo.getSendUserId());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				check = true;
+				if (vo.getChatting().equals("") && rs.getString("chat").equals("")) {
+					check = true;
+				}
 				break;
 			}
 		} catch (SQLException e) {
@@ -158,7 +160,7 @@ public class MyPageDAO {
 	public ArrayList<ChattingVO> getChatting(String userId, String nickname) {
 		ArrayList<ChattingVO> list = new ArrayList<>();
 		String friendId = friendDao.getUserId(nickname);
-		String sql = "SELECT * FROM chattings WHERE (send_user_id = ? AND accept_user_id = ?) OR (send_user_id = ? AND accept_user_id = ?)";
+		String sql = "SELECT * FROM chattings WHERE (send_user_id = ? AND accept_user_id = ?) OR (send_user_id = ? AND accept_user_id = ?) ORDER BY send_date";
 		try {
 			con = JdbcUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -172,8 +174,8 @@ public class MyPageDAO {
 					rs.getString("send_user_id"),
 					rs.getString("accept_user_id"),
 					rs.getString("chat"),
-					rs.getDate("send_date"),
-					rs.getDate("accept_date")
+					rs.getString("send_date"),
+					rs.getString("accept_date")
 				);
 				list.add(vo);
 			}

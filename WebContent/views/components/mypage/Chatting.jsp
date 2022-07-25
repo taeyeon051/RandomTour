@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="dao.FriendDAO"%>
 <%@page import="vo.UserVO"%>
 <%@page import="dao.MyPageDAO"%>
@@ -17,9 +19,23 @@
    	<div id="friend-chat">
    		<% for (ChattingVO vo : list) { %>
    			<% if (!vo.getChatting().equals("")) { %>
-		   		<div class="m-2 text-<%=vo.getSendUserId().equals(user.getUserId()) ? "end" : "start"%>">
-					<div class="message"><%=vo.getChatting()%></div>
-				</div>
+   				<%
+	   				String dateText = vo.getSendDate();
+	   				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	   				Date date = dateFormat.parse(dateText);
+	   				dateText = dateFormat.format(date);
+   				%>
+   				<% if (vo.getSendUserId().equals(user.getUserId())) { %>
+			   		<div class="m-2 d-flex justify-content-end">
+						<div class="msg-date d-flex align-items-end text-gray m-1"><%=dateText%></div>
+						<div class="message"><%=vo.getChatting()%></div>
+					</div>
+   				<% } else { %>
+   					<div class="m-2 d-flex justify-content-start">
+						<div class="message"><%=vo.getChatting()%></div>
+						<div class="msg-date d-flex align-items-end text-gray m-1"><%=dateText%></div>
+					</div>
+   				<% } %>
    			<% } %>   			
    		<% } %>
    	</div>

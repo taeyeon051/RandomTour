@@ -6,14 +6,14 @@ public class ChattingVO {
 	private String sendUserId;
 	private String acceptUserId;
 	private String chatting;
-	private Date sendDate;
-	private Date acceptDate;
+	private String sendDate;
+	private String acceptDate;
 
 	public ChattingVO() {
 		super();
 	}
 
-	public ChattingVO(String sendUserId, String acceptUserId, String chatting, Date sendDate, Date acceptDate) {
+	public ChattingVO(String sendUserId, String acceptUserId, String chatting, String sendDate, String acceptDate) {
 		super();
 		this.sendUserId = sendUserId;
 		this.acceptUserId = acceptUserId;
@@ -46,19 +46,19 @@ public class ChattingVO {
 		this.chatting = chatting;
 	}
 
-	public Date getSendDate() {
+	public String getSendDate() {
 		return sendDate;
 	}
 
-	public void setSendDate(Date sendDate) {
+	public void setSendDate(String sendDate) {
 		this.sendDate = sendDate;
 	}
 
-	public Date getAcceptDate() {
+	public String getAcceptDate() {
 		return acceptDate;
 	}
 
-	public void setAcceptDate(Date acceptDate) {
+	public void setAcceptDate(String acceptDate) {
 		this.acceptDate = acceptDate;
 	}
 }
