@@ -14,6 +14,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.json.simple.JSONObject;
+
 import vo.UserVO;
 
 @ServerEndpoint(value = "/chatting/all", configurator = HttpSessionConfigurator.class)
@@ -34,11 +36,10 @@ public class Chatting {
 				if (!client.getKey().equals(session)) {					
 					UserVO user = (UserVO) userSession.getAttribute("randomtour-user");
 					String nickname = user != null ? user.getNickname() : "";
-					String text = "{"
-							+ "\"nickname\" : \"" + nickname + "\", "
-							+ "\"message\" : \"" + message
-							+ "\"}";
-					client.getKey().getBasicRemote().sendText(text);
+					JSONObject json = new JSONObject();
+					json.put("nickname", nickname);
+					json.put("message", message);
+					client.getKey().getBasicRemote().sendText(json.toString());
 				}
 			}
 		}
