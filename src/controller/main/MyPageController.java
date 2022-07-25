@@ -29,10 +29,7 @@ public class MyPageController implements Controller {
 			FriendDAO friendDao = new FriendDAO();
 			MyPageDAO mypageDao = new MyPageDAO();
 			boolean friendCheck = friendDao.friendCheck(user.getUserId(), nickname);
-			if (!friendCheck) {
-				request.setAttribute("alert", "친구 추가가 안 되어있거나 없는 사용자입니다.");
-				return new MyView("/views/myPage.jsp");
-			}
+			if (!friendCheck) return new MyView("/main/mypage?p=list", true);
 			ChattingVO vo = new ChattingVO(user.getUserId(), friendDao.getUserId(nickname), "", null, null);
 			mypageDao.insertChat(vo);
 		}
