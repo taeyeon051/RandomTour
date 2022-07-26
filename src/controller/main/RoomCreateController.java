@@ -30,7 +30,7 @@ public class RoomCreateController implements Controller {
 		
 		RoomVO vo = new RoomVO(roomId, title, userId, 1, false, false, "korea");
 		int n = dao.createRoom(vo);
-		
+
 		if (n > 0) {
 			request.setAttribute("state", "success");
 			request.setAttribute("message", roomId);	
