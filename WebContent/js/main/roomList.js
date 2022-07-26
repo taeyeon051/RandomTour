@@ -10,6 +10,8 @@ class RoomList {
         this.chatList = document.querySelector("#chatting-list");
         this.chatForm = document.querySelector("#chatting-form");
         this.submitButton = document.querySelector("#chatting-button");
+        this.roomTitle = document.querySelector("#room-title");
+        this.roomButton = document.querySelector("#room-button");
 
         this.colorList = ["gray", "skyblue", "mint", "wheat", "brown", "silver", "blue"];
         this.chatColor = 0;
@@ -28,7 +30,7 @@ class RoomList {
     }
 
     addEvent() {
-        const { submitButton } = this;
+        const { submitButton, roomTitle, roomButton } = this;
 
         window.addEventListener("keydown", e => {
             if (e.key === "Enter") this.sendChat();
@@ -37,6 +39,36 @@ class RoomList {
         submitButton.addEventListener("click", () => {
             this.sendChat();
         });
+
+        roomButton.addEventListener("click", () => {
+            const { app } = this;
+            const { value } = roomTitle;
+            if (value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
+        });
+    }
+
+    roomCreate() {
+        const { userId, roomTitle } = this;
+        $.ajax({
+            url: "/room/create",
+            type: "POST",
+            data: { "title": roomTitle.value, "user-id": userId },
+            success: data => {
+                console.log(data);
+                if (data.indexOf("success") !== -1) {
+                    console.log(1);
+                }
+            }
+        });
+
+        $.ajax({
+			url: "/main/friend/accept",
+			type: "POST",
+			data: { "user-id": userId, "nickname": nickname.name, "accept": accept },
+			success: data => {
+				this.ajaxAlert(data, "accept", nickname.btnDom.parentElement);
+			}
+		});
     }
 
     onMessage = e => {

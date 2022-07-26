@@ -8,7 +8,7 @@
 	<jsp:include page="./components/Logo.jsp"/>
 	
 	<div id="room-list" class="p-5 bg-white">
-	    <table class="text-center">
+	    <table class="text-center mt-2">
 	        <thead class="d-block">
 	            <tr>
 	                <th>방번호</th>
@@ -159,6 +159,10 @@
 	            </tr>
 	        </tbody>
 	    </table>
+    	<div class="input-group mt-4">
+    		<input type="text" id="room-title" class="form-control" placeholder="방 제목을 입력하세요.">
+    		<button id="room-button" class="btn btn-brown" type="button">방 생성</button>
+    	</div>
 	</div>
 	
 	<div id="user-chatting" class="bg-white">

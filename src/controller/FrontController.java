@@ -15,6 +15,7 @@ import controller.main.AddFriendController;
 import controller.main.DeleteFriendController;
 import controller.main.GetInquiryController;
 import controller.main.MyPageController;
+import controller.main.RoomCreateController;
 import controller.main.RoomListController;
 import controller.main.SendInquiryController;
 import controller.user.FindUserController;
@@ -25,7 +26,7 @@ import controller.user.SendMailController;
 import controller.user.UpdatePwdController;
 import controller.user.UpdateUserController;
 
-@WebServlet(urlPatterns = { "/user/*", "/main/*" })
+@WebServlet(urlPatterns = { "/user/*", "/main/*", "/room/*" })
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HashMap<String, Controller> controllerMap = new HashMap<>();
@@ -46,6 +47,9 @@ public class FrontController extends HttpServlet {
 		controllerMap.put("/user/sendMail", new SendMailController());
 		// 메인페이지 (방목록 페이지)
 		controllerMap.put("/main/roomList", new RoomListController());
+		
+		// 방 생성
+		controllerMap.put("/room/create", new RoomCreateController());
 		
 		// 마이페이지
 		controllerMap.put("/main/mypage", new MyPageController());
