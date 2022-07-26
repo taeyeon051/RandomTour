@@ -1,5 +1,3 @@
-const log = console.log;
-
 class Mypage {
 	constructor(userId) {
 		this.app = new App();
