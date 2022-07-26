@@ -19,13 +19,19 @@ thead {
 }
 
 tbody {
-    height: 32rem;
+    height: 28rem;
     cursor: pointer;
     overflow-y: scroll;
 }
 
 tbody tr:hover {
     background-color: var(--wheat);
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 tr>th:nth-child(1), tr>td:nth-child(1) { width: 12%; }
@@ -54,7 +60,8 @@ tr>th:nth-child(7), tr>td:nth-child(7) { width: 12%; }
     overflow-y: scroll;
 }
 
-#chatting-form {
+#chatting-form,
+#room-title {
     box-shadow: none;
     border-color: var(--brown);
     border-width: 0.125rem;
