@@ -6,13 +6,13 @@ public class UserVO {
 	private String nickname;
 	private String password;
 	private boolean loginCheck;
-	private int nowRoom;
+	private String nowRoom;
 
 	public UserVO() {
 		super();
 	}
 
-	public UserVO(String userId, String userName, String nickname, String password, boolean loginCheck, int nowRoom) {
+	public UserVO(String userId, String userName, String nickname, String password, boolean loginCheck, String nowRoom) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -62,11 +62,11 @@ public class UserVO {
 		this.loginCheck = loginCheck;
 	}
 
-	public int getnowRoom() {
+	public String getnowRoom() {
 		return nowRoom;
 	}
 
-	public void setnowRoom(int nowRoom) {
+	public void setnowRoom(String nowRoom) {
 		this.nowRoom = nowRoom;
 	}
 }

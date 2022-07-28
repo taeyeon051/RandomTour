@@ -158,7 +158,7 @@ public class UserDAO {
 						rs.getString("nickname"),
 						rs.getString("password"),
 						rs.getBoolean("login_check"),
-						rs.getInt("now_room")
+						rs.getString("now_room")
 					);
 				}
 			}

@@ -1,11 +1,12 @@
 package vo;
 
 public class RoomVO {
-	private int roomId;
+	private String roomId;
 	private String title;
 	private String userId;
 	private int personnel;
 	private boolean roomPrivate;
+	private String password;
 	private boolean state;
 	private String map;
 
@@ -13,23 +14,24 @@ public class RoomVO {
 		super();
 	}
 
-	public RoomVO(int roomId, String title, String userId, int personnel, boolean roomPrivate, boolean state,
-			String map) {
+	public RoomVO(String roomId, String title, String userId, int personnel, boolean roomPrivate, String password,
+			boolean state, String map) {
 		super();
 		this.roomId = roomId;
 		this.title = title;
 		this.userId = userId;
 		this.personnel = personnel;
 		this.roomPrivate = roomPrivate;
+		this.password = password;
 		this.state = state;
 		this.map = map;
 	}
 
-	public int getRoomId() {
+	public String getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(int roomId) {
+	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
 
@@ -63,6 +65,14 @@ public class RoomVO {
 
 	public void setRoomPrivate(boolean roomPrivate) {
 		this.roomPrivate = roomPrivate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public boolean isState() {
