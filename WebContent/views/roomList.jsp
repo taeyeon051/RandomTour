@@ -1,6 +1,16 @@
+<%@page import="dao.FriendDAO"%>
+<%@page import="dao.RoomDAO"%>
+<%@page import="vo.RoomVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./components/Header.jsp" %>
+
+<%
+	RoomDAO dao = new RoomDAO();
+	ArrayList<RoomVO> list = dao.getRoomList();
+	FriendDAO friend = new FriendDAO();
+%>
 
 <jsp:include page="./components/Background.jsp"/>
 
@@ -22,141 +32,23 @@
 	        </thead>
 	
 	        <tbody class="d-block">
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
-	            <tr>
-	                <td>0351</td>
-	                <td>제목</td>
-	                <td>방장</td>
-	                <td>1/6</td>
-	                <td>공개</td>
-	                <td>대기</td>
-	                <td>한국</td>
-	            </tr>
+		        <% for (RoomVO room : list) { %>
+		            <tr>
+		                <td><%=room.getRoomId()%></td>
+		                <td><%=room.getTitle()%></td>
+		                <td><%=friend.getNickname(room.getUserId())%></td>
+		                <td><%=room.getPersonnel()%>/6</td>
+		                <%
+		                	boolean roomPrivate = room.isRoomPrivate();
+		                	boolean state = room.isState();
+		                	String map = room.getMap();
+		                	map = map.equals("korea") ? "한국" : "세계";
+		                %>
+		                <td><%=roomPrivate ? "비공개" : "공개"%></td>
+		                <td><%=state ? "게임중" : "대기"%></td>
+		                <td><%=map%></td>
+		            </tr>
+		        <% } %>
 	        </tbody>
 	    </table>
     	<div class="input-group mt-4">
@@ -181,5 +73,8 @@
 </section>
 
 <script src="<%=path%>/js/main/roomList.js"></script>
+<script>
+	const roomList = new RoomList("<%=user.getUserId()%>");
+</script>
 
 <%@ include file="./components/Footer.jsp" %>

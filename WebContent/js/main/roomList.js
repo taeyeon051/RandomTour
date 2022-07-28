@@ -1,11 +1,8 @@
-window.onload = () => {
-    const roomList = new RoomList();
-}
-
 class RoomList {
-    constructor() {
+    constructor(userId) {
         this.app = new App();
         this.webSocket;
+        this.userId = userId;
 
         this.chatList = document.querySelector("#chatting-list");
         this.chatForm = document.querySelector("#chatting-form");
@@ -30,7 +27,7 @@ class RoomList {
     }
 
     addEvent() {
-        const { submitButton, roomTitle, roomButton } = this;
+        const { submitButton, roomButton } = this;
 
         window.addEventListener("keydown", e => {
             if (e.key === "Enter") this.sendChat();
@@ -41,34 +38,28 @@ class RoomList {
         });
 
         roomButton.addEventListener("click", () => {
-            const { app } = this;
-            const { value } = roomTitle;
-            if (value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
+            this.roomCreate();
         });
     }
 
     roomCreate() {
-        const { userId, roomTitle } = this;
+        const { app, userId, roomTitle } = this;
+        const { value } = roomTitle;
+        if (value.trim() === "") return app.alert("danger", "제목을 입력해주세요.");
+
         $.ajax({
             url: "/room/create",
             type: "POST",
             data: { "title": roomTitle.value, "user-id": userId },
             success: data => {
-                console.log(data);
+                const div = document.createElement("div");
+                div.innerHTML = data;
                 if (data.indexOf("success") !== -1) {
-                    console.log(1);
+                    const roomId = div.querySelector("#room-id").innerText;
+                    location.href = `/room?id=${roomId}`;
                 }
             }
         });
-
-        $.ajax({
-			url: "/main/friend/accept",
-			type: "POST",
-			data: { "user-id": userId, "nickname": nickname.name, "accept": accept },
-			success: data => {
-				this.ajaxAlert(data, "accept", nickname.btnDom.parentElement);
-			}
-		});
     }
 
     onMessage = e => {
