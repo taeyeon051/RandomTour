@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: localhost    Database: randomtour
+-- Host: 127.0.0.1    Database: randomtour
 -- ------------------------------------------------------
 -- Server version	8.0.29
 
@@ -28,7 +28,7 @@ CREATE TABLE `users` (
   `nickname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `login_check` tinyint DEFAULT NULL,
-  `now_room` int DEFAULT NULL,
+  `now_room` varchar(4) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `nickname_UNIQUE` (`nickname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -43,4 +43,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-20 23:09:05
+-- Dump completed on 2022-07-28 15:30:10
