@@ -4,6 +4,7 @@ let link = `<link rel="stylesheet" href="/css/`;
 if (url.indexOf("user") !== -1) link += `user.css">`;
 else if (url.indexOf("mypage") !== -1) link += `mypage.css">`;
 else if (url.indexOf("main") !== -1) link += `main.css">`;
+else if (url.indexOf("room") !== -1) link += `room.css">`;
 document.head.innerHTML += link;
 
 // App
