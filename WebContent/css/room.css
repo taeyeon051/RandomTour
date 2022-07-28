@@ -1,0 +1,88 @@
+section {
+	padding: 5rem 10rem;
+}
+
+.user-box {
+	display: flex;
+	justify-content: space-between;
+}
+
+.user-item {
+	padding-bottom: 1rem;
+	width: 14rem;
+	height: 18rem;
+	font-size: 9.0rem;
+	text-align: center;
+}
+
+.menu {
+	font-size: 3rem;
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.gmae-code {
+	width: 12rem;
+	height: 4rem;
+	font-size: 2rem;
+	line-height: 4rem;
+	text-align: center;
+}
+
+.private {
+	font-size: 2rem;
+	line-height: 4rem;
+	height: 4rem;
+	width: 8rem;
+	text-align: center;
+}
+
+.game-password {
+	font-size: 2rem;
+	height: 4rem;
+	line-height: 4rem;
+	width: 16rem;
+	text-align: center;
+}
+
+.game-name {
+	font-size: 2rem;
+	height: 4rem;
+	line-height: 4rem;
+	width: 40rem;
+	text-align: center;
+}
+
+.chat-start {
+	border: 1px solid black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 25rem;
+}
+
+.chat-box {
+	border: 1px solid red;
+	width: 70rem;
+}
+
+.chat-fild {
+	width: 70rem;
+	height: 21rem;
+	border: 1px solid blue;
+}
+
+.map {
+	border: 1px solid green;
+	width: 30rem;
+	height: 18rem;
+}
+
+.start-button {
+	width: 30rem;
+	height: 7rem;
+	border: 1px solid yellow;
+	text-align: center;
+}

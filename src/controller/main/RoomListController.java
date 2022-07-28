@@ -19,6 +19,8 @@ public class RoomListController implements Controller {
 		UserVO user = (UserVO) session.getAttribute("randomtour-user");
 		if (user == null) return new MyView("/user/login", true);
 		
+		if (user.getnowRoom() != null) return new MyView("/room?id=" + user.getnowRoom(), true);
+		
 		return new MyView("/views/roomList.jsp");
 	}
 }

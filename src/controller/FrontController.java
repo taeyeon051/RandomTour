@@ -15,6 +15,7 @@ import controller.main.AddFriendController;
 import controller.main.DeleteFriendController;
 import controller.main.GetInquiryController;
 import controller.main.MyPageController;
+import controller.main.RoomController;
 import controller.main.RoomCreateController;
 import controller.main.RoomListController;
 import controller.main.SendInquiryController;
@@ -50,6 +51,7 @@ public class FrontController extends HttpServlet {
 		
 		// 방 생성
 		controllerMap.put("/room/create", new RoomCreateController());
+		controllerMap.put("/room", new RoomController());
 		
 		// 마이페이지
 		controllerMap.put("/main/mypage", new MyPageController());
