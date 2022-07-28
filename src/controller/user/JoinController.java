@@ -66,7 +66,7 @@ public class JoinController implements Controller {
 			return new MyView("/views/join.jsp");
 		}
 
-		UserVO vo = new UserVO(userId, userName, nickname, password, false, 0);
+		UserVO vo = new UserVO(userId, userName, nickname, password, false, null);
 		int n = dao.userJoin(vo);
 		if (n > 0) {
 			dao.deleteCertify(userId);

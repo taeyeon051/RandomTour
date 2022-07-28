@@ -67,7 +67,7 @@ public class UpdateUserController implements Controller {
 			return new MyView("/views/ajax/alert.jsp");
 		}
 
-		UserVO vo = new UserVO(userId, userName, nickname, password, true, 0);
+		UserVO vo = new UserVO(userId, userName, nickname, password, true, null);
 		int n = dao.userUpdate(vo);
 		if (n > 0) {
 			dao.deleteCertify(userId);
